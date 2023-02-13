@@ -24,17 +24,17 @@ export default class SignUp extends Component {
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
-                <h1>Sign Up Form</h1>
-                <label>Username :</label>
+                <h1>Sign up</h1>
+                <label>Username</label>
                 <input name='username' value={this.state.username} onChange={this.handleChange} />
-                <label>Email :</label>
+                <label>Email address</label>
                 <input name='email' value={this.state.email} onChange={this.handleChange}/>
-                <label>Password :</label>
+                <label>Password</label>
                 <input name='password' value={this.state.password} onChange={this.handleChange} type='password' />
-                <label>Password Confirmation :</label>
+                <label>Confirm password</label>
                 <input name='password_confirmation' value={this.state.password_confirmation} onChange={this.handleChange} type='password' />
                 {this.props.signupError ? <p style={{color: 'red'}}>{this.props.signupError}</p> : null}
-                <input type="submit" value='REGISTER' />
+                <input type="submit" value='Sign up' />
             </form>
         )
     }

@@ -4,12 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 
 class Header extends Component {
-  signOut = () => {
-    localStorage.removeItem('token')
-    this.setState({
-        user: null
-        })
-  }
+
 
   render() {
 
@@ -29,10 +24,6 @@ class Header extends Component {
               <li>
                 <NavLink to="/my-offers">My offers</NavLink>
               </li>
-              <li>
-              {this.props.username ? <div><Logout onClick={this.signOut}/><a href={`/users/${this.props.username}`}>{`(${this.props.username})`}</a></div> : <NavLink to="/login">Login</NavLink>}
-                
-              </li>
             </ul>
           </div>
       </nav>
@@ -42,8 +33,4 @@ class Header extends Component {
 
 export default Header;
 
-const Logout = () => {
-  return (
-    <a href="/logout">Logout </a>
-  );
-};
+
