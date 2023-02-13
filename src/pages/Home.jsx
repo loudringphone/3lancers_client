@@ -1,37 +1,25 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
+const REQUESTS_URL = 'http://localhost:3000/requests.json'
 class Home extends Component {
     constructor() {
         super();
         this.state = {
-            requests: [
-                {
-                    id: 1,
-                    title: "Move sofa",
-                    location: 'Pyrmont, 2009',
-                    time: '20/01/2023',
-                    desciption: 'Move a big sofa with care. From Pyrmont to Surry Hills.Move down from the level 2 at Pyrmont. Move up to the level 3 at Surry Hills.',
-                    budget: 100,
-                    status: 'open'
-                }, {
-                    id: 2,
-                    title: "Move sofa",
-                    location: 'Pyrmont, 2009',
-                    time: '20/01/2023',
-                    desciption: 'Move a big sofa with care. From Pyrmont to Surry Hills.Move down from the level 2 at Pyrmont. Move up to the level 3 at Surry Hills.',
-                    budget: 100,
-                    status: 'open'
-                }, {
-                    id: 3,
-                    title: "Move sofa",
-                    location: 'Pyrmont, 2009',
-                    time: '20/01/2023',
-                    desciption: 'Move a big sofa with care. From Pyrmont to Surry Hills.Move down from the level 2 at Pyrmont. Move up to the level 3 at Surry Hills.',
-                    budget: 100,
-                    status: 'open'
-                }
-            ]
+            requests: []
         }
+    }
+
+    // fetch data from the server
+    componentDidMount() {
+        const fetchRequests = () => {
+            axios.get(REQUESTS_URL).then((response) => {
+                console.log(response.data);
+                this.setState({ requests: response.data });
+                setTimeout(fetchRequests, 5000);
+            });
+        }
+        fetchRequests();
     }
 
     render() {
@@ -66,6 +54,7 @@ function PostRequest() {
     )
 };
 
+// All requests from all users (including the current user)
 function AllRequests({requests}) {
     console.log(requests);
     const allRequests = [];
