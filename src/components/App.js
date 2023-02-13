@@ -11,6 +11,7 @@ import BrowseRequests from "../pages/BrowseRequests";
 import Header from "./Header";
 import Home from "../pages/Home";
 import NewRequest from "../pages/NewRequest";
+import RequestDetails from "../pages/RequestDetails";
 
 const USERS_URL = "http://localhost:3000/users.json";
 
@@ -145,6 +146,12 @@ class App extends Component {
       <BrowserRouter>
         <Header username = { this.state.user.username } />
         <Routes>
+        <Route path="/home" element={<Home />} />
+        <Route path="/my-offers" element={<MyOffers />} />
+        <Route path="/my-requests" element={<MyRequests />} />
+        <Route path="/requests" element={<BrowseRequests />} />
+        <Route path="/requests/:id" element={<RequestDetails />} />
+        <Route path="/new-request" element={<NewRequest />} />
         <Route path="/signup" element={<SignUp signUp={this.signUp} signupError={this.state.signupError} user={this.state.user}/>} />
         <Route path="/login" element={<Login signIn={this.signIn} signinError={this.state.signinError} user={this.state.user}/>} />
         </Routes>
