@@ -75,7 +75,8 @@ class App extends Component {
         },
         body: JSON.stringify({
             user: {
-                email: user.email
+                email: user.email,
+                password: user.password
             }
         })
       })
@@ -133,6 +134,7 @@ class App extends Component {
     this.setState({
         user: null
         })
+    window.location.href = '/home'
   }
   
   
@@ -143,8 +145,8 @@ class App extends Component {
       <BrowserRouter>
         <Header username = { this.state.user.username } />
         <Routes>
-        <Route path="/signup" element={<SignUp  signupError={this.state.signupError}/>} />
-        <Route path="/login" element={<Login signIn={this.signIn} signinError={this.state.signinError}/>} />
+        <Route path="/signup" element={<SignUp signUp={this.signUp} signupError={this.state.signupError} user={this.state.user}/>} />
+        <Route path="/login" element={<Login signIn={this.signIn} signinError={this.state.signinError} user={this.state.user}/>} />
         </Routes>
 
 
