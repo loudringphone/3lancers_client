@@ -33,6 +33,7 @@ export default class SignUp extends Component {
                 <input name='password' value={this.state.password} onChange={this.handleChange} type='password' />
                 <label>Password Confirmation :</label>
                 <input name='password_confirmation' value={this.state.password_confirmation} onChange={this.handleChange} type='password' />
+                {this.props.signupError ? <p style={{color: 'red'}}>{this.props.signupError}</p> : null}
                 <input type="submit" value='REGISTER' />
             </form>
         )

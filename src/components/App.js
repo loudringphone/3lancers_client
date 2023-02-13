@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import axios from 'axios'
 
 import SignUp from './SignUp';
 import Login from './Login';
@@ -10,13 +11,14 @@ import BrowseRequests from '../pages/BrowseRequests';
 import Header from './Header';
 import Home from '../pages/Home';
 
-
+const USERS_URL = 'http://localhost:3000/users.json'
 
 class App extends Component {
 
   state = {
     user: {}, 
-    error: "",
+    signinError: "",
+    signupError: ""
   }
 
   componentDidMount(){
@@ -49,14 +51,51 @@ class App extends Component {
       body: JSON.stringify({
         user:{
           username: user.username,
+          email: user.email,
           password: user.password,
-          first_name: user.firstName,
-          last_name: user.lastName
+          password_confirmation: user.password_confirmation
         }
       })
     })
     .then(response => response.json())
     .then(user => this.setState({ user: user }) )
+    .then(() =>{if (this.state.user.id == null) {
+      this.setState({
+        signupError: 'Invalid username, email or password',
+        signinError: '',
+        user: ''
+    })
+    } else {
+      this.setState({signupError: '', signinError: ''})
+      fetch("http://localhost:3000/login", {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            user: {
+                email: user.email
+            }
+        })
+      })
+      .then(response => response.json())
+      .then(result => {
+          if (result.token){
+          localStorage.setItem('token', result.token)
+          this.setState({
+              user: result.user
+              })
+          }
+      })
+    
+    
+    
+    
+    
+    }
+    })
+    
   }
 
   signIn = (user) => {
@@ -68,7 +107,7 @@ class App extends Component {
         },
         body: JSON.stringify({
             user: {
-                username: user.username,
+                email: user.email,
                 password: user.password
             }
         })
@@ -83,7 +122,8 @@ class App extends Component {
         }
         else {
             this.setState({
-                error: result.error
+              signinError: result.error,
+              signupError: ''
             })
         }
     })
@@ -101,8 +141,11 @@ class App extends Component {
     return (
       <div className="App">
       <BrowserRouter>
-      <Header username = { this.state.user.username } />
-
+        <Header username = { this.state.user.username } />
+        <Routes>
+        <Route path="/signup" element={<SignUp  signupError={this.state.signupError}/>} />
+        <Route path="/login" element={<Login signIn={this.signIn} signinError={this.state.signinError}/>} />
+        </Routes>
 
 
       </BrowserRouter>
@@ -116,8 +159,8 @@ class App extends Component {
 
         {this.state.user.username ? <h2>Welcome {this.state.user.username}</h2> : (
           <>
-          <Login signIn={this.signIn} error={this.state.error} />
-          <SignUp signUp={this.signUp} />
+          {/* <Login signIn={this.signIn} signinError={this.state.signinError} />
+          <SignUp signUp={this.signUp} signupError={this.state.signupError} /> */}
           </>)
         }
       </div>
