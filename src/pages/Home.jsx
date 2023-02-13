@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import BrowseRequests from './BrowseRequests';
 class Home extends Component {
 
-
-
     render() {
         return (
             <div>
