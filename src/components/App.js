@@ -143,6 +143,9 @@ class App extends Component {
       <BrowserRouter>
         <Header username = { this.state.user.username } />
         <Routes>
+        <Route path="/home" element={<Home />} />
+        <Route path="/my-offers" element={<MyOffers />} />
+        <Route path="/my-requests" element={<MyRequests />} />
         <Route path="/signup" element={<SignUp  signupError={this.state.signupError}/>} />
         <Route path="/login" element={<Login signIn={this.signIn} signinError={this.state.signinError}/>} />
         </Routes>
