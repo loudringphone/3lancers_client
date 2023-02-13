@@ -22,7 +22,7 @@ export default class SignUp extends Component {
 
 
     render() {
-        if (this.props.user.username) {
+        if (localStorage.getItem('token')) {
             return (window.location.href = '/home')
         }
         else {

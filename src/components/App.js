@@ -76,7 +76,8 @@ class App extends Component {
         },
         body: JSON.stringify({
             user: {
-                email: user.email
+                email: user.email,
+                password: user.password
             }
         })
       })
@@ -89,6 +90,7 @@ class App extends Component {
               })
           }
       })
+      .then(()=>{window.location.href = '/home'})
     
     
     
@@ -135,18 +137,18 @@ class App extends Component {
     this.setState({
         user: null
         })
+    window.location.href = '/home'
   }
   
     
   render() {
- 
     return (
       
       <div className="App">
       <BrowserRouter>
-        {/* <Header username = { this.state.user.username } /> */}
         <Routes>
-        <Route path="/signup" element={<SignUp user={this.state.user} signupError={this.state.signupError}/>} />
+          <Route path="/home" element={<Home />} />
+        <Route path="/signup" element={<SignUp user={this.state.user} signUp={this.signUp} signupError={this.state.signupError}/>} />
         <Route path="/login" element={<Login user={this.state.user} signIn={this.signIn} signinError={this.state.signinError}/>} />
         </Routes>
 
@@ -177,6 +179,6 @@ export default App;
 
 const Logout = (props) => {
   return (
-    <a href="/logout" onClick={props.onClick}>Logout </a>
+    <a href="/home" onClick={props.onClick}>Logout </a>
   );
 };
