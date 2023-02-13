@@ -13,7 +13,7 @@ class MyRequests extends Component {
     componentDidMount() {
         const fetchRequests = () => {
             axios.get(Requests_URL).then((response) => {
-                this.setState({requests: response.data}); // set the data from the API as our state
+                this.setState({requests: response.data});
                 console.log(response)
             });
         };
@@ -31,21 +31,25 @@ class MyRequests extends Component {
 }
 
 const RequestList = (props) => {
+    console.log(props)
     return (
         <div >
             <h2>My Requests</h2>
-            <div>
+            <div id='group-requests'>
                 { props.requests.map((r) => {
+                    if (r.user_id) {
                     return (
-                        <div key={ r.id }>
-                            <a href={`/my-requests/${ r.id }`}>{r.title}</a>
+                        <div id='single request' key={ r.id }>
+                            <a href={`/my requests/${ r.id }`}>{r.title}</a>
                             <p>{ r.location }</p>
                             <p>{ r.datetime }</p>
                             <p>{ r.description }</p>
                             <p>{ r.budget }</p>
                             <p>{ r.status }</p>
                         </div>
-                    );
+                    );   
+                    }
+                    
                 })}
             </div>
         </div>

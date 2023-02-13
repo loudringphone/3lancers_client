@@ -5,12 +5,7 @@ import Hamburger from "./Hamburger";
 // const [hamburgerOpen, setHamburgerOpen] = useState(false);
 
 class Header extends Component {
-  signOut = () => {
-    localStorage.removeItem('token')
-    this.setState({
-        user: null
-        })
-  }
+
 
 // const toggleHamburger = () => { setHamburgerOpen(!hamburgerOpen) }
 
@@ -31,10 +26,6 @@ class Header extends Component {
               </li>
               <li>
                 <NavLink to="/my-offers">My offers</NavLink>
-              </li>
-              <li>
-              {this.props.username ? <div><Logout onClick={this.signOut}/><a href={`/users/${this.props.username}`}>{`(${this.props.username})`}</a></div> : <NavLink to="/login">Login</NavLink>}
-                
               </li>
             </ul>
           </div>
@@ -58,8 +49,4 @@ class Header extends Component {
 
 export default Header;
 
-const Logout = () => {
-  return (
-    <a href="/logout">Logout </a>
-  );
-};
+
