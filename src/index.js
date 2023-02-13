@@ -3,6 +3,7 @@ import createRoot from 'react-dom';
 import './index.css';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
+import "./components/style.css"
 
 
 createRoot.render(

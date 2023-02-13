@@ -1,10 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import Hamburger from "./Hamburger";
 
-
+// const [hamburgerOpen, setHamburgerOpen] = useState(false);
 
 class Header extends Component {
 
+
+// const toggleHamburger = () => { setHamburgerOpen(!hamburgerOpen) }
 
   render() {
 
@@ -30,6 +33,19 @@ class Header extends Component {
     );
   }
 }
+
+// function NavLink({ to, children, ...props }) {
+//   const resolvedPath = useResolvedPath(to)
+//   const isActive = useMatch({ path: resolvedPath.pathname, end: true  })
+
+//   return (
+//       <li className={isActive ? "active" : ""}>
+//           <Link to={to} {...props}>
+//               {children}
+//           </Link>
+//       </li>
+//   );
+// };
 
 export default Header;
 
