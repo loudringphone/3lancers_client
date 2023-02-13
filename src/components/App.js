@@ -5,6 +5,7 @@ import axios from 'axios'
 import SignUp from './SignUp';
 import Login from './Login';
 
+
 import MyRequests from '../pages/MyRequests';
 import MyOffers from '../pages/MyOffers';
 import BrowseRequests from '../pages/BrowseRequests';
@@ -136,15 +137,17 @@ class App extends Component {
         })
   }
   
-  
+    
   render() {
+ 
     return (
+      
       <div className="App">
       <BrowserRouter>
-        <Header username = { this.state.user.username } />
+        {/* <Header username = { this.state.user.username } /> */}
         <Routes>
-        <Route path="/signup" element={<SignUp  signupError={this.state.signupError}/>} />
-        <Route path="/login" element={<Login signIn={this.signIn} signinError={this.state.signinError}/>} />
+        <Route path="/signup" element={<SignUp user={this.state.user} signupError={this.state.signupError}/>} />
+        <Route path="/login" element={<Login user={this.state.user} signIn={this.signIn} signinError={this.state.signinError}/>} />
         </Routes>
 
 
@@ -158,7 +161,7 @@ class App extends Component {
         
 
 
-
+        
 
         {this.state.user.username ? <h2>Welcome {this.state.user.username}</h2> : (
           <>
