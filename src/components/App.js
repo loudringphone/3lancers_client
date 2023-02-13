@@ -10,13 +10,14 @@ import MyOffers from '../pages/MyOffers';
 import BrowseRequests from '../pages/BrowseRequests';
 import Header from './Header';
 import Home from '../pages/Home';
+import NewRequest from '../pages/NewRequest';
 
 const USERS_URL = 'http://localhost:3000/users.json'
 
 class App extends Component {
 
   state = {
-    user: {}, 
+    user: {},
     signinError: "",
     signupError: ""
   }
@@ -88,14 +89,14 @@ class App extends Component {
               })
           }
       })
-    
-    
-    
-    
-    
+
+
+
+
+
     }
     })
-    
+
   }
 
   signIn = (user) => {
@@ -135,8 +136,8 @@ class App extends Component {
         user: null
         })
   }
-  
-  
+
+
   render() {
     return (
       <div className="App">
@@ -145,7 +146,11 @@ class App extends Component {
         <Routes>
         <Route path="/signup" element={<SignUp  signupError={this.state.signupError}/>} />
         <Route path="/login" element={<Login signIn={this.signIn} signinError={this.state.signinError}/>} />
+        <Route path='/' element={<Home />} />
+        <Route path='/home' element={<Home />} />
+        <Route path='/new-request' element={<NewRequest />} />
         </Routes>
+
 
 
       </BrowserRouter>
@@ -154,8 +159,8 @@ class App extends Component {
 
       {this.state.user.username ? <div><Logout onClick={this.signOut}/><a href={`/users/${this.state.user.username}`}>{`(${this.state.user.username})`}</a></div> : <a href='/login'>login</a>}
 
-        
-        
+
+
 
 
 
@@ -166,7 +171,7 @@ class App extends Component {
         }
       </div>
     );
-  } 
+  }
 }
 
 export default App;
