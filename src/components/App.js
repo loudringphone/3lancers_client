@@ -1,14 +1,11 @@
 import React, { Component } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import axios from "axios";
-
 import SignUp from "./SignUp";
 import Login from "./Login";
-
 import MyRequests from "../pages/MyRequests";
 import MyOffers from "../pages/MyOffers";
 import BrowseRequests from "../pages/BrowseRequests";
-import Header from "./Header";
+import Header from "./NavBar/Header";
 import Home from "../pages/Home";
 import NewRequest from "../pages/NewRequest";
 import RequestDetails from "../pages/RequestDetails";

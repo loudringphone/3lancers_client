@@ -32,10 +32,10 @@ class MyRequests extends Component {
                         return (
                             <div id='single request' key={ r.id }>
                             <a href={`/requests/${ r.id }`}>{r.title}</a>
-                                <p>{ r.datetime }</p>
-                                <p>{ r.budget }</p>
+                                <p>{ r.time }</p>
+                                <p>Price: { r.budget }</p>
                                 <p>{ r.status }</p>
-                                <p>{ r.offers.length }</p>
+                                <p>Bids: { r.offers.length }</p>
                             </div>
                         );
                     })}
