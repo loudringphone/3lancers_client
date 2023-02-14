@@ -43,7 +43,7 @@ export default class AcceptDecline extends Component {
             }
         })
         .then(()=>{
-            axios.put(`http://localhost:3000/requests/${this.props.offer.request_id}.json`, { status: 'Offer accepted'},{headers})
+            axios.put(`http://localhost:3000/requests/${this.props.offer.request_id}.json`, { budget: `${parseInt(this.props.offer.offer_amount).toFixed(2)}`, status: 'Offer accepted'},{headers})
         })
     };
 
