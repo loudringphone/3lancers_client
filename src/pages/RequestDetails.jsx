@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useParams } from "react-router-dom";
 
 import Offers from "../components/Offers"; 
+import CancelReopen from "../components/CancelReopen"
 
 const REQUESTS_URL = 'http://localhost:3000/requests.json'
 
@@ -92,7 +93,7 @@ const RequestInfo = (props) => {
                     {r.user_id === props.user.id && (
                         <div>
                         <button>Close request</button>
-                        <button>Cancel request</button>
+                        <CancelReopen request={r} />
                         </div>
                     )}
                     {r.user_id != props.user.id && (

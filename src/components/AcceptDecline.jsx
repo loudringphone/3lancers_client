@@ -1,8 +1,6 @@
 import { Component } from "react";
 import axios from 'axios'
 
-const OFFERS_URL = 'http://localhost:3000/offers.json'
-
 export default class AcceptDecline extends Component {
    
     declineOffer() {
@@ -43,9 +41,9 @@ export default class AcceptDecline extends Component {
                 axios.put(`http://localhost:3000/offers/${id}.json`, { status: 'Declined'},{headers})
                 }
             }
-           
         })
         .then(()=>{
+            axios.put(`http://localhost:3000/requests/${this.props.offer.request_id}.json`, { status: 'Offer accepted'},{headers})
         })
     };
 
