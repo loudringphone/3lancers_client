@@ -87,14 +87,14 @@ class App extends Component {
               })
           }
       })
-
-
-
-
-
+    
+    
+    
+    
+    
     }
     })
-
+    
   }
 
   signIn = (user) => {
@@ -124,10 +124,10 @@ class App extends Component {
             signupError: "",
           });
         }
+      })
       .then(()=>{
         window.location.href = '/home'
       })
-  };
   };
 
   signOut = () => {
@@ -137,19 +137,19 @@ class App extends Component {
         })
     window.location.href = '/home'
   }
-
+  
   render() {
-
+    
     setTimeout(() => {
       if(this.state.user.username == null) {
         localStorage.removeItem("token");
       }
     }, 500);
+   
 
-
-
+  
     return (
-
+      
       <div className="App">
       <BrowserRouter>
         <Header username = { this.state.user.username } />
