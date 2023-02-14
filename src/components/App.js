@@ -126,7 +126,7 @@ class App extends Component {
     window.location.href = '/home'
   }
   render() {
-
+    
     setTimeout(() => {
       if(this.state.user.username == null) {
         localStorage.removeItem("token");
