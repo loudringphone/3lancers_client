@@ -32,9 +32,9 @@ class MyOffers extends Component {
                         return (
                             <div id='single offer' key={ o.id }>
                             <a href={`/offers/${ o.id }`}>{o.request.title}</a>
-                                <p>{ o.request.datetime }</p>
-                                <p>{ o.request.budget }</p>
-                                <p>{ o.offer_amount}</p>
+                                <p>{ o.request.time }</p>
+                                <p>Price: { o.request.budget }</p>
+                                <p>Bid: { o.offer_amount}</p>
                                 <p>{ o.status }</p>
                             </div>
                         );
