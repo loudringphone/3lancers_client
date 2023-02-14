@@ -38,7 +38,7 @@ const RequestList = (props) => {
                 { props.requests.map((r) => {
                     return (
                         <div key={ r.id }>
-                            <a href={`/my-requests/${ r.id }`}>{r.title}</a>
+                            <a href={`/requests/${ r.id }`}>{r.title}</a>
                             <p>{ r.location }</p>
                             <p>{ r.datetime }</p>
                             <p>{ r.description }</p>
