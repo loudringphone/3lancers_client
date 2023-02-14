@@ -35,7 +35,11 @@ class MyRequests extends Component {
                                 <p>{ r.time }</p>
                                 <p>Price: { r.budget }</p>
                                 <p>{ r.status }</p>
+<<<<<<< HEAD
                                 <p>Bids: { r.offers.length }</p>
+=======
+                                <p>Currently { r.offers.length } offer(s)</p>
+>>>>>>> ea4371acb42c1621fcaed1c5c9c13c704a6a0dd7
                             </div>
                         );
                     })}

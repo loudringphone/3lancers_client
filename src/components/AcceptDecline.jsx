@@ -1,44 +1,65 @@
 import { Component } from "react";
 import axios from 'axios'
 
-// const OFFER_URL = 'http://localhost:3000/offers.json'
-
 export default class AcceptDecline extends Component {
-    constructor() {
-        super();
-        this.state = {
-            offer: null,
-        };
-        this.updateOffer = this.updateOffer.bind(this);
-    }
-
-    updateOffer(status) {
-        // update the offer on the server via AJAX
-        
+   
+    declineOffer() {
         let token = localStorage.getItem("token");
-    
-        // If the token exists, set the authorization header with the token
         let headers = {};
         if (token) {
             headers.Authorization = `Bearer ${token}`;
         }  
-        axios.put(`http://localhost:3000/offers/${this.props.offer.request_id}.json`, { status: status}).then((response) => {
-            // update the offer in the state
-            let offer = this.props.offer;
-            offer = response.data;
-            this.setState({ offer: offer });
-        });
+        axios.put(`http://localhost:3000/offers/${this.props.offer.id}.json`, { status: 'Declined'},{headers}).then(() => {
+  
+        })
+        
     };
 
+
+
+
+
+    acceptOffer() {
+
+        
+
+
+
+
+        let token = localStorage.getItem("token");
+        let headers = {};
+        if (token) {
+            headers.Authorization = `Bearer ${token}`;
+        }  
+        axios.put(`http://localhost:3000/offers/${this.props.offer.id}.json`, { status: 'Accepted'},{headers}).then(() => {
+            let offerIds = []
+            for (let offer of this.props.offers) {
+                offerIds.push(offer.id)
+            }
+            for (let id of offerIds) {
+                if (id != this.props.offer.id) {
+                axios.put(`http://localhost:3000/offers/${id}.json`, { status: 'Declined'},{headers})
+                }
+            }
+        })
+        .then(()=>{
+            axios.put(`http://localhost:3000/requests/${this.props.offer.request_id}.json`, { status: 'Offer accepted'},{headers})
+        })
+    };
+
+
+
+
+
     render() {
+        if (this.props.offer.status == "Open"){
+            return(
+            <div>
+                <a href="#" onClick={() => this.acceptOffer()}>Accept</a> <a href="#" onClick={() => this.declineOffer()}>Decline</a>
+            </div>
+            )
 
-
-        return(
-        <div>
-            <a href="#">Accept</a> <a href="#" onClick={() => this.updateOffer("Declined")}>Decline</a>
-        </div>
-        )
-
+        }
     }
 
 
