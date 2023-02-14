@@ -35,7 +35,7 @@ class MyRequests extends Component {
                                 <p>{ r.datetime }</p>
                                 <p>{ r.budget }</p>
                                 <p>{ r.status }</p>
-                                <p>{ r.offers.length }</p>
+                                <p>Currently { r.offers.length } offer(s)</p>
                             </div>
                         );
                     })}

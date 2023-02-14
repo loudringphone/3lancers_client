@@ -95,14 +95,9 @@ const RequestInfo = (props) => {
                         <button>Cancel request</button>
                         </div>
                     )}
-                    
                     {r.user_id != props.user.id && (
                         <button>Make an offer</button>
                     )}
-
-                    
-                
-                
                 </div>
 
             </div>

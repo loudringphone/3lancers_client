@@ -50,7 +50,7 @@ export default class Offers extends Component {
                 <div>
                     {filteredOffers.map(o => (
           <div key={o.id}>
-            <p>{users[o.user_id]}  ${o.offer_amount}  {o.status} {this.props.request.user_id === this.props.user.id && (<AcceptDecline offer={o} />)}</p>
+            <p>{users[o.user_id]}  ${o.offer_amount}  {o.status} </p>{this.props.request.user_id === this.props.user.id && (<AcceptDecline offer={o} offers={filteredOffers} />)}
           </div>
         ))}
 
