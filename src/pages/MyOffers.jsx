@@ -14,8 +14,8 @@ class MyOffers extends Component {
     componentDidMount() {
         const fetchOffers = () => {
             axios.get(OFFERS_URL).then((response) => {
+                console.log(response.data)
                 this.setState({offers: response.data});
-                console.log(response)
             });
         };
         fetchOffers(); 
@@ -30,20 +30,21 @@ class MyOffers extends Component {
     }
 }
 
-const OfferList = (props) => {
-    console.log(props)
+const OfferList = ( { offers }) => {
+    console.log(offers)
     return (
         <div >
             <h2>My Offers</h2>
             <div id='group offers'>
-                { props.offers.map((o) => {
-                    if (o.user_id) {
+                { offers.map((o) => {
+                    console.log(o)
+                    if (o.user_id && o.request_id != null) {
                     return (
                         <div id='single offer' key={ o.id }>
                         <a href={`/my-offers/${ o.id }`}>{o.request_id}</a>
-                            <p>{ o.request.date }</p>
+                            {/* <p>{ o.request.date }</p> */}
                             <p>{ o.status }</p>
-                            <p>Price: { o.request.budget }</p>
+                            {/* <p>Price: { o.request.budget }</p> */}
                             <p>Bid: { o.offer_amount }</p>
                         </div>
                     );

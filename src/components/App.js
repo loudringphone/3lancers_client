@@ -148,6 +148,8 @@ class App extends Component {
         <Route path="/home" element={<Home />} />
         <Route path="/my-offers" element={<MyOffers />} />
         <Route path="/my-requests" element={<MyRequests />} />
+        <Route path="/browse-requests" element={<BrowseRequests />} />
+        <Route path="/new-request" element={<NewRequest />} />
         <Route path="/signup" element={<SignUp signUp={this.signUp} signupError={this.state.signupError} user={this.state.user}/>} />
         <Route path="/login" element={<Login signIn={this.signIn} signinError={this.state.signinError} user={this.state.user}/>} />
         </Routes>
