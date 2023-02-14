@@ -40,7 +40,7 @@ const RequestList = (props) => {
                     if (r.user_id) {
                     return (
                         <div id='single request' key={ r.id }>
-                            <a href={`/my requests/${ r.id }`}>{r.title}</a>
+                            <a href={`/requests/${ r.id }`}>{r.title}</a>
                             <p>{ r.location }</p>
                             <p>{ r.datetime }</p>
                             <p>{ r.description }</p>

@@ -1,62 +1,48 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import axios from 'axios'
 
-const REQUESTS_URL = 'http://localhost:3000/requests.json';
+const REQUESTS_URL = 'http://localhost:3000/requests.json'
 
 class BrowseRequests extends Component {
     constructor() {
-        super();
+        super()
         this.state = {
-            requests: []
+            requests: [],
+            users: []
         }
     }
 
-    // fetch data from the server
     componentDidMount() {
         const fetchRequests = () => {
             axios.get(REQUESTS_URL).then((response) => {
-                console.log(response.data);
-                this.setState({ requests: response.data });
-                setTimeout(fetchRequests, 5000);
-            });
+                this.setState({ requests:response.data })
+                setTimeout(fetchRequests, 5000)
+            })
         }
-        fetchRequests();
+        fetchRequests() 
     }
+    
 
     render() {
         return (
-            <div>
-                <AllRequests  requests={this.state.requests}/>
-            </div>
-        );
+          <div>
+            <RequestList requests={ this.state.requests } users={ this.state.users } />
+
+          </div>
+        )
     }
 }
 
-
-// All requests from all users (including the current user)
-function AllRequests({requests}) {
-    console.log(requests);
-    const allRequests = [];
-    requests.forEach(request => {
-        allRequests.push(<Request request={request}/>);
-    })
-
-    return (
-        <div>
-            {allRequests}
-        </div>
-    )
-
-}
-
-function Request({request}) {
-    console.log(request);
-    return (
-        <div key={request.id}>
-            <h4>
-                {request.title}
-            </h4>
-            <p><span>{request.location}</span> | <span>${request.budget}</span></p>
+const RequestList = (props) => {
+    return(
+        <div className='requests'>
+            <h2>Requests from our users</h2>
+            { props.requests.map((r) => 
+            <div key={r.id}>
+                <a href={`/requests/${r.id}`}>{r.title}</a>
+                <div><span>{r.location}</span> | <span>${r.budget}</span></div>
+            </div>
+            )}
         </div>
     )
 }
