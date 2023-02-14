@@ -87,7 +87,7 @@ const RequestInfo = (props) => {
                 <div>
                     <button onClick={handleClickC}>Comments</button><button onClick={handleClickO}>Offers</button>
                     {showElementC && <div>Commentsssssssss!</div>}
-                    {showElementO && <Offers request={r}/>}
+                    {showElementO && <Offers user={props.user} request={r}/>}
                 
                     {r.user_id === props.user.id && (
                         <div>

@@ -127,7 +127,10 @@ class App extends Component {
             signupError: "",
           });
         }
-      });
+      })
+      .then(()=>{
+        window.location.href = '/home'
+      })
   };
 
   signOut = () => {
@@ -139,6 +142,15 @@ class App extends Component {
   }
   
   render() {
+    
+    setTimeout(() => {
+      if(this.state.user.username == null) {
+        localStorage.removeItem("token");
+      }
+    }, 500);
+   
+
+  
     return (
       
       <div className="App">
@@ -171,6 +183,6 @@ export default App;
 
 const Logout = (props) => {
   return (
-    <a href="/logout" onClick={props.onClick}>Logout </a>
+    <a href="/home" onClick={props.onClick}>Logout </a>
   );
 };
