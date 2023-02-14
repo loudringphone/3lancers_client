@@ -9,11 +9,11 @@ export default class AcceptDecline extends Component {
         this.state = {
             offer: null,
         };
-        this.updateOffer = this.updateOffer.bind(this);
+        this.declineOffer = this.declineOffer.bind(this);
     }
 
-    updateOffer(status) {
-        // update the offer on the server via AJAX
+    declineOffer(status) {
+        // decline the offer on the server via AJAX
         
         let token = localStorage.getItem("token");
     
@@ -22,8 +22,8 @@ export default class AcceptDecline extends Component {
         if (token) {
             headers.Authorization = `Bearer ${token}`;
         }  
-        axios.put(`http://localhost:3000/offers/${this.props.offer.request_id}.json`, { status: status}).then((response) => {
-            // update the offer in the state
+        axios.put(`http://localhost:3000/offers/${this.props.offer.request_id}.json`, { status: 'Declined'}).then((response) => {
+            // decline the offer in the state
             let offer = this.props.offer;
             offer = response.data;
             this.setState({ offer: offer });
@@ -35,7 +35,7 @@ export default class AcceptDecline extends Component {
 
         return(
         <div>
-            <a href="#">Accept</a> <a href="#" onClick={() => this.updateOffer("Declined")}>Decline</a>
+            <a href="#">Accept</a> <a href="#" onClick={() => this.declineOffer}>Decline</a>
         </div>
         )
 
