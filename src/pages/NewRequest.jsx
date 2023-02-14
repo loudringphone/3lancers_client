@@ -2,37 +2,56 @@ import axios from "axios";
 import React, { useState } from "react";
 
 const REQUESTS_URL = "http://localhost:3000/requests.json";
+
+// token to be able to save info to database
+let token = localStorage.getItem("token");
+let headers = {};
+if (token) {
+    headers.Authorization = `Bearer ${token}`;
+}
+
 export default class NewRequest extends React.Component {
     constructor() {
         super();
         this.state = {
-            requests: [],
+            newRequest: null,
         };
         this.saveRequest = this.saveRequest.bind(this);
     }
 
     // React life cycle method
-    saveRequest(title, date, location, description, budget) {
+    saveRequest(title, time, location, description, budget) {
         // save the request to the server via AJAX
-        axios.post(REQUESTS_URL, { title: title, date: date, location: location, desciption: description, budget: budget }).then((response) => {
+        axios.post(REQUESTS_URL, { user_id: this.props.user_id, title: title, time: time, location: location, description: description, budget: budget }, { headers }).then((response) => {
             // save the new request to the server
-            this.setState({ requests: [response.data, ...this.state.requests] });
+            this.setState({ newRequest: response.data });
         });
     };
 
 
     render() {
-        return (
-            <div>
-                <RequestForm onSubmit={this.saveRequest} />
-            </div>
-        )
+        // if currentUser logged in then show the new request form
+        // else show them a message and a button linking to the login page.
+        if (token) {
+            return (
+                <div>
+                    <RequestForm onSubmit={this.saveRequest} />
+                </div>
+            )
+        } else  {
+            return (
+                <div>
+                    <p>Please login to create a new request</p>
+                    <p><a href="/login">Go to login</a></p>
+                </div>
+            )
+        }
     }
 }
 
 const RequestForm = (props) => {
     const [title, setTitle] = useState('');
-    const [date, setDate] = useState('');
+    const [time, setTime] = useState('');
     const [location, setLocation] = useState('');
     const [description, setDescription] = useState('');
     const [budget, setBudget] = useState();
@@ -41,8 +60,8 @@ const RequestForm = (props) => {
         setTitle(e.target.value)
     };
 
-    function _handleDate(e) {
-        setDate(e.target.value);
+    function _handleTime(e) {
+        setTime(e.target.value);
     };
 
     function _handleLocation(e) {
@@ -59,7 +78,7 @@ const RequestForm = (props) => {
 
     function _handleSubmit(e) {
         e.preventDefault();
-        props.onSubmit(title, date, location, description, budget);
+        props.onSubmit(title, time, location, description, budget);
     };
 
     return (
@@ -68,15 +87,15 @@ const RequestForm = (props) => {
             <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={_handleSubmit}>
                 <label>
                     In a few words, what do you need done?
-                    <input type="text" name='title' id='title' value={title} onInput={_handleTitle} />
+                    <input type="text" name='title' id='title' value={title} onInput={_handleTitle} required />
                 </label>
                 <label>
                     When do you need this done?
-                    <input type="date" name='date' id='date' value={date} onInput={_handleDate}/>
+                    <input type="date" name='time' id='time' value={time} onInput={_handleTime} required />
                 </label>
                 <label>
                     Where do you need this done?
-                    <input type="text" name='location' id="location" value={location} onInput={_handleLocation} />
+                    <input type="text" name='location' id="location" value={location} onInput={_handleLocation} required />
                 </label>
                 <label>
                     Provide more details of the request
@@ -84,7 +103,7 @@ const RequestForm = (props) => {
                 </label>
                 <label>
                     What is your budget for this request?
-                    <input type="number" value={budget} onInput={_handleBudget} />
+                    <input type="number" value={budget} onInput={_handleBudget} required />
                 </label>
                 <input type="submit" value="Post request" />
             </form>
