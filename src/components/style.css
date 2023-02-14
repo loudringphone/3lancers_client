@@ -37,6 +37,9 @@ ul {
     gap: 1rem;
 }
 
+
+
+
 .hamburger {
     display: none;
 }
@@ -67,4 +70,21 @@ ul {
         transition: all 0.3s linear;
     }
 }
+
+
+#round-6 {
+    border-radius: 70%;
+    background-color: #8A2BE2;
+    color: white;
+    border: none;
+    padding: 5px;
+    font-size: 31px;
+    height: 50px;
+    width: 50px;
+    box-shadow: 0 2px 4px darkslategray;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+  
+  
 

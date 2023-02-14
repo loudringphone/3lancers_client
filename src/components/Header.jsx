@@ -27,7 +27,14 @@ class Header extends Component {
               <li>
                 <NavLink to="/my-offers">My offers</NavLink>
               </li>
+              <li>
+                <button id="round-6" href="/my-offers">+</button>
+              </li>
+
             </ul>
+            {/* <div className="hamburger" onClick={toggleHamburger}>
+              <Hamburger />
+            </div> */}
           </div>
       </nav>
     );

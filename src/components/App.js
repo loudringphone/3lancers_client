@@ -141,7 +141,6 @@ class App extends Component {
     window.location.href = '/home'
   }
   
-  
   render() {
     
     setTimeout(() => {
@@ -159,27 +158,17 @@ class App extends Component {
         <Header username = { this.state.user.username } />
         <Routes>
         <Route path="/home" element={<Home />} />
-        <Route path="/my-offers" element={<MyOffers />} />
-        <Route path="/my-requests" element={<MyRequests />} />
+        <Route path="/my-offers" element={<MyOffers request={this.state.request} user={this.state.user}/>} />
+        <Route path="/my-requests" element={<MyRequests user={this.state.user}/>} />
         <Route path="/requests" element={<BrowseRequests />} />
         <Route path="/requests/:id" element={<RequestDetails user={this.state.user} />} />
         <Route path="/new-request" element={<NewRequest />} />
         <Route path="/signup" element={<SignUp signUp={this.signUp} signupError={this.state.signupError} user={this.state.user}/>} />
         <Route path="/login" element={<Login signIn={this.signIn} signinError={this.state.signinError} user={this.state.user}/>} />
         </Routes>
-
-
       </BrowserRouter>
 
-
-
       {this.state.user.username ? <div><Logout onClick={this.signOut}/><a href={`/users/${this.state.user.username}`}>{`(${this.state.user.username})`}</a></div> : <a href='/login'>login</a>}
-
-        
-        
-
-
-
 
         {this.state.user.username ? <h2>Welcome {this.state.user.username}</h2> : (
           <>
