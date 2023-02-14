@@ -26,8 +26,9 @@ const MakeOffer = (props) => {
 
     const _editOffer = (event) => {
         event.preventDefault();
+        axios.put(`http://localhost:3000/offers/${userOpenOfferId}.json`, { status: 'Canceled'},{headers})
         axios.put(`http://localhost:3000/offers/${userOpenOfferId}.json`, { offer_amount: offer_amount},{headers})
-
+        axios.put(`http://localhost:3000/offers/${userOpenOfferId}.json`, { status: 'Open'},{headers})
 
 
 
