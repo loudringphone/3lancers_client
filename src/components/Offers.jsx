@@ -24,19 +24,8 @@ export default class Offers extends Component {
 
 
     render() {
-
-        
-
-
-
-
-
         return (
-
             <div>Offersssss!!</div>
-
-
-
         )
     }
 

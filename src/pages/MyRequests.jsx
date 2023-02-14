@@ -7,7 +7,7 @@ class MyRequests extends Component {
     constructor() {
         super();
         this.state = {
-            requests: []
+            requests: [],
         };
     }
     componentDidMount() {
@@ -21,39 +21,28 @@ class MyRequests extends Component {
     }
 
     render() {
+        const requests = this.state.requests;
+        const userID = this.props.user.id;
+        const filteredRequests = requests.filter(request => request.user_id === userID);
         return (
             <div>
-                <RequestList requests={ this.state.requests }/>
+                <h2>My Requests</h2>
+                <div id='group requests'>
+                    { filteredRequests.map((r) => {
+                        return (
+                            <div id='single request' key={ r.id }>
+                            <a href={`/requests/${ r.id }`}>{r.title}</a>
+                                <p>{ r.datetime }</p>
+                                <p>{ r.budget }</p>
+                                <p>{ r.status }</p>
+                                <p>{ r.offers.length }</p>
+                            </div>
+                        );
+                    })}
+                </div>
             </div>
         );
     }
-    
-}
-
-const RequestList = (props) => {
-    console.log(props)
-    return (
-        <div >
-            <h2>My Requests</h2>
-            <div id='group-requests'>
-                { props.requests.map((r) => {
-                    if (r.user_id) {
-                    return (
-                        <div id='single request' key={ r.id }>
-                            <a href={`/requests/${ r.id }`}>{r.title}</a>
-                            <p>{ r.location }</p>
-                            <p>{ r.datetime }</p>
-                            <p>{ r.description }</p>
-                            <p>{ r.budget }</p>
-                            <p>{ r.status }</p>
-                        </div>
-                    );   
-                    }
-                    
-                })}
-            </div>
-        </div>
-    )
 }
 
 export default MyRequests;

@@ -146,8 +146,8 @@ class App extends Component {
         <Header username = { this.state.user.username } />
         <Routes>
         <Route path="/home" element={<Home />} />
-        <Route path="/my-offers" element={<MyOffers />} />
-        <Route path="/my-requests" element={<MyRequests />} />
+        <Route path="/my-offers" element={<MyOffers request={this.state.request} user={this.state.user}/>} />
+        <Route path="/my-requests" element={<MyRequests user={this.state.user}/>} />
         <Route path="/requests" element={<BrowseRequests />} />
         <Route path="/requests/:id" element={<RequestDetails user={this.state.user} />} />
         <Route path="/new-request" element={<NewRequest />} />
