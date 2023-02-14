@@ -138,7 +138,6 @@ class App extends Component {
     window.location.href = '/home'
   }
   
-  
   render() {
     return (
       
@@ -155,19 +154,9 @@ class App extends Component {
         <Route path="/signup" element={<SignUp signUp={this.signUp} signupError={this.state.signupError} user={this.state.user}/>} />
         <Route path="/login" element={<Login signIn={this.signIn} signinError={this.state.signinError} user={this.state.user}/>} />
         </Routes>
-
-
       </BrowserRouter>
 
-
-
       {this.state.user.username ? <div><Logout onClick={this.signOut}/><a href={`/users/${this.state.user.username}`}>{`(${this.state.user.username})`}</a></div> : <a href='/login'>login</a>}
-
-        
-        
-
-
-
 
         {this.state.user.username ? <h2>Welcome {this.state.user.username}</h2> : (
           <>
