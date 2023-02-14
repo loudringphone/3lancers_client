@@ -5,7 +5,7 @@ import Login from "./Login";
 import MyRequests from "../pages/MyRequests";
 import MyOffers from "../pages/MyOffers";
 import BrowseRequests from "../pages/BrowseRequests";
-// import Header from "./NavBar/NavBar/Header";
+import Header from "./NavBar/Header";
 import Home from "../pages/Home";
 import NewRequest from "../pages/NewRequest";
 import RequestId from "../pages/RequestId";
@@ -135,7 +135,7 @@ class App extends Component {
     return (
       <div className="App">
       <BrowserRouter>
-        {/* <Header username = { this.state.user.username } /> */}
+        <Header username = { this.state.user.username } />
         <Routes>
         <Route path="" element={<Home />} />
         <Route path="/home" element={<Home />} />
