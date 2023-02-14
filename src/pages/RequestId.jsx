@@ -3,11 +3,12 @@ import axios from 'axios'
 import { useParams } from "react-router-dom";
 
 import Offers from "../components/Offers"; 
-import CancelReopen from "../components/CancelReopen"
+import CancelReopenComplete from "../components/CancelReopenComplete"
+import MakeOffer from "../components/MakeOffer"
 
 const REQUESTS_URL = 'http://localhost:3000/requests.json'
 
-class RequestDetails extends Component {
+export default class RequestId extends Component {
     constructor() {
         super();
         this.state = {
@@ -19,7 +20,7 @@ class RequestDetails extends Component {
         const fetchRequests = () => {
             axios.get(REQUESTS_URL).then((response) => {
                 this.setState({ requests:response.data })
-                setTimeout(fetchRequests, 5000)
+                setTimeout(fetchRequests, 2500)
             })
         }
         fetchRequests() 
@@ -34,7 +35,7 @@ class RequestDetails extends Component {
         )
     }
 }
-export default RequestDetails;
+
 
 
 
@@ -43,7 +44,6 @@ export default RequestDetails;
 
 const RequestInfo = (props) => {
     const { id } = useParams();
-
     const [showElementC, setShowElementC] = useState(true);
     const handleClickC = () => {
         setShowElementC(true);
@@ -59,10 +59,12 @@ const RequestInfo = (props) => {
     useEffect(() => {
     const fetchData = async () => {
       const response = await axios.get(OFFERS_URL);
-      setOffers(response.data);
+      const offers = response.data
+      const filteredOffers = offers.filter(offer => offer.request_id == id);
+      setOffers(filteredOffers);
     };
 
-    const intervalId = setInterval(fetchData, 5000);
+    const intervalId = setInterval(fetchData, 1500);
 
     return () => clearInterval(intervalId);
   }, []);
@@ -87,17 +89,16 @@ const RequestInfo = (props) => {
                 <p>Price <b>${parseInt(r.budget).toFixed(2)}</b></p>
                 <div>
                     <button onClick={handleClickC}>Comments</button><button onClick={handleClickO}>Offers</button>
-                    {showElementC && <div>Commentsssssssss!</div>}
-                    {showElementO && <Offers user={props.user} request={r}/>}
+                    {showElementC && <div>No comments yet.</div>}
+                    {showElementO && <Offers user={props.user} request={r} offers={offers}/>}
                 
                     {r.user_id === props.user.id && (
                         <div>
-                        <button>Close request</button>
-                        <CancelReopen request={r} />
+                        <CancelReopenComplete request={r} offers={offers} />
                         </div>
                     )}
                     {r.user_id != props.user.id && (
-                        <button>Make an offer</button>
+                        <MakeOffer user={props.user} request={r} offers={offers} />
                     )}
                 </div>
 

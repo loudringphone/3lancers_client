@@ -5,20 +5,17 @@ import Login from "./Login";
 import MyRequests from "../pages/MyRequests";
 import MyOffers from "../pages/MyOffers";
 import BrowseRequests from "../pages/BrowseRequests";
-import Header from "./NavBar/Header";
+// import Header from "./NavBar/NavBar/Header";
 import Home from "../pages/Home";
 import NewRequest from "../pages/NewRequest";
-import RequestDetails from "../pages/RequestDetails";
-
+import RequestId from "../pages/RequestId";
 const USERS_URL = "http://localhost:3000/users.json";
-
 class App extends Component {
   state = {
     user: {},
     signinError: "",
     signupError: "",
   };
-
   componentDidMount() {
     let token = localStorage.getItem("token");
     if (token) {
@@ -38,7 +35,6 @@ class App extends Component {
         });
     }
   }
-
   signUp = (user) => {
     fetch("http://localhost:3000/users", {
       method: "POST",
@@ -87,16 +83,9 @@ class App extends Component {
               })
           }
       })
-    
-    
-    
-    
-    
     }
     })
-    
   }
-
   signIn = (user) => {
     fetch("http://localhost:3000/login", {
       method: "POST",
@@ -129,7 +118,6 @@ class App extends Component {
         window.location.href = '/home'
       })
   };
-
   signOut = () => {
     localStorage.removeItem("token");
     this.setState({
@@ -137,7 +125,6 @@ class App extends Component {
         })
     window.location.href = '/home'
   }
-  
   render() {
     
     setTimeout(() => {
@@ -145,28 +132,23 @@ class App extends Component {
         localStorage.removeItem("token");
       }
     }, 500);
-   
-
-  
     return (
-      
       <div className="App">
       <BrowserRouter>
-        <Header username = { this.state.user.username } />
+        {/* <Header username = { this.state.user.username } /> */}
         <Routes>
+        <Route path="" element={<Home />} />
         <Route path="/home" element={<Home />} />
         <Route path="/my-offers" element={<MyOffers request={this.state.request} user={this.state.user}/>} />
         <Route path="/my-requests" element={<MyRequests user={this.state.user}/>} />
         <Route path="/requests" element={<BrowseRequests />} />
-        <Route path="/requests/:id" element={<RequestDetails user={this.state.user} />} />
+        <Route path="/requests/:id" element={<RequestId user={this.state.user} />} />
         <Route path="/new-request" element={<NewRequest />} />
         <Route path="/signup" element={<SignUp signUp={this.signUp} signupError={this.state.signupError} user={this.state.user}/>} />
         <Route path="/login" element={<Login signIn={this.signIn} signinError={this.state.signinError} user={this.state.user}/>} />
         </Routes>
       </BrowserRouter>
-
       {this.state.user.username ? <div><Logout onClick={this.signOut}/><a href={`/users/${this.state.user.username}`}>{`(${this.state.user.username})`}</a></div> : <a href='/login'>login</a>}
-
         {this.state.user.username ? <h2>Welcome {this.state.user.username}</h2> : (
           <>
           </>)
@@ -175,9 +157,7 @@ class App extends Component {
     );
   }
 }
-
 export default App;
-
 const Logout = (props) => {
   return (
     <a href="/home" onClick={props.onClick}>Logout </a>
