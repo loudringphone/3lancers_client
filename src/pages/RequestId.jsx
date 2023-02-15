@@ -3,13 +3,13 @@ import axios from 'axios'
 import { useParams } from "react-router-dom";
 import { AiFillEdit } from 'react-icons/ai'
 
-
 import Comments from "../components/Comments"; 
 import Offers from "../components/Offers"; 
 import CancelReopenComplete from "../components/CancelReopenComplete"
 import MakeOffer from "../components/MakeOffer"
 
-const REQUESTS_URL = 'http://localhost:3000/requests.json'
+const URL = 'http://localhost:3000'
+const REQUESTS_URL = URL + '/requests.json'
 
 export default class RequestId extends Component {
     constructor() {
@@ -87,14 +87,14 @@ const RequestInfo = (props) => {
     for (let i = 0; i < props.requests.length; i++) {
       if (props.requests[i].id == id) {
         const r = props.requests[i]
-        const options = { day: "2-digit", month: "short", year: "numeric" };
+        const dateOptions = { day: "2-digit", month: "short", year: "numeric" };
         return(
             <div>
                 <h3>{r.title}</h3>{editIcon}
                 <h3>Request status: {r.status}</h3>
                 <p>Location: {r.location}</p>
                 <p>Description: {r.description}</p>
-                <p>Date: {new Date(r.time).toLocaleDateString("en-AU", options)}</p>
+                <p>Date: {new Date(r.time).toLocaleDateString("en-AU", dateOptions)}</p>
                 <p>Budget: <b>${parseInt(r.budget).toFixed(2)}</b></p>
                 <div>
                     {r.user_id === props.user.id && (
