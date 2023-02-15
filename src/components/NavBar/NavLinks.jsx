@@ -8,12 +8,13 @@ const NavLinks = (props) => {
     let existingToken = '111'
     if (token) {existingToken = token}
     const {decodedToken, isExpired } = useJwt(existingToken);
-    let username = ''
-    let user_id = ''
+    let username
+    let user_id
     if (decodedToken) {
         username = decodedToken.username
         user_id = decodedToken.user_id
     }
+    
     if (!token){
         return (
             <ul id='mobNavLinks'>

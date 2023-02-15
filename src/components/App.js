@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import SignUp from "./SignUp";
-import Login from "./Login";
+import SignUp from "../pages/SignUp";
+import Login from "../pages/Login";
 import MyRequests from "../pages/MyRequests";
 import MyOffers from "../pages/MyOffers";
 import BrowseRequests from "../pages/BrowseRequests";
@@ -139,6 +139,7 @@ class App extends Component {
         <BrowserRouter>
           <Header username={this.state.user.username} />
           <Routes>
+          <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
             <Route path="/my-offers" element={<MyOffers request={this.state.request} user={this.state.user} />} />
             <Route path="/my-requests" element={<MyRequests user={this.state.user} />} />
@@ -153,9 +154,6 @@ class App extends Component {
           </Routes>
         </BrowserRouter>
 
-        {this.state.user.username ? <div><Logout onClick={this.signOut} /><a href={`/users/${this.state.user.username}`}>{`(${this.state.user.username})`}</a></div> : <a href='/login'>login</a>}
-
-        {this.state.user.username ? <h2>Welcome {this.state.user.username}</h2> : (<></>)}
       </div>
     )
   };
@@ -164,8 +162,3 @@ class App extends Component {
 };
 
 export default App;
-const Logout = (props) => {
-  return (
-    <a href="/home" onClick={props.onClick}>Logout </a>
-  );
-};

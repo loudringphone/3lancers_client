@@ -1,65 +1,45 @@
-import React, { Component } from "react";
-import { NavLink } from "react-router-dom";
-import { connect } from "react-redux";
-import { logInUser } from "../actions/userActions";
+import { Component } from "react";
 
-class Login extends Component {
-	state = {
-		email: "",
-		password: ""
-	};
+export default class Login extends Component {
 
-	handleChange = (e) => {
-		this.setState({
-			[e.target.name]: e.target.value
-		});
-	};
+    state = {
+        email: '',
+        password: ''
+    }
 
-	handleSubmit = (e) => {
-		e.preventDefault();
-		this.props.logInUser(this.state);
-		this.setState({ email: "", password: "" });
-	};
+    handleChange = (event) => {
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    }
 
-	render() {
-		return (
-			<div className="login-page">
-				<div className="login-signup">
-					<div className="login-signup-container">
-						<div className="title">Log In</div>
-						<form onSubmit={this.handleSubmit}>
-							<input
-								type="text"
-								placeholder="Email Address"
-								name="email"
-								onChange={this.handleChange}
-								value={this.state.email}
-							/>
-							<input
-								type="password"
-								placeholder="Password"
-								name="password"
-								onChange={this.handleChange}
-								value={this.state.password}
-							/>
-							<button type="submit">Log In</button>
-						</form>
-						<div className="alt">
-							Don't have an account?{" "}
-							<NavLink to="/signup" className="link">
-								Sign Up
-							</NavLink>
-						</div>
-					</div>
-				</div>
+    handleSubmit = (event) => {
+        event.preventDefault()
+        this.props.signIn(this.state)
+    }
 
-			</div>
-		);
-	}
+    render() {
+        if (localStorage.getItem('token')) {
+            return (window.location.href = '/home')
+        }
+        else {
+        
+            return (
+                <div>
+                    <form onSubmit={this.handleSubmit}>
+                        <h1>Login</h1>
+                        <label>Email address</label>
+                        <input name='email' value={this.state.email} onChange={this.handleChange}/>
+                        <label>Password</label>
+                        <input type="password" name='password' value={this.state.password} onChange={this.handleChange}/>
+                        {this.props.signinError ? <p style={{color: 'red'}}>{this.props.signinError}</p> : null}
+                        <input type="submit" value="Login"/>
+                    </form>
+                    <p>Don't have an account yet?</p>
+                    <button><a href="/signup">Sign Up</a></button>
+                </div>
+            )
+            }
+    }
+
 }
-
-const mapDispatchToProps = (dispatch) => {
-	return { logInUser: (userInfo) => dispatch(logInUser(userInfo)) };
-};
-
-export default connect(null, mapDispatchToProps)(Login);

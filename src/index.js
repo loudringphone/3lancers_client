@@ -7,6 +7,7 @@ import "./components/style.css"
 import "./components/NavBar/navbar.css"
 
 
+
 createRoot.render(
 	<React.StrictMode>
 	  <App />

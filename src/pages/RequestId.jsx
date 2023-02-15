@@ -89,11 +89,8 @@ const RequestInfo = (props) => {
             mapLocation = (props.requests[i].location).replace(/\s+/g, '+')
         }
     }
-    const YOUR_API_KEY = ''
+    const YOUR_API_KEY = process.env.REACT_APP_GOECODING_API;
 
-    // alert(mapLocation)
-    
-    // alert(geoCoding)
     
     const [location, setLocation] = useState(null);
     useEffect(() => {
