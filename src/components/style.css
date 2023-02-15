@@ -15,6 +15,7 @@ body {
     padding: 0 1rem;
     align-items: stretch;
     gap: 2rem;
+    height: 80px;
 }
 
 .logo {
@@ -142,17 +143,21 @@ ul {
         color: black;
     }
     .logo {
-        position: absolute;
-        left: 40%;
+        /* position: absolute;
+        left: 40%; */
+        width: fit-content;
+        margin: auto;
     }
     .header {
         background-color: white;
         color: #8A2BE2;
         display: flex;
-        justify-content: space-between;
+        /* justify-content: space-between; */
         padding: 0 1rem;
         align-items: center;
-        gap: 2rem;
+        gap: 0;
+        height: 80px;
+        width: 100%;
     }
 
 }
