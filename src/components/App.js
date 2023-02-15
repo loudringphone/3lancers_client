@@ -8,12 +8,20 @@ import BrowseRequests from "../pages/BrowseRequests";
 import Header from "./NavBar/Header";
 import Home from "../pages/Home";
 import NewRequest from "../pages/NewRequest";
+<<<<<<< HEAD
 import RequestId from "../pages/RequestId";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import EditRequest from "../pages/EditRequest";
+=======
+// import RequestId from "../pages/RequestId";
+import 'bootstrap/dist/css/bootstrap.min.css';
+// import EditRequest from "../pages/EditRequest";
+// import RequestDetails from "../pages/RequestDetails";
+>>>>>>> 4bddcf0 (add request_id to be a part of identical chat and refactor code)
 import MyMessages from "../pages/MyMessages";
 
 const USERS_URL = "http://localhost:3000/users.json";
+
 class App extends Component {
   state = {
     user: {},
@@ -39,6 +47,7 @@ class App extends Component {
         });
     }
   }
+
   signUp = (user) => {
     fetch("http://localhost:3000/users", {
       method: "POST",
@@ -90,7 +99,20 @@ class App extends Component {
             })
         }
       })
+<<<<<<< HEAD
+=======
+      .then(response => response.json())
+      .then(result => {
+          if (result.token){
+          localStorage.setItem('token', result.token)
+          this.setState({
+              user: result.user
+              })
+          }
+      })
+>>>>>>> 4bddcf0 (add request_id to be a part of identical chat and refactor code)
   }
+
   signIn = (user) => {
     fetch("http://localhost:3000/login", {
       method: "POST",
@@ -119,6 +141,24 @@ class App extends Component {
     }).then(() => {
       window.location.href = '/home'
     })
+<<<<<<< HEAD
+=======
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.token) {
+          localStorage.setItem("token", result.token);
+          this.setState({
+            user: result.user,
+          });
+          window.location.href = '/home'
+        } else {
+          this.setState({
+            signinError: result.error,
+            signupError: "",
+          });
+        }
+      })
+>>>>>>> 4bddcf0 (add request_id to be a part of identical chat and refactor code)
   };
 
   signOut = () => {
@@ -129,6 +169,10 @@ class App extends Component {
     window.location.href = '/home'
   }
   render() {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4bddcf0 (add request_id to be a part of identical chat and refactor code)
     setTimeout(() => {
       if (this.state.user.username == null) {
         localStorage.removeItem("token");
@@ -147,7 +191,7 @@ class App extends Component {
             <Route path="/requests" element={<BrowseRequests />} />
             <Route path="/requests/:id" element={<RequestId user={this.state.user} />} />
             <Route path="/requests/:id/edit" element={<EditRequest user={this.state.user} />} />
-            
+
             <Route path="/new-request" element={<NewRequest user_id={this.state.user.id} />} />
             <Route path="/signup" element={<SignUp signUp={this.signUp} signupError={this.state.signupError} user={this.state.user} />} />
             <Route path="/login" element={<Login signIn={this.signIn} signinError={this.state.signinError} user={this.state.user} />} />
@@ -161,4 +205,14 @@ class App extends Component {
 
 };
 
+<<<<<<< HEAD
 export default App;
+=======
+export default App;
+
+const Logout = (props) => {
+  return (
+    <a href="/home" onClick={props.onClick}>Logout </a>
+  );
+};
+>>>>>>> 4bddcf0 (add request_id to be a part of identical chat and refactor code)
