@@ -8,16 +8,9 @@ import BrowseRequests from "../pages/BrowseRequests";
 import Header from "./NavBar/Header";
 import Home from "../pages/Home";
 import NewRequest from "../pages/NewRequest";
-<<<<<<< HEAD
 import RequestId from "../pages/RequestId";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import EditRequest from "../pages/EditRequest";
-=======
-// import RequestId from "../pages/RequestId";
-import 'bootstrap/dist/css/bootstrap.min.css';
-// import EditRequest from "../pages/EditRequest";
-// import RequestDetails from "../pages/RequestDetails";
->>>>>>> 4bddcf0 (add request_id to be a part of identical chat and refactor code)
 import MyMessages from "../pages/MyMessages";
 
 const USERS_URL = "http://localhost:3000/users.json";
@@ -99,8 +92,6 @@ class App extends Component {
             })
         }
       })
-<<<<<<< HEAD
-=======
       .then(response => response.json())
       .then(result => {
           if (result.token){
@@ -110,7 +101,6 @@ class App extends Component {
               })
           }
       })
->>>>>>> 4bddcf0 (add request_id to be a part of identical chat and refactor code)
   }
 
   signIn = (user) => {
@@ -141,8 +131,6 @@ class App extends Component {
     }).then(() => {
       window.location.href = '/home'
     })
-<<<<<<< HEAD
-=======
       .then((response) => response.json())
       .then((result) => {
         if (result.token) {
@@ -158,7 +146,6 @@ class App extends Component {
           });
         }
       })
->>>>>>> 4bddcf0 (add request_id to be a part of identical chat and refactor code)
   };
 
   signOut = () => {
@@ -169,10 +156,6 @@ class App extends Component {
     window.location.href = '/home'
   }
   render() {
-<<<<<<< HEAD
-=======
-
->>>>>>> 4bddcf0 (add request_id to be a part of identical chat and refactor code)
     setTimeout(() => {
       if (this.state.user.username == null) {
         localStorage.removeItem("token");
@@ -205,9 +188,6 @@ class App extends Component {
 
 };
 
-<<<<<<< HEAD
-export default App;
-=======
 export default App;
 
 const Logout = (props) => {
@@ -215,4 +195,3 @@ const Logout = (props) => {
     <a href="/home" onClick={props.onClick}>Logout </a>
   );
 };
->>>>>>> 4bddcf0 (add request_id to be a part of identical chat and refactor code)
