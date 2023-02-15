@@ -89,7 +89,7 @@ const RequestInfo = (props) => {
             mapLocation = (props.requests[i].location).replace(/\s+/g, '+')
         }
     }
-    const YOUR_API_KEY = 'AIzaSyDlqVBURPLkfoy97JTTNvuvxcGd6XEDLLQ'
+    const YOUR_API_KEY = ''
 
     // alert(mapLocation)
     
