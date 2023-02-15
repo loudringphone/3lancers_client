@@ -8,15 +8,12 @@ import BrowseRequests from "../pages/BrowseRequests";
 import Header from "./NavBar/Header";
 import Home from "../pages/Home";
 import NewRequest from "../pages/NewRequest";
-<<<<<<< HEAD
 import RequestId from "../pages/RequestId";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import EditRequest from "../pages/EditRequest";
-=======
 import RequestDetails from "../pages/RequestDetails";
 import MyMessages from "../pages/MyMessages";
 
->>>>>>> 40471ac (done show message, working on sending message)
 const USERS_URL = "http://localhost:3000/users.json";
 class App extends Component {
   state = {
@@ -99,7 +96,6 @@ class App extends Component {
 
         }
       })
-<<<<<<< HEAD
       .then(response => response.json())
       .then(result => {
           if (result.token){
@@ -110,11 +106,8 @@ class App extends Component {
           }
       })
     }
-    })
-=======
-
->>>>>>> 40471ac (done show message, working on sending message)
-  }
+    
+  
   signIn = (user) => {
     fetch("http://localhost:3000/login", {
       method: "POST",
@@ -143,7 +136,6 @@ class App extends Component {
     }).then(() => {
       window.location.href = '/home'
     })
-<<<<<<< HEAD
       .then((response) => response.json())
       .then((result) => {
         if (result.token) {
@@ -160,10 +152,6 @@ class App extends Component {
         }
       })
   };
-=======
-  };
-
->>>>>>> 40471ac (done show message, working on sending message)
   signOut = () => {
     localStorage.removeItem("token");
     this.setState({
@@ -180,28 +168,6 @@ class App extends Component {
     }, 500);
     return (
       <div className="App">
-<<<<<<< HEAD
-      <BrowserRouter>
-        <Header username = { this.state.user.username } />
-        <Routes>
-        <Route path="" element={<Home />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/my-offers" element={<MyOffers request={this.state.request} user={this.state.user}/>} />
-        <Route path="/my-requests" element={<MyRequests user={this.state.user}/>} />
-        <Route path="/requests" element={<BrowseRequests />} />
-        <Route path="/requests/:id" element={<RequestId user={this.state.user} />} />
-        <Route path="/requests/:id/edit" element={<EditRequest user={this.state.user} />} />
-        <Route path="/new-request" element={<NewRequest />} />
-        <Route path="/signup" element={<SignUp signUp={this.signUp} signupError={this.state.signupError} user={this.state.user}/>} />
-        <Route path="/login" element={<Login signIn={this.signIn} signinError={this.state.signinError} user={this.state.user}/>} />
-        </Routes>
-      </BrowserRouter>
-      {this.state.user.username ? <div><Logout onClick={this.signOut}/><a href={`/users/${this.state.user.username}`}>{`(${this.state.user.username})`}</a></div> : <a href='/login'>login</a>}
-      </div>
-    );
-  }
-}
-=======
         <BrowserRouter>
           <Header username={this.state.user.username} />
           <Routes>
@@ -227,7 +193,6 @@ class App extends Component {
 
 };
 
->>>>>>> 40471ac (done show message, working on sending message)
 export default App;
 const Logout = (props) => {
   return (
