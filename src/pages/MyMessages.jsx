@@ -39,6 +39,7 @@ export default class MyMessages extends Component {
         // save the message to the server
         axios.post(MESSAGES_URL, { sender_id: this.props.user_id, receiver_id: receiver_id, content: content, request_id: request_id }).then(response => {
             console.log(response.data);
+            this.setState({ messages: [...this.state.messages, response.data]})
         })
     }
 
@@ -58,6 +59,10 @@ export default class MyMessages extends Component {
         let chatId = undefined;
         for (let m of myMessages) {
             // console.log(m.request_id, typeof m.request_id)
+            // if the request_id is exiting then
+                // find the guest
+                // set the chatId
+                // push a message to the existing chat or create a new chat.
             if (m.request_id) {
                 if (m.sender_id === this.props.user_id) {
                     guest = m.receiver;
@@ -95,7 +100,7 @@ export default class MyMessages extends Component {
                 <LatestMessage message={chatContents[chatContents.length - 1]} message_id={chatContents[chatContents.length - 1].id} key={chatContents[chatContents.length - 1].id}/>
             )
             allConversationWindows.push(
-                <ConversationWindow chatContents={chatContents} key={chatId} saveMessage={this.saveMessage} />
+                <ConversationWindow chatContents={chatContents} key={chatId} saveMessage={this.saveMessage} guest_id={chatId.split('-')[1]}/>
             )
 
         }
@@ -146,9 +151,11 @@ function Message({ message }) {
 }
 
 // Conversation window
-function ConversationWindow({ chatContents, saveMessage }) {
+function ConversationWindow({ chatContents, saveMessage, guest_id }) {
     const conversation = [];
     const requestTitle = chatContents[0].request.title;
+    const requestId = chatContents[0].request_id;
+    console.log('requestId: ', requestId);
     for (const message of chatContents) {
         conversation.push(
             <Message message={message} key={message.id}/>
@@ -158,15 +165,14 @@ function ConversationWindow({ chatContents, saveMessage }) {
         <div>
             <h4>{requestTitle}</h4>
             {conversation}
-            <NewMessageForm onSubmit={saveMessage} receiver_id={chatContents[0].receiver_id} request_id={1} />
+            <NewMessageForm onSubmit={saveMessage} receiver_id={guest_id} request_id={requestId} />
         </div>
     )
 }
 
 
 // New Message Form
-const NewMessageForm = (props) => {
-    const receiver_id = props.receiver_id;
+const NewMessageForm = ( props ) => {
     const [content, setContent] = useState('');
 
     const _handleInput = (e) => {
@@ -176,7 +182,7 @@ const NewMessageForm = (props) => {
 
     const _handleSubmit = (e) => {
         e.preventDefault();
-        props.onSubmit(content, receiver_id);
+        props.onSubmit(content, props.receiver_id, props.request_id);
         setContent('')
     };
 
