@@ -10,6 +10,7 @@ import Home from "../pages/Home";
 import NewRequest from "../pages/NewRequest";
 import RequestId from "../pages/RequestId";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import EditRequest from "../pages/EditRequest";
 const USERS_URL = "http://localhost:3000/users.json";
 class App extends Component {
   state = {
@@ -108,15 +109,13 @@ class App extends Component {
           this.setState({
             user: result.user,
           });
+          window.location.href = '/home'
         } else {
           this.setState({
             signinError: result.error,
             signupError: "",
           });
         }
-      })
-      .then(()=>{
-        window.location.href = '/home'
       })
   };
   signOut = () => {
@@ -144,16 +143,13 @@ class App extends Component {
         <Route path="/my-requests" element={<MyRequests user={this.state.user}/>} />
         <Route path="/requests" element={<BrowseRequests />} />
         <Route path="/requests/:id" element={<RequestId user={this.state.user} />} />
+        <Route path="/requests/:id/edit" element={<EditRequest user={this.state.user} />} />
         <Route path="/new-request" element={<NewRequest />} />
         <Route path="/signup" element={<SignUp signUp={this.signUp} signupError={this.state.signupError} user={this.state.user}/>} />
         <Route path="/login" element={<Login signIn={this.signIn} signinError={this.state.signinError} user={this.state.user}/>} />
         </Routes>
       </BrowserRouter>
       {this.state.user.username ? <div><Logout onClick={this.signOut}/><a href={`/users/${this.state.user.username}`}>{`(${this.state.user.username})`}</a></div> : <a href='/login'>login</a>}
-        {this.state.user.username ? <h2>Welcome {this.state.user.username}</h2> : (
-          <>
-          </>)
-        }
       </div>
     );
   }
