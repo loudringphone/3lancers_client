@@ -8,9 +8,15 @@ import BrowseRequests from "../pages/BrowseRequests";
 import Header from "./NavBar/Header";
 import Home from "../pages/Home";
 import NewRequest from "../pages/NewRequest";
+<<<<<<< HEAD
 import RequestId from "../pages/RequestId";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import EditRequest from "../pages/EditRequest";
+=======
+import RequestDetails from "../pages/RequestDetails";
+import MyMessages from "../pages/MyMessages";
+
+>>>>>>> 40471ac (done show message, working on sending message)
 const USERS_URL = "http://localhost:3000/users.json";
 class App extends Component {
   state = {
@@ -53,29 +59,47 @@ class App extends Component {
         },
       }),
     })
-    .then(response => response.json())
-    .then(user => this.setState({ user: user }) )
-    .then(() =>{if (this.state.user.id == null) {
-      this.setState({
-        signupError: 'Invalid username, email or password',
-        signinError: '',
-        user: ''
-    })
-    } else {
-      this.setState({signupError: '', signinError: ''})
-      fetch("http://localhost:3000/login", {
-        method: "POST",
-        headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            user: {
+      .then(response => response.json())
+      .then(user => this.setState({ user: user }))
+      .then(() => {
+        if (this.state.user.id == null) {
+          this.setState({
+            signupError: 'Invalid username, email or password',
+            signinError: '',
+            user: ''
+          })
+        } else {
+          this.setState({ signupError: '', signinError: '' })
+          fetch("http://localhost:3000/login", {
+            method: "POST",
+            headers: {
+              "Accept": "application/json",
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              user: {
                 email: user.email,
                 password: user.password
-            }
-        })
+              }
+            })
+          })
+            .then(response => response.json())
+            .then(result => {
+              if (result.token) {
+                localStorage.setItem('token', result.token)
+                this.setState({
+                  user: result.user
+                })
+              }
+            })
+
+
+
+
+
+        }
       })
+<<<<<<< HEAD
       .then(response => response.json())
       .then(result => {
           if (result.token){
@@ -87,6 +111,9 @@ class App extends Component {
       })
     }
     })
+=======
+
+>>>>>>> 40471ac (done show message, working on sending message)
   }
   signIn = (user) => {
     fetch("http://localhost:3000/login", {
@@ -101,7 +128,22 @@ class App extends Component {
           password: user.password,
         },
       }),
+    }).then((response) => response.json()).then((result) => {
+      if (result.token) {
+        localStorage.setItem("token", result.token);
+        this.setState({
+          user: result.user,
+        });
+      } else {
+        this.setState({
+          signinError: result.error,
+          signupError: "",
+        });
+      }
+    }).then(() => {
+      window.location.href = '/home'
     })
+<<<<<<< HEAD
       .then((response) => response.json())
       .then((result) => {
         if (result.token) {
@@ -118,22 +160,27 @@ class App extends Component {
         }
       })
   };
+=======
+  };
+
+>>>>>>> 40471ac (done show message, working on sending message)
   signOut = () => {
     localStorage.removeItem("token");
     this.setState({
-        user: null
-        })
+      user: null
+    })
     window.location.href = '/home'
   }
   render() {
     
     setTimeout(() => {
-      if(this.state.user.username == null) {
+      if (this.state.user.username == null) {
         localStorage.removeItem("token");
       }
     }, 500);
     return (
       <div className="App">
+<<<<<<< HEAD
       <BrowserRouter>
         <Header username = { this.state.user.username } />
         <Routes>
@@ -154,6 +201,33 @@ class App extends Component {
     );
   }
 }
+=======
+        <BrowserRouter>
+          <Header username={this.state.user.username} />
+          <Routes>
+            <Route path="/home" element={<Home />} />
+            <Route path="/my-offers" element={<MyOffers request={this.state.request} user={this.state.user} />} />
+            <Route path="/my-requests" element={<MyRequests user={this.state.user} />} />
+            <Route path="/my-messages" element={<MyMessages user_id={this.state.user.id} />} />
+            <Route path="/requests" element={<BrowseRequests />} />
+            <Route path="/requests/:id" element={<RequestDetails user={this.state.user} />} />
+            <Route path="/new-request" element={<NewRequest user_id={this.state.user.id} />} />
+            <Route path="/signup" element={<SignUp signUp={this.signUp} signupError={this.state.signupError} user={this.state.user} />} />
+            <Route path="/login" element={<Login signIn={this.signIn} signinError={this.state.signinError} user={this.state.user} />} />
+          </Routes>
+        </BrowserRouter>
+
+        {this.state.user.username ? <div><Logout onClick={this.signOut} /><a href={`/users/${this.state.user.username}`}>{`(${this.state.user.username})`}</a></div> : <a href='/login'>login</a>}
+
+        {this.state.user.username ? <h2>Welcome {this.state.user.username}</h2> : (<></>)}
+      </div>
+    )
+  };
+
+
+};
+
+>>>>>>> 40471ac (done show message, working on sending message)
 export default App;
 const Logout = (props) => {
   return (
