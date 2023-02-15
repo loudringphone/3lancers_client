@@ -134,7 +134,7 @@ const RequestInfo = (props) => {
 
                 </div>
                 <div>
-                    <button onClick={handleClickC}>Comments</button><button onClick={handleClickO}>Offers</button>
+                    <div style={{ display: 'inline-flex' }}><button onClick={handleClickC}>Comments</button><button onClick={handleClickO}>Offers</button></div>
                     {showElementC && <Comments user={props.user} request={r} />}
                     {showElementO && <Offers user={props.user} request={r} offers={offers}/>}
                 </div>
