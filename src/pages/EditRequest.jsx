@@ -72,7 +72,7 @@ const RequestForm = (props) => {
     const [time, setTime] = useState('');
     const [location, setLocation] = useState('');
     const [description, setDescription] = useState('');
-    const [budget, setBudget] = useState();
+    const [budget, setBudget] = useState('');
 
     function _handleTitle(e) {
         setTitle(e.target.value)
@@ -154,7 +154,7 @@ const RequestForm = (props) => {
                     What is your budget for this request?
                     <input type="number" value={budget|| parseInt(props.request.budget).toFixed(2)} onInput={_handleBudget} onFocus={_handleInputFocus} required />
                 </label>
-                <input type="submit" value="Post request" />
+                <input type="submit" value="Edit request" />
             </form>
         </div>
     )

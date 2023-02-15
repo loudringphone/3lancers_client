@@ -66,10 +66,11 @@ const RequestInfo = (props) => {
       const filteredOffers = offers.filter(offer => offer.request_id == id);
       setOffers(filteredOffers);
     };
-
+    
     const intervalId = setInterval(fetchData, 1500);
 
     
+
 
     return () => clearInterval(intervalId);
   }, []);
@@ -82,7 +83,30 @@ const RequestInfo = (props) => {
     />
 
 
+    let mapLocation
+    for (let i = 0; i < props.requests.length; i++) {
+        if (props.requests[i].id == id) {
+            mapLocation = (props.requests[i].location).replace(/\s+/g, '+')
+        }
+    }
+    const YOUR_API_KEY = 'AIzaSyDlqVBURPLkfoy97JTTNvuvxcGd6XEDLLQ'
+
+    // alert(mapLocation)
+    
+    // alert(geoCoding)
+    
+    const [location, setLocation] = useState(null);
+    useEffect(() => {
+        if (mapLocation) {
+        let geoCoding = `https://maps.googleapis.com/maps/api/geocode/json?address=${mapLocation}&key=${YOUR_API_KEY}`
+        fetch(geoCoding)
+          .then(response => response.json())
+          .then(data => setLocation(data.results[0].geometry.location))
+          .catch(error => console.log(error))
+        }
+      }, [mapLocation])
    
+
     if (props.requests) {
     for (let i = 0; i < props.requests.length; i++) {
       if (props.requests[i].id == id) {
@@ -90,14 +114,14 @@ const RequestInfo = (props) => {
         const dateOptions = { day: "2-digit", month: "short", year: "numeric" };
         return(
             <div>
-                <h3>{r.title}</h3>{editIcon}
+                <h3>{r.title}</h3>{(props.user.id == r.user_id || props.user.admin === true) && editIcon}
                 <h3>Request status: {r.status}</h3>
                 <p>Location: {r.location}</p>
                 <p>Description: {r.description}</p>
                 <p>Date: {new Date(r.time).toLocaleDateString("en-AU", dateOptions)}</p>
                 <p>Budget: <b>${parseInt(r.budget).toFixed(2)}</b></p>
                 <div>
-                    {r.user_id === props.user.id && (
+                    {(props.user.id == r.user_id || props.user.admin === true) && (
                         <div>
                         <CancelReopenComplete request={r} offers={offers} />
                         </div>
