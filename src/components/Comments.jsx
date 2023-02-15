@@ -49,7 +49,7 @@ export default class Comments extends Component {
             if (filteredComments.length > 0) {
                 return (
                     <div className="commentSection">
-                        <div className="commentArea">
+                        <div className="commentArea" style={{ height: '300px', overflowY: 'scroll' }}>
                             <div>
                                 {filteredComments.map(c => (
                     <div key={c.id} className='comment'>

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 const REQUESTS_URL = "http://localhost:3000/requests.json";
 
-// token to be able to save info to database
+// token
 let token = localStorage.getItem("token");
 let headers = {};
 if (token) {
@@ -13,9 +13,6 @@ if (token) {
 export default class NewRequest extends React.Component {
     constructor() {
         super();
-        this.state = {
-            newRequest: null,
-        };
         this.saveRequest = this.saveRequest.bind(this);
     }
 
@@ -24,7 +21,7 @@ export default class NewRequest extends React.Component {
         // save the request to the server via AJAX
         axios.post(REQUESTS_URL, { user_id: this.props.user_id, title: title, time: time, location: location, description: description, budget: budget }, { headers }).then((response) => {
             // save the new request to the server
-            this.setState({ newRequest: response.data });
+            window.location.href = `/requests/${response.data.id}`
         });
     };
 
@@ -78,7 +75,7 @@ const RequestForm = (props) => {
 
     function _handleSubmit(e) {
         e.preventDefault();
-        props.onSubmit(title, time, location, description, budget);
+        props.onSubmit(title, time, location, description, budget)
     };
 
     return (
