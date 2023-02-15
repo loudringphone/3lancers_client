@@ -1,7 +1,10 @@
 import React, { Component, useState, useEffect } from 'react';
 import axios from 'axios'
 import { useParams } from "react-router-dom";
+import { AiFillEdit } from 'react-icons/ai'
 
+
+import Comments from "../components/Comments"; 
 import Offers from "../components/Offers"; 
 import CancelReopenComplete from "../components/CancelReopenComplete"
 import MakeOffer from "../components/MakeOffer"
@@ -66,11 +69,17 @@ const RequestInfo = (props) => {
 
     const intervalId = setInterval(fetchData, 1500);
 
+    
+
     return () => clearInterval(intervalId);
   }, []);
 
 
-
+    const editIcon = <AiFillEdit className='edit' 
+    size='25px' color='#8A2BE2' 
+    cursor='pointer'
+    onClick={() => window.location.href = `/requests/${id}/edit`}
+    />
 
 
    
@@ -81,17 +90,13 @@ const RequestInfo = (props) => {
         const options = { day: "2-digit", month: "short", year: "numeric" };
         return(
             <div>
-                <h3>{r.title}</h3>
-                <h3>{r.status}</h3>
-                <p>{r.location}</p>
-                <p>{r.description}</p>
-                <p>Date {new Date(r.time).toLocaleDateString("en-AU", options)}</p>
-                <p>Price <b>${parseInt(r.budget).toFixed(2)}</b></p>
+                <h3>{r.title}</h3>{editIcon}
+                <h3>Request status: {r.status}</h3>
+                <p>Location: {r.location}</p>
+                <p>Description: {r.description}</p>
+                <p>Date: {new Date(r.time).toLocaleDateString("en-AU", options)}</p>
+                <p>Budget: <b>${parseInt(r.budget).toFixed(2)}</b></p>
                 <div>
-                    <button onClick={handleClickC}>Comments</button><button onClick={handleClickO}>Offers</button>
-                    {showElementC && <div>No comments yet.</div>}
-                    {showElementO && <Offers user={props.user} request={r} offers={offers}/>}
-                
                     {r.user_id === props.user.id && (
                         <div>
                         <CancelReopenComplete request={r} offers={offers} />
@@ -100,6 +105,14 @@ const RequestInfo = (props) => {
                     {r.user_id != props.user.id && (
                         <MakeOffer user={props.user} request={r} offers={offers} />
                     )}
+
+
+
+                </div>
+                <div>
+                    <button onClick={handleClickC}>Comments</button><button onClick={handleClickO}>Offers</button>
+                    {showElementC && <Comments user={props.user} request={r} />}
+                    {showElementO && <Offers user={props.user} request={r} offers={offers}/>}
                 </div>
 
             </div>

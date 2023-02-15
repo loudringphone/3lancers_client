@@ -9,7 +9,8 @@ const MakeOffer = (props) => {
     if (token) {
         headers.Authorization = `Bearer ${token}`;
     }
-    const OFFERS_URL = 'http://localhost:3000/offers.json'
+    const URL = 'http://localhost:3000'
+    const OFFERS_URL = URL + '/offers.json'
     const _makeOffer = (event) => {
         event.preventDefault();
         axios.post(OFFERS_URL, {user_id: props.user.id, request_id: props.request.id, offer_amount: offer_amount, status: 'Open'}, {headers})
@@ -26,9 +27,28 @@ const MakeOffer = (props) => {
 
     const _editOffer = (event) => {
         event.preventDefault();
-        axios.put(`http://localhost:3000/offers/${userOpenOfferId}.json`, { status: 'Canceled'},{headers})
-        axios.put(`http://localhost:3000/offers/${userOpenOfferId}.json`, { offer_amount: offer_amount},{headers})
-        axios.put(`http://localhost:3000/offers/${userOpenOfferId}.json`, { status: 'Open'},{headers})
+        axios.put(`http://localhost:3000/offers/${userOpenOfferId}.json`, { status: 'Canceled'},{headers}).then(response => {
+            console.log('Success:', response);
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          })
+          .then(()=>{
+        axios.put(`http://localhost:3000/offers/${userOpenOfferId}.json`, { offer_amount: offer_amount},{headers}).then(response => {
+            console.log('Success:', response);
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+        })
+        .then(()=>{
+        axios.put(`http://localhost:3000/offers/${userOpenOfferId}.json`, { status: 'Open'},{headers}).then(response => {
+            console.log('Success:', response);
+          })
+          .catch(error => {
+            console.error('Error:', error);
+          });
+        })
 
 
 
@@ -57,41 +77,46 @@ const MakeOffer = (props) => {
     }
 
 
+    if (token) {
+        if (openOffers){
 
-    if (openOffers){
+            
+            if(userOpenOffer === true) {
 
-        
-        if(userOpenOffer === true) {
-
-            return(
-                <div>
-                    <form onSubmit={_editOffer}>
-                        <label>Edit offer</label>
-                        <input type="number" id="offer" name="offer" value={offer_amount || userOpenOfferAmount} onInput={_handleOfferAmount} required />
-                        <button type="submit">Edit</button>
-                    </form>
-
-
-
-                </div>
-
-            )
+                return(
+                    <div>
+                        <form onSubmit={_editOffer}>
+                            <label>Edit offer</label>
+                            <input type="number" id="offer" name="offer" value={offer_amount || userOpenOfferAmount} onInput={_handleOfferAmount} required />
+                            <button type="submit">Edit</button>
+                        </form>
 
 
-        }
-        else {
-            return(
-                <div>
-                    <form onSubmit={_makeOffer}>
-                        <label>Make an offer</label>
-                        <input type="number" id="offer" name="offer" value={offer_amount} onInput={_handleOfferAmount} required />
-                        <button type="submit">Go</button>
-                    </form>
-                </div>
-            )
+
+                    </div>
+
+                )
+
+
+            }
+            else {
+                return(
+                    <div>
+                        <form onSubmit={_makeOffer}>
+                            <label>Make an offer</label>
+                            <input type="number" id="offer" name="offer" value={offer_amount} onInput={_handleOfferAmount} required />
+                            <button type="submit">Go</button>
+                        </form>
+                    </div>
+                )
+            }
         }
     }
-
+    else {
+        return (
+            <p>Plesae <a href="/login">login</a> to make an offer</p>
+        )
+    }
 
 }
 

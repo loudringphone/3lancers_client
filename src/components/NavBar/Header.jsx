@@ -15,10 +15,10 @@ const Header = () => {
             <Navigation />
           </div>
           <button id="deskButton" href="/new-request">
-            <a href="/new-request" target="_blank">Post Request</a>
+            <a href="/new-request">Post Request</a>
           </button>
           <button id="mobButton">
-            <a href="/new-request" target="_blank">+</a>
+            <a href="/new-request">+</a>
           </button>
       </div>
   );

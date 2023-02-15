@@ -107,15 +107,13 @@ class App extends Component {
           this.setState({
             user: result.user,
           });
+          window.location.href = '/home'
         } else {
           this.setState({
             signinError: result.error,
             signupError: "",
           });
         }
-      })
-      .then(()=>{
-        window.location.href = '/home'
       })
   };
   signOut = () => {
