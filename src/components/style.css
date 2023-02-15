@@ -122,6 +122,9 @@ li a {
 .NavButtons {
     margin: auto 0;
 }
+.red {
+    color: greenyellow;
+}
 
 @media (max-width: 1000px){
     .Navigation {
@@ -182,6 +185,7 @@ li a {
     }
     .NavBar {
         opacity: 1;
+        margin: 0;
     }
 
     .NavBar a:hover {
@@ -223,7 +227,7 @@ li a {
     h2 {
         text-align: left;
         margin-top: 15px;
-        margin-left: 20px;
+        margin-left: 15px;
     }
     #group-requests {
         display: flex;
@@ -249,6 +253,30 @@ li a {
     .titleDate {
         display: flex;
         justify-content: space-between;
+        margin-top: 10px;
+    }
+    .titleDate, .status, .price, .bids {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+    .price, .bids {
+        display: flex;
+        margin-left: 50px;
+        color: rgb(210, 210, 210);
+    }
+    .value {
+        margin-left: 10px;
+        color: black;
+    }
+    .value.B {
+        margin-left: 16px;
+    }
+    .value.B2 {
+        margin-left: 24px;
+    }
+    .filler {
+        color: white;
+        width: 40px;
     }
 
 }

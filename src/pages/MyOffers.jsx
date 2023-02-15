@@ -41,16 +41,18 @@ class MyOffers extends Component {
                             <div id='single-request' key={ o.id }>
                                 <div className='titleDate'>
                                 <a href={`/offers/${ o.id }`}>{o.request.title}</a>
-                                    <p>{ o.request.time }</p>
+                                    <p>{ o.request.time.substring(0, 10) }</p>
                                 </div>  
                                 <div className='status'>
-                                        <p>{ o.status }</p>
+                                        <p className='red'>{ o.status }</p>
                                 </div> 
                                 <div className='price'> 
-                                    <p>Price: { o.request.budget }</p>
+                                    Price:
+                                    <p className='value P'>${ o.request.budget.substring(0, 2) }</p>
                                 </div>
                                 <div className='bids'>
-                                    <p>Bid: { o.offer_amount}</p>
+                                    Bid:
+                                    <p className='value B2'>${ o.offer_amount }</p>
                                 </div>
                             </div>
                         );

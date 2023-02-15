@@ -40,17 +40,24 @@ class MyRequests extends Component {
                         return (
                             <div id='single-request' key={ r.id }>
                                 <div className='titleDate'>
-                                    <a href={`/requests/${ r.id }`}>{r.title}</a>
-                                    <p>{ r.time }</p>
+                                    <a href={`/requests/${ r.id }`}>{r.title.substring(0, 30)}</a>
+                                    <p>{ r.time.substring(0, 10) }</p>
                                 </div>
                                 <div className='status'>
-                                    <p>{ r.status }</p>
+                                    {/* if (r.status === 'Open') {
+                                        <p className='green'>{ r.status }</p>
+                                    } else if (r.status === 'Pending'){
+                                        <p className='yellow'>{ r.status }</p>
+                                    } else */}
+                                        <p className='red'>{ r.status }</p>
                                 </div>
                                 <div className='price'>
-                                    <p>Price: { r.budget }</p>
+                                    Price:
+                                    <p className='value P'>${ r.budget.substring(0, 2) }</p>
                                 </div>
                                 <div className='bids'>
-                                    <p>Bids: { r.offers.length }</p>
+                                    Bids:
+                                    <p className='value B'>{ r.offers.length }</p>
                                 </div>
                             </div>
                         );
