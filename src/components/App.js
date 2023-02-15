@@ -9,6 +9,7 @@ import Header from "./NavBar/Header";
 import Home from "../pages/Home";
 import NewRequest from "../pages/NewRequest";
 import RequestId from "../pages/RequestId";
+import 'bootstrap/dist/css/bootstrap.min.css';
 const USERS_URL = "http://localhost:3000/users.json";
 class App extends Component {
   state = {

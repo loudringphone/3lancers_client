@@ -4,7 +4,7 @@ import './index.css';
 import App from './components/App';
 import reportWebVitals from './reportWebVitals';
 import "./components/style.css"
-// import './NavBar/NavBar.module.css';
+import "./components/NavBar/navbar.css"
 
 
 createRoot.render(

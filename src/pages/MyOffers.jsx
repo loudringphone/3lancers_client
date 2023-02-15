@@ -27,15 +27,31 @@ class MyOffers extends Component {
         return (
             <div>
                 <h2>My Offers</h2>
-                <div id='group offers'>
+                <ul className='request-offerToggle'>
+                    <li>
+                        <a className='toggle' href="/my-requests">Requests</a>
+                    </li>
+                    <li>
+                        <a className='toggle' href="/my-offers">Offers</a>
+                    </li>
+                </ul>
+                <div id='group-requests'>
                     { filteredOffers.map((o) => {
                         return (
-                            <div id='single offer' key={ o.id }>
-                            <a href={`/offers/${ o.id }`}>{o.request.title}</a>
-                                <p>{ o.request.time }</p>
-                                <p>Price: { o.request.budget }</p>
-                                <p>Bid: { o.offer_amount}</p>
-                                <p>{ o.status }</p>
+                            <div id='single-request' key={ o.id }>
+                                <div className='titleDate'>
+                                <a href={`/offers/${ o.id }`}>{o.request.title}</a>
+                                    <p>{ o.request.time }</p>
+                                </div>  
+                                <div className='status'>
+                                        <p>{ o.status }</p>
+                                </div> 
+                                <div className='price'> 
+                                    <p>Price: { o.request.budget }</p>
+                                </div>
+                                <div className='bids'>
+                                    <p>Bid: { o.offer_amount}</p>
+                                </div>
                             </div>
                         );
                     })}

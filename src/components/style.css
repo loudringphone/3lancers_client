@@ -15,11 +15,17 @@ body {
     padding: 0 1rem;
     align-items: stretch;
     gap: 2rem;
-    height: 80px;
+    height: 70px;
+    border-bottom: 2px solid rgb(210, 210, 210);
+}
+#mobNavLinks {
+    font-size: larger;
 }
 
 .logo {
     font-size: 1rem;
+    display: flex;
+    align-items: center;
 }
 
 .header ul {
@@ -38,6 +44,24 @@ body {
     align-items: center;
     padding: .25rem;
     justify-content: center;
+    
+}
+a {
+    text-decoration: none;
+    color: white;
+}
+a:hover {
+    color: black;
+}
+button {
+    border-radius: 12px;
+    width: 300px;
+    background-color: #8A2BE2;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
 }
 
 ul {
@@ -50,6 +74,7 @@ ul {
 .NavBar {
     display: flex;
     align-items: center;
+    margin: 0 auto;
 }
 
 #mobButton {
@@ -62,20 +87,40 @@ ul {
     color: white;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
-    font-size: 10px;
+    /* display: inline-block;
+    font-size: 10px; */
     height: 30px;
-    margin-top: 25px;
-    width: 300px;
-    border-radius: 10px;
+    width: 200px;
+    border-radius: 12px;
     cursor: pointer;
-    position: absolute;
+    /* position: absolute; */
     right: 0;
-    margin-right: 5px;
+    display: flex;
+    margin: auto 0;
+    justify-content: center;
 
 }
 .MobileNavigation {
     display: none;
+}
+/* My Requests */
+h2 {
+    text-align: center;
+    margin-top: 15px;
+}
+#group-requests {
+    display: flex;
+    justify-content: center;
+}
+#single-request {
+    margin: 0 auto;
+    border: 1px solid rgb(210, 210, 210);
+}
+li a {
+    color: #8A2BE2;
+}
+.NavButtons {
+    margin: auto 0;
 }
 
 @media (max-width: 1000px){
@@ -99,7 +144,8 @@ ul {
         cursor: pointer;
         transition: all 0.2s ease;
         justify-content: center;
-        margin-top: 10px;
+        /* margin-top: 1.25%; */
+        align-items: center;
     }
     #deskButton {
         display: none;
@@ -109,7 +155,7 @@ ul {
         position: absolute;
         left: 5%;
         cursor: pointer;
-        top: 2%;
+        top: 1.25%;
         /* margin-top: 20px; */
     }
 
@@ -117,11 +163,11 @@ ul {
         display: flex;
         flex-direction: column;
         position: absolute;
-        top: 80px;
+        top: 70px;
         left: 0;
         width: 100%;
         background-color: #8A2BE2;
-        border-top: 2px solid black;
+        /* border-top: 2px solid black; */
         align-items: flex-start;
 
     }
@@ -156,8 +202,53 @@ ul {
         padding: 0 1rem;
         align-items: center;
         gap: 0;
-        height: 80px;
-        width: 100%;
+        height: 70px;
+        /* width: 100%; */
+    }
+    a {
+        color: #8A2BE2;
+    }
+    button {
+        border-radius: 12px;
+        width: 90%;
+        background-color: #8A2BE2;
+        border: none;
+        color: white;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        margin: 0 auto;
+    }
+    /* My Requests */
+    h2 {
+        text-align: left;
+        margin-top: 15px;
+        margin-left: 20px;
+    }
+    #group-requests {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    #single-request {
+        margin: 0 auto;
+        margin-bottom: 10px;
+        border: 1px solid rgb(210, 210, 210);
+        width: 90%;
+    }
+    .request-offerToggle {
+        display: flex;
+        margin-bottom: 15px;
+    }
+    .logoLink {
+        display: block;
+    }
+    .toggle {
+        color: black;
+    }
+    .titleDate {
+        display: flex;
+        justify-content: space-between;
     }
 
 }

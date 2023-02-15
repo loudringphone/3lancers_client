@@ -6,7 +6,7 @@ const Header = () => {
 
       <div className="header">
           <div className="logo">
-            <nav>
+            <nav className='logoLink'>
               <a href="/home"><h1>3Lancers</h1></a>
             </nav>
           </div>
@@ -14,12 +14,14 @@ const Header = () => {
             <MobileNavigation />
             <Navigation />
           </div>
-          <button id="deskButton" href="/new-request">
-            <a href="/new-request" target="_blank">Post Request</a>
-          </button>
-          <button id="mobButton">
-            <a href="/new-request" target="_blank">+</a>
-          </button>
+          <div className='NavButtons'>
+            <button id="deskButton" href="/new-request">
+              <a href="/new-request">Post Request</a>
+            </button>
+            <button id="mobButton">
+              <a href="/new-request">+</a>
+            </button>
+          </div>
       </div>
   );
 }

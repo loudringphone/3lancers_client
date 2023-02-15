@@ -27,15 +27,31 @@ class MyRequests extends Component {
         return (
             <div>
                 <h2>My Requests</h2>
-                <div id='group requests'>
+                <ul className='request-offerToggle'>
+                    <li>
+                        <a className='toggle' href="/my-requests">Requests</a>
+                    </li>
+                    <li>
+                        <a className='toggle' href="/my-offers">Offers</a>
+                    </li>
+                </ul>
+                <div id='group-requests'>
                     { filteredRequests.map((r) => {
                         return (
-                            <div id='single request' key={ r.id }>
-                            <a href={`/requests/${ r.id }`}>{r.title}</a>
-                                <p>{ r.time }</p>
-                                <p>Price: { r.budget }</p>
-                                <p>{ r.status }</p>
-                                <p>Bids: { r.offers.length }</p>
+                            <div id='single-request' key={ r.id }>
+                                <div className='titleDate'>
+                                    <a href={`/requests/${ r.id }`}>{r.title}</a>
+                                    <p>{ r.time }</p>
+                                </div>
+                                <div className='status'>
+                                    <p>{ r.status }</p>
+                                </div>
+                                <div className='price'>
+                                    <p>Price: { r.budget }</p>
+                                </div>
+                                <div className='bids'>
+                                    <p>Bids: { r.offers.length }</p>
+                                </div>
                             </div>
                         );
                     })}
