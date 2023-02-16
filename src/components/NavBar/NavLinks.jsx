@@ -5,7 +5,7 @@ import { useJwt } from "react-jwt";
 
 const NavLinks = (props) => {
     const token = localStorage.getItem('token');
-    let existingToken = '111'
+    let existingToken = 'none'
     if (token) {existingToken = token}
     const {decodedToken, isExpired } = useJwt(existingToken);
     let username

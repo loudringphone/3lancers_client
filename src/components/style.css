@@ -52,7 +52,7 @@ body {
     align-items: center;
     padding: .25rem;
     justify-content: center;
-    
+
 }
 a {
     text-decoration: none;
@@ -172,7 +172,7 @@ li a {
     }
     #deskButton {
         display: none;
-        
+
     }
     .MobileNavigation .Hamburger {
         position: absolute;
@@ -306,6 +306,6 @@ li a {
     }
 
 }
-  
-  
+
+
 
