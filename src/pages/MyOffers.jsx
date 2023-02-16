@@ -53,11 +53,11 @@ class MyOffers extends Component {
                                 </div> 
                                 <div className='price'> 
                                     Price:
-                                    <p className='value P'>${ o.request.budget }</p>
+                                    <p className='value P'>${ parseInt(o.request.budget).toFixed(2) }</p>
                                 </div>
                                 <div className='bids'>
                                     Bid:
-                                    <p className='value B2'>${ o.offer_amount }</p>
+                                    <p className='value B2'>${ parseInt(o.offer_amount).toFixed(2) }</p>
                                 </div>
                             </div>
                         );
