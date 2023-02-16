@@ -6,7 +6,7 @@ body {
     margin: 0;
     padding: 0;
     --brand-color: #8A2BE2;
-    --btn-yes: rgb(38, 255, 0);
+    --btn-yes: rgb(255, 0, 85);
     --box-color: rgb(210, 210, 210);
     --box-style: 2px solid rgb(210, 210, 210);
     --standard-margin-left: 15px
@@ -246,6 +246,7 @@ li a {
         background-color: var(--brand-color);
         /* border-top: 2px solid black; */
         align-items: flex-start;
+        z-index: 99;
 
     }
     .nav ul li {
