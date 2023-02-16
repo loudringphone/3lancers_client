@@ -49,12 +49,12 @@ export default class RequestId extends Component {
 
 const RequestInfo = (props) => {
     const { id } = useParams();
-    const [showElementC, setShowElementC] = useState(true);
+    const [showElementC, setShowElementC] = useState(false);
     const handleClickC = () => {
         setShowElementC(true);
         setShowElementO(false);
     };
-    const [showElementO, setShowElementO] = useState(false);
+    const [showElementO, setShowElementO] = useState(true);
     const handleClickO = () => {
         setShowElementO(true);
         setShowElementC(false);
@@ -91,21 +91,10 @@ const RequestInfo = (props) => {
             mapLocation = (props.requests[i].location).replace(/\s+/g, '+')
         }
     }
-    const YOUR_API_KEY = process.env.REACT_APP_GOECODING_API;
+    
 
     
-    const [location, setLocation] = useState(null);
-    useEffect(() => {
-        if (mapLocation) {
-        let geoCoding = `https://maps.googleapis.com/maps/api/geocode/json?address=${mapLocation}&key=${YOUR_API_KEY}`
-        fetch(geoCoding)
-          .then(response => response.json())
-          .then(data => setLocation(data.results[0].geometry.location))
-          .catch(error => console.log(error))
-        }
-      }, [mapLocation])
    
-
     if (props.requests) {
     for (let i = 0; i < props.requests.length; i++) {
       if (props.requests[i].id == id) {
@@ -116,7 +105,7 @@ const RequestInfo = (props) => {
                 <h3>{r.title}</h3>{(props.user.id == r.user_id || props.user.admin === true) && editIcon}
                 <h3>Request status: {r.status}</h3>
                 <p>Location: {r.location}</p>
-                <Map />
+                <Map mapLocation={mapLocation}/>
                 <p>Description: {r.description}</p>
                 <p>Date: {new Date(r.time).toLocaleDateString("en-AU", dateOptions)}</p>
                 <p>Budget: <b>${parseInt(r.budget).toFixed(2)}</b></p>

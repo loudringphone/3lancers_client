@@ -53,7 +53,7 @@ class MyOffers extends Component {
                                 </div> 
                                 <div className='price'> 
                                     Price:
-                                    <p className='value P'>${ o.request.budget.substring(0, 2) }</p>
+                                    <p className='value P'>${ o.request.budget }</p>
                                 </div>
                                 <div className='bids'>
                                     Bid:

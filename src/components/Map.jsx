@@ -1,22 +1,61 @@
-import React from 'react';
+import React, { useState, useEffect} from 'react';
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 
-const containerStyle = {
-  width: '400px',
-  height: '400px'
-};
-
-const center = {
-  lat: -3.745,
-  lng: -38.523
-};
 
 
 
-function Map() {
+
+const Map  = (props) => {
+
+
+    const YOUR_API_KEY = process.env.REACT_APP_GOECODING_API;
+    const mapLocation = props.mapLocation
+
+    const [location, setLocation] = useState({lat: 0, lng: 0});
+    useEffect(() => {
+        if (mapLocation) {
+        let geoCoding = `https://maps.googleapis.com/maps/api/geocode/json?address=${mapLocation}&key=${YOUR_API_KEY}`
+        fetch(geoCoding)
+          .then(response => response.json())
+          .then(data => setLocation(data.results[0].geometry.location))
+          .catch(error => console.log(error))
+        }
+      }, [mapLocation])
+
+      useEffect(() => {
+        if (location) {
+        }
+      }, [location]);
+      console.log(location)
+
+  
+
+
+      const containerStyle = {
+        width: '400px',
+        height: '200px'
+      };
+      
+      const center = {
+        lat: location.lat,
+        lng: location.lng
+      };
+
+
+
+
+
+
+
+
+
+
+
+
+
   const { isLoaded, loadError } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: 'AIzaSyDDeilR0uC4lPekryob1G9q64tCLu8118A',
+    googleMapsApiKey: YOUR_API_KEY,
   });
 
   const [map, setMap] = React.useState(null);
@@ -39,13 +78,14 @@ map.fitBounds(bounds);
     return <div>There was an error loading the Google Maps API</div>;
   }
 
-  return isLoaded ? (
+  return isLoaded && center!= {lat: 0, lng: 0}? (
     <GoogleMap
       mapContainerStyle={containerStyle}
       center={center}
-      zoom={5}
+      zoom={12}
       onLoad={onLoad}
       onUnmount={onUnmount}
+      options={{disableDefaultUI: true}}
     >
         <Marker position={center} />
       { /* Child components, such as markers, info windows, etc. */ }

@@ -41,7 +41,7 @@ export default class Offers extends Component {
                     <div style={{ maxHeight: '300px', overflowY: 'scroll' }}>
                         {offers.map(o => (
             <div key={o.id}>
-                <p>{users[o.user_id]}  ${o.offer_amount.toFixed(2)}  {o.status} </p>{this.props.request.user_id === this.props.user.id && (<AcceptDecline offer={o} offers={offers} />)}
+                <p>{users[o.user_id]}  ${o.offer_amount}  {o.status} </p>{this.props.request.user_id === this.props.user.id && (<AcceptDecline offer={o} offers={offers} />)}
             </div>
             ))}
                     </div>
