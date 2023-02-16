@@ -104,5 +104,8 @@
     border: 1px solid lightslategray;
     margin-bottom: 10px;
 }
+.messageArea {
+    margin: 0 auto;
+}
 
 

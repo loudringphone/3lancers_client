@@ -65,22 +65,22 @@ export default class CancelReopenComplete extends Component {
             if (this.props.request.status != "Canceled" && this.props.request.status != "Offer accepted" ) {
                 return(
                     <div>
-                        <button onClick={() => this.cancelRequest()}>Cancel request</button>
+                        <button className='Btns' onClick={() => this.cancelRequest()}>Cancel request</button>
                     </div>
                 )
             }
             if (this.props.request.status != "Canceled" && this.props.request.status === "Offer accepted" ) {
                 return(
                     <div>
-                        <button onClick={() => this.completeOffer()}>Complete request</button>
-                        <button onClick={() => this.cancelRequest()}>Cancel request</button>
+                        <button className='Btns' onClick={() => this.completeOffer()}>Complete request</button>
+                        <button className='Btns' onClick={() => this.cancelRequest()}>Cancel request</button>
                     </div>
                 )
             }
             if (this.props.request.status === "Canceled") {
                 return(
                     <div> 
-                        <button onClick={() => this.reopenRequest()}>Reopen request</button>
+                        <button className='Btns' onClick={() => this.reopenRequest()}>Reopen request</button>
                     </div>
                 )
             }

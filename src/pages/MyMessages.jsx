@@ -227,8 +227,8 @@ export function NewMessageForm(props) {
     };
 
     return (
-        <form onSubmit={_handleSubmit}>
-            <textarea type="text" placeholder="Type your message" name="message" onInput={_handleInput} value={content} required ></textarea>
+        <form classNameonSubmit={_handleSubmit}>
+            <textarea className='textareaMessages'type="text" placeholder="Type your message" name="message" onInput={_handleInput} value={content} required ></textarea>
             <input type="submit" value="Send" />
         </form>
     )

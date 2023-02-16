@@ -42,6 +42,7 @@ input {
     border: 1px solid var(--brand-color);
     border-radius: 12px;
 }
+/* for future use scss and start building set style blocks. the two buttons below use the same style */
 .signupBtn {
     color: white;
     background-color: var(--brand-color);
@@ -230,7 +231,13 @@ h2.newRequestTitle {
     border: 2px solid var(--brand-color);
     width: 100%;
 }
-
+.Btns {
+    width: 100%;
+}
+.msg-request {
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
 
 
 /* My Requests and My Offers */
@@ -323,6 +330,12 @@ button {
 } */
 .homepageBtn {
     margin-bottom: 30px;
+}
+
+.textareaMessages {
+    width: 100%;
+    height: 150px;
+    margin: 0 auto;
 }
 @media (max-width: 736px){
     .requests {

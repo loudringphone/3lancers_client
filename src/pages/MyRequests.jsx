@@ -52,9 +52,11 @@ class MyRequests extends Component {
                     { filteredRequests.map((r) => {
                         return (
                             <div id='single-request' key={ r.id }>
-                                <div className='titleDate'>
-                                    <a className='boxedLinks' href={`/requests/${ r.id }`}>{r.title.substring(0, 30)}</a>
-                                    <p>{ new Date(r.time.substring(0, 10)).toLocaleDateString("en-AU", dateOptions) }</p>
+                                <div className='banner'>
+                                    <div className='titleDate'>
+                                        <a className='boxedLinks' href={`/requests/${ r.id }`}>{r.title.substring(0, 30)}</a>
+                                        <p>{ new Date(r.time.substring(0, 10)).toLocaleDateString("en-AU", dateOptions) }</p>
+                                    </div>
                                 </div>
                                 <div className='status'>
                                     {r.status === 'Open'  ? <p className='green'>{ r.status }</p> : r.status === 'Cancelled'  ? <p className='grey'>{ r.status }</p> : <p className='red'>{ r.status }</p>} 
