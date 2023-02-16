@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useParams } from "react-router-dom";
 import { AiFillEdit } from 'react-icons/ai'
 
+import Map from "../components/Map"
 import Comments from "../components/Comments"; 
 import Offers from "../components/Offers"; 
 import CancelReopenComplete from "../components/CancelReopenComplete"
@@ -115,6 +116,7 @@ const RequestInfo = (props) => {
                 <h3>{r.title}</h3>{(props.user.id == r.user_id || props.user.admin === true) && editIcon}
                 <h3>Request status: {r.status}</h3>
                 <p>Location: {r.location}</p>
+                <Map />
                 <p>Description: {r.description}</p>
                 <p>Date: {new Date(r.time).toLocaleDateString("en-AU", dateOptions)}</p>
                 <p>Budget: <b>${parseInt(r.budget).toFixed(2)}</b></p>
@@ -129,6 +131,7 @@ const RequestInfo = (props) => {
                             <MessageButton />
                         </div>
                     )}
+                    <div></div>
                     {r.user_id != props.user.id && (
                         <MakeOffer user={props.user} request={r} offers={offers} />
                     )}

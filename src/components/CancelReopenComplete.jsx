@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export default class CancelReopenComplete extends Component {
 
-    cancelOffer() {
+    cancelRequest() {
         let token = localStorage.getItem("token");
         let headers = {};
         if (token) {
@@ -21,7 +21,7 @@ export default class CancelReopenComplete extends Component {
         
     };
 
-    reopenOffer() {
+    reopenRequest() {
         let token = localStorage.getItem("token");
         let headers = {};
         if (token) {
@@ -48,7 +48,7 @@ export default class CancelReopenComplete extends Component {
             if (this.props.request.status != "Canceled" && this.props.request.status != "Offer accepted" ) {
                 return(
                     <div>
-                        <button onClick={() => this.cancelOffer()}>Cancel request</button>
+                        <button onClick={() => this.cancelRequest()}>Cancel request</button>
                     </div>
                 )
             }
@@ -56,14 +56,14 @@ export default class CancelReopenComplete extends Component {
                 return(
                     <div>
                         <button onClick={() => this.completeOffer()}>Complete request</button>
-                        <button onClick={() => this.cancelOffer()}>Cancel request</button>
+                        <button onClick={() => this.cancelRequest()}>Cancel request</button>
                     </div>
                 )
             }
             if (this.props.request.status === "Canceled") {
                 return(
                     <div> 
-                        <button onClick={() => this.reopenOffer()}>Reopen request</button>
+                        <button onClick={() => this.reopenRequest()}>Reopen request</button>
                     </div>
                 )
             }

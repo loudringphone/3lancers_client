@@ -2,7 +2,6 @@ import { useState } from "react";
 import axios from 'axios'
 
 const MakeOffer = (props) => {
-
     const [offer_amount, setOfferAmount] = useState('');
     let token = localStorage.getItem("token");
     let headers = {};
@@ -35,7 +34,7 @@ const MakeOffer = (props) => {
           })
           .then(()=>{
         axios.put(`http://localhost:3000/offers/${userOpenOfferId}.json`, { offer_amount: offer_amount},{headers}).then(response => {
-            console.log('Success:', response);
+            console.log('Success:', response)
           })
           .catch(error => {
             console.error('Error:', error);
@@ -90,10 +89,12 @@ const MakeOffer = (props) => {
                     <div>
                         <form onSubmit={_editOffer}>
                             <label>Edit offer</label>
-                            <input type="number" id="offer" name="offer" value={offer_amount || (userOpenOfferAmount).toFixed(2)} onInput={_handleOfferAmount}  onFocus={_handleInputFocus} required />
+                            <input type="number" id="offer" name="offer" value={offer_amount || (userOpenOfferAmount)} onInput={_handleOfferAmount}  onFocus={_handleInputFocus} required />
                             <button type="submit">Edit</button>
                         </form>
-
+                        {/* {offerMade != "Your offer has been" && (
+                        <p> {offerMade} </p>
+                    )} */}
 
 
                     </div>
