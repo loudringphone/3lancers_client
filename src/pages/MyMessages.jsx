@@ -41,7 +41,7 @@ export default class MyMessages extends Component {
         // save the message to the server
         axios.post(MESSAGES_URL, { sender_id: this.props.user_id, receiver_id: receiver_id, content: content, request_id: request_id }).then(response => {
             console.log(response.data);
-            this.setState({ messages: [...this.state.messages, response.data]})
+            this.setState({ messages: [...this.state.messages, response.data] })
         })
     }
 
@@ -64,9 +64,9 @@ export default class MyMessages extends Component {
         for (let m of myMessages) {
             // console.log(m.request_id, typeof m.request_id)
             // if the request_id is exiting then
-                // find the guest
-                // set the chatId
-                // push a message to the existing chat or create a new chat.
+            // find the guest
+            // set the chatId
+            // push a message to the existing chat or create a new chat.
             if (m.request_id) {
                 if (m.sender_id === this.props.user_id) {
                     guest = m.receiver;
@@ -101,30 +101,39 @@ export default class MyMessages extends Component {
         const allConversationWindows = [];
         for (let [chatId, chatContents] of Object.entries(chats)) {
             quickViews.push(
-                <LatestMessage message={chatContents[chatContents.length - 1]} message_id={chatContents[chatContents.length - 1].id} key={chatContents[chatContents.length - 1].id} chat_id={chatId}/>
+                <LatestMessage message={chatContents[chatContents.length - 1]} message_id={chatContents[chatContents.length - 1].id} key={chatContents[chatContents.length - 1].id} chat_id={chatId} />
             )
             allConversationWindows.push(
-                <ConversationWindow chatContents={chatContents} key={chatId} id={chatId} saveMessage={this.saveMessage} guest_id={chatId.split('-')[1]}/>
+                <ConversationWindow chatContents={chatContents} key={chatId} id={chatId} saveMessage={this.saveMessage} guest_id={chatId.split('-')[1]} />
             )
 
         }
 
-        return (
-            <div>
-                <div key={"quickViews"}>
-                    {quickViews}
+        if (token) {
+            return (
+                <div className="my-messages">
+                    <div key={"quick-views"} id="quick-views">
+                        {quickViews}
+                    </div>
+                    <div key={"all-conversations"} id="all-conversations">
+                        {allConversationWindows}
+                    </div>
                 </div>
-                <div key={"allWindows"}>
-                    {allConversationWindows}
+            )
+        } else {
+            return (
+                <div>
+                    <h2>Please <a href="/login">login</a> to view this page!</h2>
                 </div>
-            </div>
-        )
+            )
+        }
+
     }
 }
 
 function LatestMessage({ message, message_id, chat_id }) {
     // show only the latest message from the groupOfMessages
-    const latestMessage = <Message message={message} key={message_id}/>;
+    const latestMessage = <Message message={message} key={message_id} />;
     console.log('chat id for this latest message', chat_id)
     const _handleClick = (e) => {
         _showConversationWindow();
@@ -133,13 +142,29 @@ function LatestMessage({ message, message_id, chat_id }) {
     const _showConversationWindow = () => {
         const correspondingConversation = document.getElementById(chat_id);
         correspondingConversation.style.display = '';
+
+        document.getElementById("quick-views").style.display = 'none';
     };
 
-
     return (
-        <div style={{ border: '1px solid red' }} onClick={_handleClick} key={message_id}>
-            <h4>{message.request.title}</h4>
+        <div onClick={_handleClick} key={message_id} className="msg-quickview">
+            <p className="msg-request">
+                <span className="msg-request-title">{message.request.title}</span>
+                <span className="msg-request-time"><i>posted on</i> {(new Date(message.request.created_at)).toString().substring(0, 15)}</span>
+            </p>
             {latestMessage}
+        </div>
+    )
+}
+
+function Message({ message }) {
+    return (
+        <div className="msg-quickview-body">
+            <p className="swap">
+                <span className="msg-sender-name">{message.sender.username}</span>
+                <span className="msg-request-time">at {(new Date(message.created_at)).toString().substring(0, 24)}</span>
+            </p>
+            <p className="msg-quickview-content">{message.content}</p>
         </div>
     )
 }
@@ -153,42 +178,41 @@ function ConversationWindow({ chatContents, saveMessage, guest_id, id }) {
     console.log('requestId: ', requestId);
     for (const message of chatContents) {
         conversation.push(
-            <Message message={message} key={message.id}/>
+            <Message message={message} key={message.id} />
         )
     }
 
     // close conversation
     const _closeConversation = (e) => {
         document.getElementById(id).style.display = 'none';
+
+        document.getElementById("quick-views").style.display = '';
     }
 
     return (
         //by default, the full conversation will be hidden.
-        <div style={{display: 'none'}} id={id}>
-            <button className="close-btn" onClick={_closeConversation}>Close</button>
-            <h4>{requestTitle}</h4>
-            <p>{requestDate}</p>
-            {conversation}
-            <NewMessageForm onSubmit={saveMessage} receiver_id={guest_id} request_id={requestId} />
-        </div>
-    )
-}
+        <div style={{ display: 'none' }} id={id} className="full-conversation">
+            <div className="conversation-body">
+                <input className="close-btn" onClick={_closeConversation} type="button" value="Close" />
+                <p className="msg-request">
+                    <span className="msg-request-title">{requestTitle}</span>
+                    <span className="msg-request-time">{requestDate}</span>
+                </p>
+                <div className="messages">
+                    {conversation}
+                </div>
+            </div>
+            <div>
+                <NewMessageForm onSubmit={saveMessage} receiver_id={guest_id} request_id={requestId} />
+            </div>
 
-function Message({ message }) {
-    return (
-        <div>
-            <p>
-                <span>{message.sender.username}</span>
-                <span>{message.created_at}</span>
-            </p>
-            <p>{message.content}</p>
         </div>
     )
 }
 
 
 // New Message Form
-export function NewMessageForm ( props ) {
+export function NewMessageForm(props) {
     const [content, setContent] = useState('');
 
     const _handleInput = (e) => {
@@ -204,7 +228,7 @@ export function NewMessageForm ( props ) {
 
     return (
         <form onSubmit={_handleSubmit}>
-            <textarea type="text" placeholder="Type your message" name="message" onInput={_handleInput} value={content} ></textarea>
+            <textarea type="text" placeholder="Type your message" name="message" onInput={_handleInput} value={content} required ></textarea>
             <input type="submit" value="Send" />
         </form>
     )

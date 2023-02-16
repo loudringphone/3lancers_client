@@ -1,3 +1,108 @@
-body {
-    background-color: aquamarine;
+* {
+    /* border: 1px solid red; */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
+.my-messages {
+    /* background-color: aquamarine; */
+    max-width: 500px;
+    margin: 10px auto;
+    line-height: 1.5;
+    font-size: 16px;
+}
+
+/* ----------QUICK VIEW OF THE CONVERSATION --------- */
+#quick-views {
+    margin-bottom: 40px;
+}
+.msg-quickview {
+    margin-bottom: 10px;
+    border: 1px solid lightslategray;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.msg-request {
+    background-color: blueviolet;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.msg-request i {
+    font-size: 12px;
+}
+
+.msg-request-title {
+    font-weight: bold;
+    font-size: 18px;
+    text-transform: capitalize;
+}
+
+.msg-request-time {
+    font-size: 14px;
+}
+
+.msg-quickview-body {
+    padding-left: 10px;
+}
+
+.msg-sender-name {
+    font-size: 18px;
+    font-weight: 12px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+/* -----------FULL VIEW OF CONVERSATION WINDOW---------- */
+.full-conversation {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border: 2px solid gray;
+    border-radius: 5px;
+    max-width: 500px;
+}
+
+.full-conversation .conversation-body {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 70px - 80px);
+    overflow: scroll;
+}
+
+.conversation-body .msg-request {
+    width: 100%;
+}
+
+.full-conversation form {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    max-width: 500px;
+}
+
+
+.full-conversation .close-btn {
+    display: block;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.full-conversation textarea {
+    width: 100%;
+}
+
+.full-conversation .msg-quickview-body {
+    border: 1px solid lightslategray;
+    margin-bottom: 10px;
+}
+
+

@@ -7,7 +7,6 @@ class Home extends Component {
             <div>
                 <PostRequest />
                 <div>
-                    {/* <h2>See what others get done</h2> */}
                     <BrowseRequests />
                 </div>
             </div>
