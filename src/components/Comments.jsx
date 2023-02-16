@@ -64,7 +64,9 @@ export default class Comments extends Component {
                 )
             }
             else {
-                return ( <div><p>No comments yet.</p></div>)
+                return ( <div><p>No comments yet.</p>
+                {token? (<MakeComment user={this.props.user} request={this.props.request} />):(<div></div>)}</div>
+                )
             }
         }
         else {

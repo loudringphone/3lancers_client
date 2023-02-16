@@ -31,7 +31,8 @@ const MakeComment = (props) => {
 
         <div className="commentBox">
             <form onSubmit={_makeComment}>
-                <textarea type="text" id="comment" name="comment" onInput={_handleComment} required />
+                <textarea type="text" id="comment" name="comment" 
+                placeholder="Type your comment" onInput={_handleComment} required />
                 <button type="submit">Post</button>
             </form>
         </div>
