@@ -62,7 +62,7 @@ class MyRequests extends Component {
                                 <div className='price'>
                                     {/* {moneyIcon} */}
                                     Price:
-                                    <p className='value P'>${ r.budget.substring(0, 2) }</p>
+                                    <p className='value P'>${ parseInt(r.budget).toFixed(2) }</p>
                                 </div>
                                 <div className='bids'>
                                     Bids:
