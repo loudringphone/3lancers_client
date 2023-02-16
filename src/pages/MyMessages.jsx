@@ -143,19 +143,11 @@ function LatestMessage({ message, message_id, chat_id }) {
     )
 }
 
-function Message({ message }) {
-    return (
-        <div>
-            <p>{message.sender.username}</p>
-            <p>{message.content}</p>
-        </div>
-    )
-}
-
 // Conversation window
 function ConversationWindow({ chatContents, saveMessage, guest_id, id }) {
     const conversation = [];
     const requestTitle = chatContents[0].request.title;
+    const requestDate = chatContents[0].request.created_at;
     const requestId = chatContents[0].request_id;
     console.log('requestId: ', requestId);
     for (const message of chatContents) {
@@ -174,8 +166,21 @@ function ConversationWindow({ chatContents, saveMessage, guest_id, id }) {
         <div style={{display: 'none'}} id={id}>
             <button className="close-btn" onClick={_closeConversation}>Close</button>
             <h4>{requestTitle}</h4>
+            <p>{requestDate}</p>
             {conversation}
             <NewMessageForm onSubmit={saveMessage} receiver_id={guest_id} request_id={requestId} />
+        </div>
+    )
+}
+
+function Message({ message }) {
+    return (
+        <div>
+            <p>
+                <span>{message.sender.username}</span>
+                <span>{message.created_at}</span>
+            </p>
+            <p>{message.content}</p>
         </div>
     )
 }
