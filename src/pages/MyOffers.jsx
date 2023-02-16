@@ -49,7 +49,7 @@ class MyOffers extends Component {
                                     <p>{ new Date(o.request.time.substring(0, 10)).toLocaleDateString("en-AU", dateOptions) }</p>
                                 </div>  
                                 <div className='status'>
-                                {o.status === 'Open'  ? <p className='green'>{ o.status }</p> : o.status === 'Accepted'  ? <p className='grey'>{ o.status }</p> : <p className='red'>{ o.status }</p>}
+                                {o.status === 'Open'  ? <p className='green'>{ o.status }</p> : o.status === 'Accepted'  ? <p className='blue'>{ o.status }</p> : <p className='red'>{ o.status }</p>}
                                 </div> 
                                 <div className='price'> 
                                     Price:
