@@ -30,13 +30,30 @@ export default class CancelReopenComplete extends Component {
         axios.put(`http://localhost:3000/requests/${this.props.request.id}.json`, { status: 'Open'},{headers})
     }
 
+
+
+
+
+
+
+
+
+
     completeOffer() {
         let token = localStorage.getItem("token");
         let headers = {};
         if (token) {
             headers.Authorization = `Bearer ${token}`;
         }  
-        axios.put(`http://localhost:3000/requests/${this.props.request.id}.json`, { status: 'Completed'},{headers})
+        axios.put(`http://localhost:3000/requests/${this.props.request.id}.json`, { status: 'Completed'},{headers}).then(() => {
+            let acceptedOfferId
+            for (let offer of this.props.offers) {
+                if (offer.status = "Accepted") {
+                    acceptedOfferId = offer.id
+                }
+            }
+                axios.put(`http://localhost:3000/offers/${acceptedOfferId}.json`, { status: 'Completed'},{headers})
+        })
     }
 
 
