@@ -10,6 +10,7 @@ import CancelReopenComplete from "../components/CancelReopenComplete"
 import MakeOffer from "../components/MakeOffer"
 // import MessageButton from "../components/MessageButton"
 import SendMessage from "../components/SendMessage"
+import "../components/RequestId.css"
 
 const URL = 'http://localhost:3000'
 const REQUESTS_URL = URL + '/requests.json'
@@ -79,11 +80,6 @@ const RequestInfo = (props) => {
   }, []);
 
 
-    const editIcon = <FiEdit2 className='edit'
-    size='25px' color='#8A2BE2'
-    cursor='pointer'
-    onClick={() => window.location.href = `/requests/${id}/edit`}
-    />
 
 
     let mapLocation
@@ -93,17 +89,19 @@ const RequestInfo = (props) => {
         }
     }
 
-
-
-
     if (props.requests) {
     for (let i = 0; i < props.requests.length; i++) {
       if (props.requests[i].id == id) {
         const r = props.requests[i]
         const dateOptions = { day: "2-digit", month: "short", year: "numeric" };
+        const editIcon = <FiEdit2 className='edit'
+    size='25px' color='#8A2BE2'
+    cursor='pointer'
+    onClick={() => window.location.href = `/requests/${id}/edit`}
+    />
         return(
-            <div>
-                <h3>{r.title}</h3>{(props.user.id == r.user_id || props.user.admin === true) && editIcon}
+            <div className="request-info">
+                <h2>{r.title} {(props.user.id == r.user_id || props.user.admin === true) && editIcon}</h2>
                 <h3>Request status: {r.status}</h3>
                 <p>Location: {r.location}</p>
                 <Map mapLocation={mapLocation}/>
@@ -129,14 +127,10 @@ const RequestInfo = (props) => {
 
 
                 </div>
-                <div>
-                    <div>
-                        <button onClick={handleClickC}>
-                            Comments
-                        </button>
-                        <button onClick={handleClickO}>
-                            Offers
-                        </button>
+                <div className='comments-offers'>
+                    <div style={{display:'inline-flex'}}>
+                        <a href="#" onClick={handleClickC}>Comments</a>
+                        <a href="#" onClick={handleClickO}>Offers</a>
                     </div>
                     {showElementC && <Comments user={props.user} request={r} />}
                     {showElementO && <Offers user={props.user} request={r} offers={offers}/>}
