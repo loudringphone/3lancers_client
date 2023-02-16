@@ -182,7 +182,7 @@ function ConversationWindow({ chatContents, saveMessage, guest_id, id }) {
 
 
 // New Message Form
-const NewMessageForm = ( props ) => {
+export function NewMessageForm ( props ) {
     const [content, setContent] = useState('');
 
     const _handleInput = (e) => {
@@ -198,12 +198,11 @@ const NewMessageForm = ( props ) => {
 
     return (
         <form onSubmit={_handleSubmit}>
-            <input type="text" placeholder="Type your message" name="message" onInput={_handleInput} value={content} />
+            <textarea type="text" placeholder="Type your message" name="message" onInput={_handleInput} value={content} ></textarea>
             <input type="submit" value="Send" />
         </form>
     )
 }
-
 
 //     render() {
 //         const messages = this.state.messages;
