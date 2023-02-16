@@ -14,6 +14,7 @@ import EditRequest from "../pages/EditRequest";
 import MyMessages from "../pages/MyMessages";
 
 const USERS_URL = "http://localhost:3000/users.json";
+
 class App extends Component {
   state = {
     user: {},
@@ -39,6 +40,7 @@ class App extends Component {
         });
     }
   }
+
   signUp = (user) => {
     fetch("http://localhost:3000/users", {
       method: "POST",
@@ -90,7 +92,17 @@ class App extends Component {
             })
         }
       })
+      .then(response => response.json())
+      .then(result => {
+          if (result.token){
+          localStorage.setItem('token', result.token)
+          this.setState({
+              user: result.user
+              })
+          }
+      })
   }
+
   signIn = (user) => {
     fetch("http://localhost:3000/login", {
       method: "POST",
@@ -119,6 +131,21 @@ class App extends Component {
     }).then(() => {
       window.location.href = '/home'
     })
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.token) {
+          localStorage.setItem("token", result.token);
+          this.setState({
+            user: result.user,
+          });
+          window.location.href = '/home'
+        } else {
+          this.setState({
+            signinError: result.error,
+            signupError: "",
+          });
+        }
+      })
   };
 
   signOut = () => {
@@ -147,7 +174,7 @@ class App extends Component {
             <Route path="/requests" element={<BrowseRequests />} />
             <Route path="/requests/:id" element={<RequestId user={this.state.user} />} />
             <Route path="/requests/:id/edit" element={<EditRequest user={this.state.user} />} />
-            
+
             <Route path="/new-request" element={<NewRequest user_id={this.state.user.id} />} />
             <Route path="/signup" element={<SignUp signUp={this.signUp} signupError={this.state.signupError} user={this.state.user} />} />
             <Route path="/login" element={<Login signIn={this.signIn} signinError={this.state.signinError} user={this.state.user} />} />

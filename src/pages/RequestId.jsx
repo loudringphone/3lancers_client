@@ -1,7 +1,7 @@
 import React, { Component, useState, useEffect } from 'react';
 import axios from 'axios'
 import { useParams } from "react-router-dom";
-import { AiFillEdit } from 'react-icons/ai'
+import { FiEdit2 } from 'react-icons/fi'
 
 import Map from "../components/Map"
 import Comments from "../components/Comments"; 
@@ -78,7 +78,7 @@ const RequestInfo = (props) => {
   }, []);
 
 
-    const editIcon = <AiFillEdit className='edit' 
+    const editIcon = <FiEdit2 className='edit' 
     size='25px' color='#8A2BE2' 
     cursor='pointer'
     onClick={() => window.location.href = `/requests/${id}/edit`}
@@ -140,7 +140,14 @@ const RequestInfo = (props) => {
 
                 </div>
                 <div>
-                    <div style={{ display: 'inline-flex' }}><button onClick={handleClickC}>Comments</button><button onClick={handleClickO}>Offers</button></div>
+                    <div>
+                        <button onClick={handleClickC}>
+                            Comments
+                        </button>
+                        <button onClick={handleClickO}>
+                            Offers
+                        </button>
+                    </div>
                     {showElementC && <Comments user={props.user} request={r} />}
                     {showElementO && <Offers user={props.user} request={r} offers={offers}/>}
                 </div>

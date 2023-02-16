@@ -28,17 +28,18 @@ export default class MyMessages extends Component {
         const fetchMessages = () => {
             axios.get(MESSAGES_URL).then(response => {
                 this.setState({ messages: response.data })
-                // setTimeout(fetchMessages, 5000); // fetch messages every 5 seconds
-                // console.log(this.state.messages)
+                setTimeout(fetchMessages, 5000); // fetch messages every 5 seconds
+                console.log(this.state.messages)
             })
         }
         fetchMessages()
     }
 
-    saveMessage(content,receiver_id) {
+    saveMessage(content, receiver_id, request_id) {
         // save the message to the server
-        axios.post(MESSAGES_URL, { sender_id: this.props.user_id, receiver_id: receiver_id, content: content }).then(response => {
+        axios.post(MESSAGES_URL, { sender_id: this.props.user_id, receiver_id: receiver_id, content: content, request_id: request_id }).then(response => {
             console.log(response.data);
+            this.setState({ messages: [...this.state.messages, response.data]})
         })
     }
 
@@ -54,47 +55,65 @@ export default class MyMessages extends Component {
         // categorise the current user's messages into different chat boxes
         // which is identical by sender_id, receiver_id and request_id
         let chats = {};
+        // the guest is the conversation's other user who is not the curerent  user
+        let guest;
+        // each chat is identical by chatId
+        let chatId = undefined;
         for (let m of myMessages) {
-            if (m.sender_id === this.props.user_id && chats[m.receiver_id]) {
-                chats[m.receiver_id].push(m);
-            }
+            // console.log(m.request_id, typeof m.request_id)
+            // if the request_id is exiting then
+                // find the guest
+                // set the chatId
+                // push a message to the existing chat or create a new chat.
+            if (m.request_id) {
+                if (m.sender_id === this.props.user_id) {
+                    guest = m.receiver;
+                    chatId = `${m.request_id}-${guest.id}`
+                    if (chats.hasOwnProperty(chatId)) {
+                        chats[chatId].push(m);
+                    } else {
+                        chats[chatId] = [m];
+                    }
+                }
 
-            if (m.sender_id === this.props.user_id && !chats[m.receiver_id]) {
-                chats[m.receiver_id] = [m];
-            }
+                if (m.receiver_id === this.props.user_id) {
+                    guest = m.sender;
+                    chatId = `${m.request_id}-${guest.id}`
+                    if (chats.hasOwnProperty(chatId)) {
+                        chats[chatId].push(m);
+                    } else {
+                        chats[chatId] = [m];
+                    }
 
-            if (m.receiver_id === this.props.user_id && chats[m.sender_id]) {
-                chats[m.sender_id].push(m);
-            }
+                }
 
-            if (m.receiver_id === this.props.user_id && !chats[m.sender_id]) {
-                chats[m.sender_id] = [m];
             }
         }
 
-        console.log(chats, chats);
+        console.log(chats);
         console.log(Object.values(chats));
 
-        // all quick view of each conversation
+        // Quick view of each conversation which contains the latest message
         const quickViews = [];
-        // all conversation windows
+        // all conversation windows.
         const allConversationWindows = [];
-        for (let [key, chat] of Object.entries(chats)) {
+        for (let [chatId, chatContents] of Object.entries(chats)) {
             quickViews.push(
-                <LatestMessage chat={chat} key={key} />
+                <LatestMessage message={chatContents[chatContents.length - 1]} message_id={chatContents[chatContents.length - 1].id} key={chatContents[chatContents.length - 1].id} chat_id={chatId}/>
             )
             allConversationWindows.push(
-                <ConversationWindow chat={chat} key={key} saveMessage={ this.saveMessage }/>
+                <ConversationWindow chatContents={chatContents} key={chatId} id={chatId} saveMessage={this.saveMessage} guest_id={chatId.split('-')[1]}/>
             )
 
         }
 
         return (
             <div>
-                <div>
+                <div key={"quickViews"}>
                     {quickViews}
                 </div>
-                <div>
+                <div key={"allWindows"}>
+                    {this.props.user_id}
                     {allConversationWindows}
                 </div>
             </div>
@@ -102,25 +121,23 @@ export default class MyMessages extends Component {
     }
 }
 
-function LatestMessage({ chat, key }) {
-    const latestMessage = [];
+function LatestMessage({ message, message_id, chat_id }) {
     // show only the latest message from the groupOfMessages
-    latestMessage.push(
-        <Message message={chat[chat.length - 1]} />
-    )
-
+    const latestMessage = <Message message={message} key={message_id}/>;
+    console.log('chat id for this latest message', chat_id)
     const _handleClick = (e) => {
-        console.log('clicked');
         _showConversationWindow();
     };
 
     const _showConversationWindow = () => {
-        console.log('displaying latestMessage window');
+        const correspondingConversation = document.getElementById(chat_id);
+        correspondingConversation.style.display = '';
     };
 
 
     return (
-        <div style={{ border: '1px solid red' }} key={key} id={key} onClick={_handleClick}>
+        <div style={{ border: '1px solid red' }} onClick={_handleClick} key={message_id}>
+            <h4>{message.request.title}</h4>
             {latestMessage}
         </div>
     )
@@ -136,25 +153,36 @@ function Message({ message }) {
 }
 
 // Conversation window
-function ConversationWindow({ chat, saveMessage }) {
+function ConversationWindow({ chatContents, saveMessage, guest_id, id }) {
     const conversation = [];
-    for (const message of chat) {
+    const requestTitle = chatContents[0].request.title;
+    const requestId = chatContents[0].request_id;
+    console.log('requestId: ', requestId);
+    for (const message of chatContents) {
         conversation.push(
-            <Message message={message} />
+            <Message message={message} key={message.id}/>
         )
     }
+
+    // close conversation
+    const _closeConversation = (e) => {
+        document.getElementById(id).style.display = 'none';
+    }
+
     return (
-        <div>
+        //by default, the full conversation will be hidden.
+        <div style={{display: 'none'}} id={id}>
+            <button className="close-btn" onClick={_closeConversation}>Close</button>
+            <h4>{requestTitle}</h4>
             {conversation}
-            <NewMessageForm onSubmit={saveMessage} receiver_id={ chat[0].receiver_id } />
+            <NewMessageForm onSubmit={saveMessage} receiver_id={guest_id} request_id={requestId} />
         </div>
     )
 }
 
 
 // New Message Form
-const NewMessageForm = (props) => {
-    const receiver_id = props.receiver_id;
+const NewMessageForm = ( props ) => {
     const [content, setContent] = useState('');
 
     const _handleInput = (e) => {
@@ -164,14 +192,14 @@ const NewMessageForm = (props) => {
 
     const _handleSubmit = (e) => {
         e.preventDefault();
-        props.onSubmit(content, receiver_id);
+        props.onSubmit(content, props.receiver_id, props.request_id);
         setContent('')
     };
 
     return (
         <form onSubmit={_handleSubmit}>
-            <input type="text" placeholder="Type your message" name="message" onInput={_handleInput} value={ content } />
-            <input type="submit" value="Send"  />
+            <input type="text" placeholder="Type your message" name="message" onInput={_handleInput} value={content} />
+            <input type="submit" value="Send" />
         </form>
     )
 }
