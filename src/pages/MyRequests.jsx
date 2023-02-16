@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { MdAttachMoney } from 'react-icons/md' 
 
 const Requests_URL = 'http://localhost:3000/requests.json';
 
@@ -21,6 +22,7 @@ class MyRequests extends Component {
     }
 
     render() {
+        const moneyIcon = <MdAttachMoney size='25px' color='#8A2BE2' />
         const requests = this.state.requests;
         const userID = this.props.user.id;
         const filteredRequests = requests.filter(request => request.user_id === userID);
@@ -44,14 +46,11 @@ class MyRequests extends Component {
                                     <p>{ r.time.substring(0, 10) }</p>
                                 </div>
                                 <div className='status'>
-                                    {/* if (r.status === 'Open') {
-                                        <p className='green'>{ r.status }</p>
-                                    } else if (r.status === 'Pending'){
-                                        <p className='yellow'>{ r.status }</p>
-                                    } else */}
-                                        <p className='red'>{ r.status }</p>
+                                    {r.status === 'Open'  ? <p className='green'>{ r.status }</p> : r.status === 'Cancelled'  ? <p className='grey'>{ r.status }</p> : <p className='red'>{ r.status }</p>} 
+                                        {/* <p className='red'>{ r.status }</p> */}
                                 </div>
                                 <div className='price'>
+                                    {/* {moneyIcon} */}
                                     Price:
                                     <p className='value P'>${ r.budget.substring(0, 2) }</p>
                                 </div>

@@ -90,7 +90,7 @@ const MakeOffer = (props) => {
                     <div>
                         <form onSubmit={_editOffer}>
                             <label>Edit offer</label>
-                            <input type="number" id="offer" name="offer" value={offer_amount || userOpenOfferAmount} onInput={_handleOfferAmount} onFocus={_handleInputFocus} required />
+                            <input type="number" id="offer" name="offer" value={offer_amount || (userOpenOfferAmount).toFixed(2)} onInput={_handleOfferAmount}  onFocus={_handleInputFocus} required />
                             <button type="submit">Edit</button>
                         </form>
 
@@ -107,7 +107,7 @@ const MakeOffer = (props) => {
                     <div>
                         <form onSubmit={_makeOffer}>
                             <label>Make an offer</label>
-                            <input type="number" id="offer" name="offer" value={offer_amount} onInput={_handleOfferAmount} required />
+                            <input type="number" id="offer" name="offer" value={offer_amount || Number(props.request.budget).toFixed(2)} onInput={_handleOfferAmount} required onFocus={_handleInputFocus} />
                             <button type="submit">Go</button>
                         </form>
                     </div>

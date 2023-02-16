@@ -76,6 +76,12 @@ ul {
     align-items: center;
     margin: 0 auto;
 }
+a {
+    color: #8A2BE2;
+}
+button a {
+    color: white;
+}
 
 #mobButton {
     display: none;
@@ -123,7 +129,13 @@ li a {
     margin: auto 0;
 }
 .red {
+    color: red;
+}
+.green {
     color: greenyellow;
+}
+.grey {
+    color: rgba(211, 211, 211, 0.576);
 }
 
 @media (max-width: 1000px){

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import SignUp from "./SignUp";
-import Login from "./Login";
+import SignUp from "../pages/SignUp";
+import Login from "../pages/Login";
 import MyRequests from "../pages/MyRequests";
 import MyOffers from "../pages/MyOffers";
 import BrowseRequests from "../pages/BrowseRequests";
@@ -11,7 +11,6 @@ import NewRequest from "../pages/NewRequest";
 import RequestId from "../pages/RequestId";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import EditRequest from "../pages/EditRequest";
-import RequestDetails from "../pages/RequestDetails";
 import MyMessages from "../pages/MyMessages";
 
 const USERS_URL = "http://localhost:3000/users.json";
@@ -89,25 +88,9 @@ class App extends Component {
                 })
               }
             })
-
-
-
-
-
         }
       })
-      .then(response => response.json())
-      .then(result => {
-          if (result.token){
-          localStorage.setItem('token', result.token)
-          this.setState({
-              user: result.user
-              })
-          }
-      })
-    }
-    
-  
+  }
   signIn = (user) => {
     fetch("http://localhost:3000/login", {
       method: "POST",
@@ -136,22 +119,8 @@ class App extends Component {
     }).then(() => {
       window.location.href = '/home'
     })
-      .then((response) => response.json())
-      .then((result) => {
-        if (result.token) {
-          localStorage.setItem("token", result.token);
-          this.setState({
-            user: result.user,
-          });
-          window.location.href = '/home'
-        } else {
-          this.setState({
-            signinError: result.error,
-            signupError: "",
-          });
-        }
-      })
   };
+
   signOut = () => {
     localStorage.removeItem("token");
     this.setState({
@@ -160,7 +129,6 @@ class App extends Component {
     window.location.href = '/home'
   }
   render() {
-    
     setTimeout(() => {
       if (this.state.user.username == null) {
         localStorage.removeItem("token");
@@ -171,21 +139,21 @@ class App extends Component {
         <BrowserRouter>
           <Header username={this.state.user.username} />
           <Routes>
+          <Route path="/" element={<Home />} />
             <Route path="/home" element={<Home />} />
             <Route path="/my-offers" element={<MyOffers request={this.state.request} user={this.state.user} />} />
             <Route path="/my-requests" element={<MyRequests user={this.state.user} />} />
             <Route path="/my-messages" element={<MyMessages user_id={this.state.user.id} />} />
             <Route path="/requests" element={<BrowseRequests />} />
-            <Route path="/requests/:id" element={<RequestDetails user={this.state.user} />} />
+            <Route path="/requests/:id" element={<RequestId user={this.state.user} />} />
+            <Route path="/requests/:id/edit" element={<EditRequest user={this.state.user} />} />
+            
             <Route path="/new-request" element={<NewRequest user_id={this.state.user.id} />} />
             <Route path="/signup" element={<SignUp signUp={this.signUp} signupError={this.state.signupError} user={this.state.user} />} />
             <Route path="/login" element={<Login signIn={this.signIn} signinError={this.state.signinError} user={this.state.user} />} />
           </Routes>
         </BrowserRouter>
 
-        {this.state.user.username ? <div><Logout onClick={this.signOut} /><a href={`/users/${this.state.user.username}`}>{`(${this.state.user.username})`}</a></div> : <a href='/login'>login</a>}
-
-        {this.state.user.username ? <h2>Welcome {this.state.user.username}</h2> : (<></>)}
       </div>
     )
   };
@@ -194,8 +162,3 @@ class App extends Component {
 };
 
 export default App;
-const Logout = (props) => {
-  return (
-    <a href="/home" onClick={props.onClick}>Logout </a>
-  );
-};

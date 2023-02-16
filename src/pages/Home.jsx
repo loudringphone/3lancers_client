@@ -29,7 +29,7 @@ function PostRequest() {
                     <p><span className='step-number'>3</span> Receive quotes and pick the best</p>
                 </div>
                 <button>
-                    <a href="/new-request" target="_blank">Post your request for free</a>
+                    <a href="/new-request">Post your request for free</a>
                 </button>
             </div>
         </div>

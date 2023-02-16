@@ -38,8 +38,7 @@ export default class NewRequest extends React.Component {
         } else  {
             return (
                 <div>
-                    <p>Please login to create a new request</p>
-                    <p><a href="/login">Go to login</a></p>
+                    <p>Please <a href="/login">login</a> to create a new request</p>
                 </div>
             )
         }

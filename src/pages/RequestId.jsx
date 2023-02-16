@@ -1,7 +1,7 @@
 import React, { Component, useState, useEffect } from 'react';
 import axios from 'axios'
 import { useParams } from "react-router-dom";
-import { AiFillEdit } from 'react-icons/ai'
+import { FiEdit2 } from 'react-icons/fi'
 
 import Comments from "../components/Comments"; 
 import Offers from "../components/Offers"; 
@@ -76,7 +76,7 @@ const RequestInfo = (props) => {
   }, []);
 
 
-    const editIcon = <AiFillEdit className='edit' 
+    const editIcon = <FiEdit2 className='edit' 
     size='25px' color='#8A2BE2' 
     cursor='pointer'
     onClick={() => window.location.href = `/requests/${id}/edit`}
@@ -89,11 +89,8 @@ const RequestInfo = (props) => {
             mapLocation = (props.requests[i].location).replace(/\s+/g, '+')
         }
     }
-    const YOUR_API_KEY = 'AIzaSyDlqVBURPLkfoy97JTTNvuvxcGd6XEDLLQ'
+    const YOUR_API_KEY = process.env.REACT_APP_GOECODING_API;
 
-    // alert(mapLocation)
-    
-    // alert(geoCoding)
     
     const [location, setLocation] = useState(null);
     useEffect(() => {
@@ -134,7 +131,14 @@ const RequestInfo = (props) => {
 
                 </div>
                 <div>
-                    <button onClick={handleClickC}>Comments</button><button onClick={handleClickO}>Offers</button>
+                    <div>
+                        <button onClick={handleClickC}>
+                            Comments
+                        </button>
+                        <button onClick={handleClickO}>
+                            Offers
+                        </button>
+                    </div>
                     {showElementC && <Comments user={props.user} request={r} />}
                     {showElementO && <Offers user={props.user} request={r} offers={offers}/>}
                 </div>
