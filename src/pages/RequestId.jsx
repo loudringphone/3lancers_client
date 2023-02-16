@@ -7,6 +7,7 @@ import Comments from "../components/Comments";
 import Offers from "../components/Offers"; 
 import CancelReopenComplete from "../components/CancelReopenComplete"
 import MakeOffer from "../components/MakeOffer"
+import MessageButton from "../components/MessageButton"
 
 const URL = 'http://localhost:3000'
 const REQUESTS_URL = URL + '/requests.json'
@@ -121,6 +122,11 @@ const RequestInfo = (props) => {
                     {(props.user.id == r.user_id || props.user.admin === true) && (
                         <div>
                         <CancelReopenComplete request={r} offers={offers} />
+                        </div>
+                    )}
+                    {(props.user.id) && (
+                        <div>
+                            <MessageButton />
                         </div>
                     )}
                     {r.user_id != props.user.id && (
