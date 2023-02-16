@@ -5,21 +5,29 @@
 body {
     margin: 0;
     padding: 0;
+    --brand-color: #8A2BE2;
+    --box-color: rgb(210, 210, 210);
+    --box-style: 2px solid rgb(210, 210, 210);
+
+
 }
 
 .header {
     background-color: white;
-    color: #8A2BE2;
+    color: var(--brand-color);
     display: flex;
     /* justify-content: space-between; */
     padding: 0 1rem;
     align-items: stretch;
     gap: 2rem;
     height: 70px;
-    border-bottom: 2px solid rgb(210, 210, 210);
+    border-bottom: var(--box-style);
 }
 #mobNavLinks {
     font-size: larger;
+}
+.filler {
+    display: none;
 }
 
 .logo {
@@ -77,7 +85,7 @@ ul {
     margin: 0 auto;
 }
 a {
-    color: #8A2BE2;
+    color: var(--brand-color);
 }
 button a {
     color: white;
@@ -88,7 +96,7 @@ button a {
 }
 
 #deskButton {
-    background-color: #8A2BE2;
+    background-color: var(--brand-color);
     border: none;
     color: white;
     text-align: center;
@@ -120,7 +128,7 @@ h2 {
 }
 #single-request {
     margin: 0 auto;
-    border: 1px solid rgb(210, 210, 210);
+    border: var(--box-style);
 }
 li a {
     color: #8A2BE2;
@@ -148,7 +156,7 @@ li a {
     #mobButton {
         display: flex;
         border-radius: 70%;
-        background-color: #8A2BE2;
+        background-color: var(--brand-color);
         color: white;
         border: none;
         padding: 5px;
@@ -181,7 +189,7 @@ li a {
         top: 70px;
         left: 0;
         width: 100%;
-        background-color: #8A2BE2;
+        background-color: var(--brand-color);
         /* border-top: 2px solid black; */
         align-items: flex-start;
 
@@ -212,7 +220,7 @@ li a {
     }
     .header {
         background-color: white;
-        color: #8A2BE2;
+        color: var(--brand-color);
         display: flex;
         /* justify-content: space-between; */
         padding: 0 1rem;
@@ -222,12 +230,12 @@ li a {
         /* width: 100%; */
     }
     a {
-        color: #8A2BE2;
+        color: var(--brand-color);
     }
     button {
         border-radius: 12px;
         width: 90%;
-        background-color: #8A2BE2;
+        background-color: var(--brand-color);
         border: none;
         color: white;
         cursor: pointer;
@@ -249,18 +257,23 @@ li a {
     #single-request {
         margin: 0 auto;
         margin-bottom: 10px;
-        border: 1px solid rgb(210, 210, 210);
+        border: var(--box-style);
         width: 90%;
     }
     .request-offerToggle {
         display: flex;
         margin-bottom: 15px;
+        margin-left: 0;
     }
     .logoLink {
         display: block;
     }
     .toggle {
         color: black;
+    }
+
+    .request-offerLinks {
+        margin-left: 0;
     }
     .titleDate {
         display: flex;
@@ -287,6 +300,7 @@ li a {
         margin-left: 24px;
     }
     .filler {
+        display: flex;
         color: white;
         width: 40px;
     }
