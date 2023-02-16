@@ -19,7 +19,9 @@ const Map = (props) => {
 
   const containerStyle = {
     width: '400px',
-    height: '200px'
+    height: '200px',
+    marginTop: '10px',
+    marginBottom: '10px'
   };
 
   const center = {
@@ -39,6 +41,26 @@ const Map = (props) => {
     bounds.extend(new window.google.maps.LatLng(center.lat + 0.1, center.lng + 0.1));
     bounds.extend(new window.google.maps.LatLng(center.lat - 0.1, center.lng - 0.1));
     map.fitBounds(bounds);
+    const initialZoom = 2;
+    setTimeout(() => {
+      map.setZoom(initialZoom);
+    }, 30);
+  const targetZoom = 12;
+  const increment = (targetZoom - initialZoom) / 10;
+  let currentIncrement = 0;
+  let currentZoom = initialZoom
+  setTimeout(() => {
+  const interval = setInterval(() => {
+    currentIncrement = currentIncrement + 0.25
+    currentZoom = initialZoom + currentIncrement * increment
+    map.setZoom(currentZoom);
+    
+    if (parseInt(currentZoom) == targetZoom) {
+      clearInterval(interval);
+    }
+  }, 100);
+  }, 1000);
+  
     setMap(map);
   }, [center]);
 
@@ -64,7 +86,9 @@ const Map = (props) => {
       <></>
     </GoogleMap>
   ) : (
-    <div>Loading...</div>
+    <div><br/>This site owner is missing an API key for <a href="https://developers.google.com/maps/documentation/javascript/get-api-key">Google Maps Platform</a> <br/>
+    If you would like to sponsor them a key, here is their bank details: <br/>
+    BSB 062-320 Account 1080 6600<br/><br/></div>
   );
 };
 
