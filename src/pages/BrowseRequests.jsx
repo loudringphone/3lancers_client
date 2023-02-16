@@ -35,14 +35,20 @@ class BrowseRequests extends Component {
 
 const RequestList = (props) => {
     return(
-        <div className='requests'>
+        <div>
             <h2>Requests from our users</h2>
-            { props.requests.map((r) => 
-            <div className='browse' key={r.id}>
-                <a href={`/requests/${r.id}`}>{r.title}</a>
-                <div><span>{r.location}</span> | <span>${r.budget}</span></div>
+            <div className='requests'>
+                { props.requests.map((r) => 
+                {if (r.status === 'Open') { return (
+                  <div className='browse' key={r.id}>
+                    <a href={`/requests/${r.id}`}>{r.title}</a>
+                    <div><span>{r.location}</span> | <span>${r.budget}</span></div>
+                    </div>  
+                )
+                    
+                }
+                })}
             </div>
-            )}
         </div>
     )
 }

@@ -47,7 +47,7 @@ class MyOffers extends Component {
                                 <div className='titleDate'>
                                 <a href={`/requests/${ o.request_id }`}>{o.request.title}</a>
                                     <p>{ new Date(o.request.time.substring(0, 10)).toLocaleDateString("en-AU", dateOptions) }</p>
-                                </div>  
+                                </div>
                                 <div className='status'>
                                 {o.status === 'Open'  ? <p className='green'>{ o.status }</p> : o.status === 'Accepted'  ? <p className='blue'>{ o.status }</p> : <p className='red'>{ o.status }</p>}
                                 </div> 
