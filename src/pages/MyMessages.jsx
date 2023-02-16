@@ -2,6 +2,8 @@ import React, { Component, useState } from "react";
 import axios from "axios";
 import { resolvePath } from "react-router-dom";
 
+import '../components/css/Message.css';
+
 // token
 let token = localStorage.getItem("token");
 let headers = {};
@@ -143,19 +145,11 @@ function LatestMessage({ message, message_id, chat_id }) {
     )
 }
 
-function Message({ message }) {
-    return (
-        <div>
-            <p>{message.sender.username}</p>
-            <p>{message.content}</p>
-        </div>
-    )
-}
-
 // Conversation window
 function ConversationWindow({ chatContents, saveMessage, guest_id, id }) {
     const conversation = [];
     const requestTitle = chatContents[0].request.title;
+    const requestDate = chatContents[0].request.created_at;
     const requestId = chatContents[0].request_id;
     console.log('requestId: ', requestId);
     for (const message of chatContents) {
@@ -174,15 +168,28 @@ function ConversationWindow({ chatContents, saveMessage, guest_id, id }) {
         <div style={{display: 'none'}} id={id}>
             <button className="close-btn" onClick={_closeConversation}>Close</button>
             <h4>{requestTitle}</h4>
+            <p>{requestDate}</p>
             {conversation}
             <NewMessageForm onSubmit={saveMessage} receiver_id={guest_id} request_id={requestId} />
         </div>
     )
 }
 
+function Message({ message }) {
+    return (
+        <div>
+            <p>
+                <span>{message.sender.username}</span>
+                <span>{message.created_at}</span>
+            </p>
+            <p>{message.content}</p>
+        </div>
+    )
+}
+
 
 // New Message Form
-const NewMessageForm = ( props ) => {
+export function NewMessageForm ( props ) {
     const [content, setContent] = useState('');
 
     const _handleInput = (e) => {
@@ -198,12 +205,11 @@ const NewMessageForm = ( props ) => {
 
     return (
         <form onSubmit={_handleSubmit}>
-            <input type="text" placeholder="Type your message" name="message" onInput={_handleInput} value={content} />
+            <textarea type="text" placeholder="Type your message" name="message" onInput={_handleInput} value={content} ></textarea>
             <input type="submit" value="Send" />
         </form>
     )
 }
-
 
 //     render() {
 //         const messages = this.state.messages;

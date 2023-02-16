@@ -1,52 +1,45 @@
-import React, { Component, useState } from "react";
+import React, { useState, useEffect  } from "react";
 import axios from 'axios'
 import { useParams } from "react-router-dom";
 
-export default class EditRequest extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { request: {} };
+export default function EditRequest() {
+  const [request, setRequest] = useState({});
+  const { id } = useParams();
+  useEffect(() => {
+    const URL = 'http://localhost:3000'
+    const REQUEST_URL = URL + "/requests/" + id +".json"
+    let token = localStorage.getItem("token");
+    if (token) {
+      fetch(REQUEST_URL, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((result) => {
+          if (result.id) {
+            setRequest(result);
+          }
+        });
     }
-      componentDidMount() {
-        const URL = 'http://localhost:3000'
-        const REQUEST_URL = URL + '/requests/44.json'
-        let token = localStorage.getItem("token");
-        if (token) {
-          fetch(REQUEST_URL, {
-            method: "GET",
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          })
-            .then((response) => response.json())
-            .then((result) => {
-              if (result.id) {
-                this.setState({
-                  request: result,
-                });
-              }
-            });
-        }
-      }
+  }, []);
 
-    render(){
+  const saveRequest = () => {
+    // Implement saveRequest logic here
+  };
 
+  let token = localStorage.getItem("token");
 
-        let token = localStorage.getItem("token");
-
-        if (token) {
-            return (
-                <div>
-                    <RequestForm request={this.state.request} onSubmit='{this.saveRequest}' />
-                </div>
-            )
-        } 
-    }
-
-
-
-
-
+  if (token) {
+    return (
+      <div>
+        <RequestForm request={request} onSubmit={saveRequest} />
+      </div>
+    )
+  } else {
+    return null;
+  }
 }
 
 
