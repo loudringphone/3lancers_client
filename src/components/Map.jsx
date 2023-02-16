@@ -82,7 +82,7 @@ map.fitBounds(bounds);
     <GoogleMap
       mapContainerStyle={containerStyle}
       center={center}
-      zoom={5}
+      zoom={12}
       onLoad={onLoad}
       onUnmount={onUnmount}
       options={{disableDefaultUI: true}}
