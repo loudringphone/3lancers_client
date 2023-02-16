@@ -19,15 +19,14 @@ class BrowseRequests extends Component {
                 setTimeout(fetchRequests, 5000)
             })
         }
-        fetchRequests() 
+        fetchRequests()
     }
-    
+
 
     render() {
         return (
           <div>
             <RequestList requests={ this.state.requests } users={ this.state.users } />
-
           </div>
         )
     }
@@ -38,14 +37,14 @@ const RequestList = (props) => {
         <div className='allUserRequests'>
             <h2>Current user requests</h2>
             <div className='requests'>
-                { props.requests.map((r) => 
+                { props.requests.map((r) =>
                 {if (r.status === 'Open') { return (
                   <div className='browse' key={r.id}>
-                    <a href={`/requests/${r.id}`}>{r.title}</a>
+                    <p><span><a href={`/requests/${r.id}`}>{r.title}</a></span> posted by <span>{r.user.username}</span></p>
                     <div><span>{r.location}</span> | <span>${r.budget}</span></div>
-                    </div>  
+                    </div>
                 )
-                    
+
                 }
                 })}
             </div>

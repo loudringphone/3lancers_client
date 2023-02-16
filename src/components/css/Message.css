@@ -65,15 +65,20 @@
     justify-content: center;
     align-items: center;
     padding: 10px;
-    border: 2px solid gray
+    border: 2px solid gray;
+    border-radius: 5px;
+    max-width: 500px;
 }
 
 .full-conversation .conversation-body {
-    max-width: 500px;
     display: flex;
     flex-direction: column;
     height: calc(100vh - 70px - 80px);
     overflow: scroll;
+}
+
+.conversation-body .msg-request {
+    width: 100%;
 }
 
 .full-conversation form {
