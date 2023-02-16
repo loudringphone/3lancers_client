@@ -2,6 +2,8 @@ import React, { Component, useState } from "react";
 import axios from "axios";
 import { resolvePath } from "react-router-dom";
 
+import '../components/css/Message.css';
+
 // token
 let token = localStorage.getItem("token");
 let headers = {};

@@ -14,7 +14,7 @@ const NavLinks = (props) => {
         username = decodedToken.username
         user_id = decodedToken.user_id
     }
-    
+
     if (!token){
         return (
             <ul id='mobNavLinks'>
@@ -41,6 +41,9 @@ const NavLinks = (props) => {
                 </li>
                 <li onClick={() => props.isMobile && props.closeMobileMenu()}>
                     <NavLink to="/my-offers">My offers</NavLink>
+                </li>
+                <li onClick={() => props.isMobile && props.closeMobileMenu()}>
+                    <NavLink to="/my-messages">My Messages</NavLink>
                 </li>
                 <li style={{ display: 'inline-flex' }} onClick={() => props.isMobile && props.closeMobileMenu()}>
                     <Logout/><a href={"/users/"+user_id}>({username})</a>
