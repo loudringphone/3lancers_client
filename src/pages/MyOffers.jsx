@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { NavLink } from 'react-router-dom';
 
 const OFFERS_URL = 'http://localhost:3000/offers.json';
 
@@ -24,15 +25,19 @@ class MyOffers extends Component {
         const offers = this.state.offers;
         const userID = this.props.user.id;
         const filteredOffers = offers.filter(offer => offer.user_id === userID);
+        let activeStyle = {
+            textDecoration: 'underline'
+        }
+        const dateOptions = { day: "2-digit", month: "short", year: "numeric" };
         return (
             <div>
                 <h2>My Offers</h2>
                 <ul className='request-offerToggle'>
                     <li>
-                        <a className='toggle' href="/my-requests">Requests</a>
+                        <NavLink className='toggle' style={({ isActive}) => isActive ? activeStyle : undefined} to="/my-requests">Requests</NavLink>
                     </li>
                     <li>
-                        <a className='toggle' href="/my-offers">Offers</a>
+                        <NavLink className='toggle' style={({ isActive}) => isActive ? activeStyle : undefined} to="/my-offers">Offers</NavLink>
                     </li>
                 </ul>
                 <div id='group-requests'>
@@ -40,11 +45,11 @@ class MyOffers extends Component {
                         return (
                             <div id='single-request' key={ o.id }>
                                 <div className='titleDate'>
-                                <a href={`/offers/${ o.id }`}>{o.request.title}</a>
-                                    <p>{ o.request.time }</p>
+                                <a href={`/requests/${ o.request_id }`}>{o.request.title}</a>
+                                    <p>{ new Date(o.request.time.substring(0, 10)).toLocaleDateString("en-AU", dateOptions) }</p>
                                 </div>  
                                 <div className='status'>
-                                        <p className='red'>{ o.status }</p>
+                                {o.status === 'Open'  ? <p className='green'>{ o.status }</p> : o.status === 'Accepted'  ? <p className='blue'>{ o.status }</p> : <p className='red'>{ o.status }</p>}
                                 </div> 
                                 <div className='price'> 
                                     Price:

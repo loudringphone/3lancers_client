@@ -24,9 +24,9 @@ function PostRequest() {
                 </h2>
                 <h3>Get the to-do done with the most affordable cost</h3>
                 <div className='post-steps'>
-                    <p><span className='step-number'>1</span> Describe what you need to get done</p>
-                    <p><span className='step-number'>2</span> Set your budget</p>
-                    <p><span className='step-number'>3</span> Receive quotes and pick the best</p>
+                    <p><span className='step-number'>1.</span> Describe what you need to get done</p>
+                    <p><span className='step-number'>2.</span> Set your budget</p>
+                    <p><span className='step-number'>3.</span> Receive quotes and pick the best</p>
                 </div>
                 <button>
                     <a href="/new-request">Post your request for free</a>
