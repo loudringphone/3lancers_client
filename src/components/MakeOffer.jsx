@@ -65,7 +65,6 @@ const MakeOffer = (props) => {
     }
 
     const openOffers = props.offers.filter(offer => offer.status == "Open")
- 
     let userOpenOffer = false
     let userOpenOfferId
     let userOpenOfferAmount
@@ -79,49 +78,47 @@ const MakeOffer = (props) => {
     }
 
 
-    if (token) {
-        if (openOffers){
+        if (token) {
+            if (openOffers){
 
-            
-            if(userOpenOffer === true) {
+                
+                if(userOpenOffer === true && props.request.status == 'Open') {
 
-                return(
-                    <div>
-                        <form onSubmit={_editOffer}>
-                            <label>Edit offer</label>
-                            <input type="number" id="offer" name="offer" value={offer_amount || (userOpenOfferAmount)} onInput={_handleOfferAmount}  onFocus={_handleInputFocus} required />
-                            <button type="submit">Edit</button>
-                        </form>
-                        {/* {offerMade != "Your offer has been" && (
-                        <p> {offerMade} </p>
-                    )} */}
+                    return(
+                        <div>
+                            <form onSubmit={_editOffer}>
+                                <label>Edit offer</label>
+                                <input type="number" id="offer" name="offer" value={offer_amount || (userOpenOfferAmount)} onInput={_handleOfferAmount}  onFocus={_handleInputFocus} required />
+                                <button type="submit">Edit</button>
+                            </form>
 
+                        </div>
 
-                    </div>
-
-                )
+                    )
 
 
+                }
+                else {
+                    return(
+                        <div>
+                            <form onSubmit={_makeOffer}>
+                                <label>Make an offer</label>
+                                <input type="number" id="offer" name="offer" value={offer_amount || Number(props.request.budget).toFixed(2)} onInput={_handleOfferAmount} required onFocus={_handleInputFocus} />
+                                <button type="submit">Go</button>
+                            </form>
+                        </div>
+                    )
+                }
             }
-            else {
-                return(
-                    <div>
-                        <form onSubmit={_makeOffer}>
-                            <label>Make an offer</label>
-                            <input type="number" id="offer" name="offer" value={offer_amount || Number(props.request.budget).toFixed(2)} onInput={_handleOfferAmount} required onFocus={_handleInputFocus} />
-                            <button type="submit">Go</button>
-                        </form>
-                    </div>
+        }
+        else {
+            if (props.request.status == 'Open') {
+                return (
+                    <p>Plesae <a href="/login">login</a> to make an offer</p>
                 )
             }
         }
-    }
-    else {
-        return (
-            <p>Plesae <a href="/login">login</a> to make an offer</p>
-        )
-    }
-
+    
 }
 
 
