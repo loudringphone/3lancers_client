@@ -79,30 +79,32 @@ const RequestForm = (props) => {
 
     return (
         <div>
-            <h2>Post a new request</h2>
-            <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={_handleSubmit}>
-                <label>
-                    In a few words, what do you need done?
-                    <input type="text" name='title' id='title' value={title} onInput={_handleTitle} required />
-                </label>
-                <label>
-                    When do you need this done?
-                    <input type="date" name='time' id='time' value={time} onInput={_handleTime} required />
-                </label>
-                <label>
-                    Where do you need this done?
-                    <input type="text" name='location' id="location" value={location} onInput={_handleLocation} required />
-                </label>
-                <label>
-                    Provide more details of the request
-                    <textarea name="description" id="description" cols="30" rows="10" value={description} onInput={_handleDescription}></textarea>
-                </label>
-                <label>
-                    What is your budget for this request?
-                    <input type="number" value={budget} onInput={_handleBudget} required />
-                </label>
-                <input type="submit" value="Post request" />
-            </form>
+            <h2 className='newRequestTitle'>Post a new request</h2>
+            <div className='newRequestForm'>
+                <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={_handleSubmit}>
+                    <label className='newRequest'>
+                        In a few words, what do you need done?
+                        <input className='newRequestInput' type="text" name='title' id='title' value={title} onInput={_handleTitle} required />
+                    </label>
+                    <label className='newRequest'>
+                        When do you need this done?
+                        <input className='newRequestInput' type="date" name='time' id='time' value={time} onInput={_handleTime} required />
+                    </label>
+                    <label className='newRequest'>
+                        Where do you need this done?
+                        <input className='newRequestInput' type="text" name='location' id="location" value={location} onInput={_handleLocation} required />
+                    </label>
+                    <label className='newRequest'>
+                        Provide more details of the request
+                        <textarea className='newRequestInput' name="description" id="description" cols="30" rows="10" value={description} onInput={_handleDescription}></textarea>
+                    </label>
+                    <label className='newRequest'>
+                        What is your budget for this request?
+                        <input className='newRequestInput' type="number" value={budget} onInput={_handleBudget} required />
+                    </label>
+                    <input className='signupBtn' type="submit" value="Post request" />
+                </form>
+            </div>
         </div>
     )
 }

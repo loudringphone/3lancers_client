@@ -35,8 +35,8 @@ class BrowseRequests extends Component {
 
 const RequestList = (props) => {
     return(
-        <div>
-            <h2>Requests from our users</h2>
+        <div className='allUserRequests'>
+            <h2>Current user requests</h2>
             <div className='requests'>
                 { props.requests.map((r) => 
                 {if (r.status === 'Open') { return (

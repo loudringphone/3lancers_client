@@ -1,10 +1,6 @@
 import React, { useState, useEffect} from 'react';
 import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 
-
-
-
-
 const Map  = (props) => {
 
 
@@ -40,18 +36,6 @@ const Map  = (props) => {
         lat: location.lat,
         lng: location.lng
       };
-
-
-
-
-
-
-
-
-
-
-
-
 
   const { isLoaded, loadError } = useJsApiLoader({
     id: 'google-map-script',

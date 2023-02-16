@@ -8,12 +8,12 @@ const MobileNavigation = () => {
 const [open, setOpen] = useState(false);
 
 const hamburgerIcon = <GiHamburgerMenu className='Hamburger' 
-                        size='50px' color='#8A2BE2' 
+                        size='50px' color='#651da8' 
                         onClick={() => setOpen(!open)}
                         />
 
 const closeIcon = <CgCloseO className='Hamburger' 
-                        size='50px' color='#8A2BE2' 
+                        size='50px' color='#651da8' 
                         onClick={() => setOpen(!open)}
                         />
 

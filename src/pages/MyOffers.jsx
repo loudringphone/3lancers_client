@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
+import { MdAttachMoney } from 'react-icons/md' 
+import { RiAuctionFill } from 'react-icons/ri' 
 
 const OFFERS_URL = 'http://localhost:3000/offers.json';
 
@@ -28,10 +30,12 @@ class MyOffers extends Component {
         let activeStyle = {
             textDecoration: 'underline'
         }
+        const moneyIcon = <MdAttachMoney size='25px' color='black' />
+        const bidIcon = <RiAuctionFill size='25px' color='black' />
         const dateOptions = { day: "2-digit", month: "short", year: "numeric" };
         return (
             <div>
-                <h2>My Offers</h2>
+                <h2>My offers</h2>
                 <ul className='request-offerToggle'>
                     <li>
                         <NavLink className='toggle' style={({ isActive}) => isActive ? activeStyle : undefined} to="/my-requests">Requests</NavLink>
@@ -45,18 +49,20 @@ class MyOffers extends Component {
                         return (
                             <div id='single-request' key={ o.id }>
                                 <div className='titleDate'>
-                                <a href={`/requests/${ o.request_id }`}>{o.request.title}</a>
+                                <a className='boxedLinks' href={`/requests/${ o.request_id }`}>{o.request.title}</a>
                                     <p>{ new Date(o.request.time.substring(0, 10)).toLocaleDateString("en-AU", dateOptions) }</p>
                                 </div>
                                 <div className='status'>
                                 {o.status === 'Open'  ? <p className='green'>{ o.status }</p> : o.status === 'Accepted'  ? <p className='blue'>{ o.status }</p> : <p className='red'>{ o.status }</p>}
                                 </div> 
                                 <div className='price'> 
-                                    Price:
+                                {moneyIcon}
+                                    Budget:
                                     <p className='value P'>${ parseInt(o.request.budget).toFixed(2) }</p>
                                 </div>
                                 <div className='bids'>
-                                    Bid:
+                                {bidIcon}
+                                    Offer:
                                     <p className='value B2'>${ parseInt(o.offer_amount).toFixed(2) }</p>
                                 </div>
                             </div>

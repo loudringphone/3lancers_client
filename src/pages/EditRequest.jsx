@@ -132,30 +132,32 @@ const RequestForm = (props) => {
 
         
         <div>
-            <h2>Edit request</h2>
-            <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={_handleSubmit}>
-                <label>
-                    In a few words, what do you need done?
-                    <input type="text" name='title' id='title' value={title || props.request.title} onInput={_handleTitle} onFocus={_handleInputFocus} required />
-                </label>
-                <label>
-                    When do you need this done? 
-                    <input type="date" name='time' id='time' value={time || requestDate} onInput={_handleTime} required />
-                </label>
-                <label>
-                    Where do you need this done?
-                    <input type="text" name='location' id="location" value={location || props.request.location} onInput={_handleLocation} onFocus={_handleInputFocus} required />
-                </label>
-                <label>
-                    Provide more details of the request
-                    <textarea name="description" id="description" cols="30" rows="10" value={description || props.request.description} onInput={_handleDescription} onFocus={_handleInputFocus}></textarea>
-                </label>
-                <label>
-                    What is your budget for this request?
-                    <input type="number" value={budget|| parseInt(props.request.budget).toFixed(2)} onInput={_handleBudget} onFocus={_handleInputFocus} required />
-                </label>
-                <input type="submit" value="Edit request" />
-            </form>
+            <h2 className='newRequestTitle'>Edit request</h2>
+            <div className='newRequestForm'>
+              <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={_handleSubmit}>
+                  <label className='newRequest'>
+                      In a few words, what do you need done?
+                      <input className='newRequestInput'  type="text" name='title' id='title' value={title || props.request.title} onInput={_handleTitle} onFocus={_handleInputFocus} required />
+                  </label>
+                  <label className='newRequest'>
+                      When do you need this done? 
+                      <input className='newRequestInput'  type="date" name='time' id='time' value={time || requestDate} onInput={_handleTime} required />
+                  </label>
+                  <label className='newRequest'>
+                      Where do you need this done?
+                      <input className='newRequestInput'  type="text" name='location' id="location" value={location || props.request.location} onInput={_handleLocation} onFocus={_handleInputFocus} required />
+                  </label>
+                  <label className='newRequest'>
+                      Provide more details of the request
+                      <textarea className='newRequestInput'  name="description" id="description" cols="30" rows="10" value={description || props.request.description} onInput={_handleDescription} onFocus={_handleInputFocus}></textarea>
+                  </label>
+                  <label className='newRequest'>
+                      What is your budget for this request?
+                      <input  className='newRequestInput' type="number" value={budget|| parseInt(props.request.budget).toFixed(2)} onInput={_handleBudget} onFocus={_handleInputFocus} required />
+                  </label>
+                  <input className='signupBtn' type="submit" value="Edit request" />
+              </form>
+            </div>
         </div>
     )
 }
