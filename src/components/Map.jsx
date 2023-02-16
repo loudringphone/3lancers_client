@@ -64,7 +64,7 @@ const Map = (props) => {
       <></>
     </GoogleMap>
   ) : (
-    <div>Loading...</div>
+    <div>API key for <a href="https://developers.google.com/maps/documentation/javascript/get-api-key">Google Maps Platform</a> missing...</div>
   );
 };
 
