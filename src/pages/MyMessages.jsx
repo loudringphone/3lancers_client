@@ -30,7 +30,7 @@ export default class MyMessages extends Component {
         const fetchMessages = () => {
             axios.get(MESSAGES_URL).then(response => {
                 this.setState({ messages: response.data })
-                setTimeout(fetchMessages, 5000); // fetch messages every 5 seconds
+                setTimeout(fetchMessages, 2000); // fetch messages every 5 seconds
                 console.log(this.state.messages)
             })
         }
@@ -115,7 +115,6 @@ export default class MyMessages extends Component {
                     {quickViews}
                 </div>
                 <div key={"allWindows"}>
-                    {this.props.user_id}
                     {allConversationWindows}
                 </div>
             </div>
