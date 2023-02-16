@@ -55,7 +55,9 @@ export default class MyMessages extends Component {
         // categorise the current user's messages into different chat boxes
         // which is identical by sender_id, receiver_id and request_id
         let chats = {};
+        // the guest is the conversation's other user who is not the curerent  user
         let guest;
+        // each chat is identical by chatId
         let chatId = undefined;
         for (let m of myMessages) {
             // console.log(m.request_id, typeof m.request_id)
@@ -97,10 +99,10 @@ export default class MyMessages extends Component {
         const allConversationWindows = [];
         for (let [chatId, chatContents] of Object.entries(chats)) {
             quickViews.push(
-                <LatestMessage message={chatContents[chatContents.length - 1]} message_id={chatContents[chatContents.length - 1].id} key={chatContents[chatContents.length - 1].id}/>
+                <LatestMessage message={chatContents[chatContents.length - 1]} message_id={chatContents[chatContents.length - 1].id} key={chatContents[chatContents.length - 1].id} chat_id={chatId}/>
             )
             allConversationWindows.push(
-                <ConversationWindow chatContents={chatContents} key={chatId} saveMessage={this.saveMessage} guest_id={chatId.split('-')[1]}/>
+                <ConversationWindow chatContents={chatContents} key={chatId} id={chatId} saveMessage={this.saveMessage} guest_id={chatId.split('-')[1]}/>
             )
 
         }
@@ -119,17 +121,17 @@ export default class MyMessages extends Component {
     }
 }
 
-function LatestMessage({ message, message_id }) {
-    const latestMessage = <Message message={message} key={message_id}/>;
+function LatestMessage({ message, message_id, chat_id }) {
     // show only the latest message from the groupOfMessages
-
+    const latestMessage = <Message message={message} key={message_id}/>;
+    console.log('chat id for this latest message', chat_id)
     const _handleClick = (e) => {
-        console.log('clicked');
         _showConversationWindow();
     };
 
     const _showConversationWindow = () => {
-        console.log('displaying latestMessage window');
+        const correspondingConversation = document.getElementById(chat_id);
+        correspondingConversation.style.display = '';
     };
 
 
@@ -151,7 +153,7 @@ function Message({ message }) {
 }
 
 // Conversation window
-function ConversationWindow({ chatContents, saveMessage, guest_id }) {
+function ConversationWindow({ chatContents, saveMessage, guest_id, id }) {
     const conversation = [];
     const requestTitle = chatContents[0].request.title;
     const requestId = chatContents[0].request_id;
@@ -161,8 +163,16 @@ function ConversationWindow({ chatContents, saveMessage, guest_id }) {
             <Message message={message} key={message.id}/>
         )
     }
+
+    // close conversation
+    const _closeConversation = (e) => {
+        document.getElementById(id).style.display = 'none';
+    }
+
     return (
-        <div>
+        //by default, the full conversation will be hidden.
+        <div style={{display: 'none'}} id={id}>
+            <button className="close-btn" onClick={_closeConversation}>Close</button>
             <h4>{requestTitle}</h4>
             {conversation}
             <NewMessageForm onSubmit={saveMessage} receiver_id={guest_id} request_id={requestId} />
