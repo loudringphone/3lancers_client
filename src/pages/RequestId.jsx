@@ -14,7 +14,7 @@ import "../components/RequestId.css"
 import { SERVER_URL } from "../components/SERVER_URL"
 
 
-const REQUESTS_URL = SERVER_URL + '/requests.json'
+const REQUESTS_URL = SERVER_URL + 'requests.json'
 
 export default class RequestId extends Component {
     constructor() {
@@ -64,7 +64,7 @@ const RequestInfo = (props) => {
         setShowElementO(true);
         setShowElementC(false);
     };
-    const OFFERS_URL = SERVER_URL + "/offers.json"
+    const OFFERS_URL = SERVER_URL + "offers.json"
     const [offers, setOffers] = useState([]);
     useEffect(() => {
     const fetchData = async () => {

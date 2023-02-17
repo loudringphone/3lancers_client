@@ -11,7 +11,7 @@ const MakeComment = (props) => {
     if (token) {
         headers.Authorization = `Bearer ${token}`;
     }
-    const COMMENT_URL = SERVER_URL + '/comments.json'
+    const COMMENT_URL = SERVER_URL + 'comments.json'
     const _makeComment = (event) => {
         event.preventDefault();
         event.target.reset();

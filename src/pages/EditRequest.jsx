@@ -8,7 +8,7 @@ export default function EditRequest() {
   const [request, setRequest] = useState({});
   const { id } = useParams();
   useEffect(() => {
-    const REQUEST_URL = SERVER_URL + "/requests/" + id + ".json"
+    const REQUEST_URL = SERVER_URL + "requests/" + id + ".json"
     let token = localStorage.getItem("token");
     if (token) {
       fetch(REQUEST_URL, {
@@ -108,7 +108,7 @@ const RequestForm = (props) => {
           description: description || props.request.description,
           budget: budget || parseFloat(props.request.budget).toFixed(2),
         };
-        axios.put(SERVER_URL + `/requests/${id}.json`, requestData, {headers})
+        axios.put(SERVER_URL + `requests/${id}.json`, requestData, {headers})
           .then((response) => {
             setRequest(response.data); // update the request state with the response data from the server
           })
@@ -116,7 +116,7 @@ const RequestForm = (props) => {
             console.log(error); // handle any errors that occur during the AJAX request
           })
           .then(()=>{
-            window.location.href = `/requests/${id}`
+            window.location.href = `requests/${id}`
           })
       };
 

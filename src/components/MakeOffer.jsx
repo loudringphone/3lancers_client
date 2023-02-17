@@ -10,7 +10,7 @@ const MakeOffer = (props) => {
     if (token) {
         headers.Authorization = `Bearer ${token}`;
     }
-    const OFFERS_URL = SERVER_URL + '/offers.json'
+    const OFFERS_URL = SERVER_URL + 'offers.json'
     const _makeOffer = (event) => {
         event.preventDefault();
         axios.post(OFFERS_URL, {user_id: props.user.id, request_id: props.request.id, offer_amount: offer_amount, status: 'Open'}, {headers})
@@ -27,14 +27,14 @@ const MakeOffer = (props) => {
 
     const _editOffer = (event) => {
         event.preventDefault();
-        axios.put(SERVER_URL + `/offers/${userOpenOfferId}.json`, { status: 'Canceled'},{headers}).then(response => {
+        axios.put(SERVER_URL + `offers/${userOpenOfferId}.json`, { status: 'Canceled'},{headers}).then(response => {
             console.log('Success:', response);
           })
           .catch(error => {
             console.error('Error:', error);
           })
           .then(()=>{
-        axios.put(SERVER_URL + `/offers/${userOpenOfferId}.json`, { offer_amount: offer_amount},{headers}).then(response => {
+        axios.put(SERVER_URL + `offers/${userOpenOfferId}.json`, { offer_amount: offer_amount},{headers}).then(response => {
             console.log('Success:', response)
           })
           .catch(error => {
@@ -42,7 +42,7 @@ const MakeOffer = (props) => {
           });
         })
         .then(()=>{
-        axios.put(SERVER_URL + `/offers/${userOpenOfferId}.json`, { status: 'Open'},{headers}).then(response => {
+        axios.put(SERVER_URL + `offers/${userOpenOfferId}.json`, { status: 'Open'},{headers}).then(response => {
             console.log('Success:', response);
           })
           .catch(error => {

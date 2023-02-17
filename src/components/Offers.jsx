@@ -4,7 +4,7 @@ import axios from 'axios'
 import { SERVER_URL } from "../components/SERVER_URL"
 import AcceptDecline from "./AcceptDecline"; 
 
-const USERS_URL = SERVER_URL + "/users.json"
+const USERS_URL = SERVER_URL + "users.json"
 
 export default class Offers extends Component {
     constructor() {

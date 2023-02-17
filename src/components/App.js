@@ -14,9 +14,9 @@ import EditRequest from "../pages/EditRequest";
 import MyMessages from "../pages/MyMessages";
 import { SERVER_URL } from "../components/SERVER_URL"
 
-const PROFILE_URL = SERVER_URL + "/profile"
-const USERS_URL = SERVER_URL + "/users"
-const LOGIN_URL = SERVER_URL + "/login"
+const PROFILE_URL = SERVER_URL + "profile"
+const USERS_URL = SERVER_URL + "users.json"
+const LOGIN_URL = SERVER_URL + "login"
 class App extends Component {
   state = {
     user: {},
@@ -93,15 +93,6 @@ class App extends Component {
               }
             })
         }
-      })
-      .then(response => response.json())
-      .then(result => {
-          if (result.token){
-          localStorage.setItem('token', result.token)
-          this.setState({
-              user: result.user
-              })
-          }
       })
   }
 

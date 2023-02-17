@@ -6,7 +6,7 @@ import { RiAuctionFill } from 'react-icons/ri'
 
 import { SERVER_URL } from "../components/SERVER_URL"
 
-const OFFERS_URL = SERVER_URL + "/offers.json";
+const OFFERS_URL = SERVER_URL + "offers.json";
 
 class MyOffers extends Component {
     constructor() {

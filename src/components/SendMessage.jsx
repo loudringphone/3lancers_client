@@ -4,7 +4,7 @@ import axios from "axios";
 import { SERVER_URL } from "../components/SERVER_URL"
 import { NewMessageForm } from "../pages/MyMessages";
 
-const MESSAGES_URL = SERVER_URL + "/messages";
+const MESSAGES_URL = SERVER_URL + "messages";
 
 export default class SendMessage extends Component {
     constructor() {

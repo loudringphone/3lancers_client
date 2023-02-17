@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 
 import { SERVER_URL } from "../components/SERVER_URL"
 
-const REQUESTS_URL = SERVER_URL + "/requests.json"
+const REQUESTS_URL = SERVER_URL + "requests.json"
 
 
 class MyRequests extends Component {

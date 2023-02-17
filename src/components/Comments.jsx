@@ -4,7 +4,7 @@ import axios from 'axios'
 import { SERVER_URL } from "../components/SERVER_URL"
 import MakeComment from './MakeComment'
 
-const COMMENTS_URL = SERVER_URL + '/comments.json'
+const COMMENTS_URL = SERVER_URL + 'comments.json'
 
 export default class Comments extends Component {
     constructor() {

@@ -13,7 +13,7 @@ if (token) {
 }
 
 // messages_url
-const MESSAGES_URL = SERVER_URL + "/messages"
+const MESSAGES_URL = SERVER_URL + "messages"
 
 export default class MyMessages extends Component {
     constructor() {
