@@ -1,10 +1,10 @@
 import { Component } from "react";
 import axios from 'axios'
 
+import { SERVER_URL } from "../components/SERVER_URL"
 import AcceptDecline from "./AcceptDecline"; 
 
-const OFFERS_URL = 'http://localhost:3000/offers.json'
-const USERS_URL = 'http://localhost:3000/users.json'
+const USERS_URL = SERVER_URL + "/users.json"
 
 export default class Offers extends Component {
     constructor() {

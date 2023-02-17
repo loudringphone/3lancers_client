@@ -1,7 +1,9 @@
 import axios from "axios";
 import React, { useState } from "react";
 
-const REQUESTS_URL = "http://localhost:3000/requests.json";
+import { SERVER_URL } from "../components/SERVER_URL"
+
+const REQUESTS_URL = SERVER_URL + "/requests.json";
 
 // token
 let token = localStorage.getItem("token");

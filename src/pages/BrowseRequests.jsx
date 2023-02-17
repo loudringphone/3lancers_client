@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 
-const REQUESTS_URL = 'http://localhost:3000/requests.json'
+import { SERVER_URL } from "../components/SERVER_URL"
+
+const REQUESTS_URL = SERVER_URL + "/requests.json"
 
 class BrowseRequests extends Component {
     constructor() {

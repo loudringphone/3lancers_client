@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from 'axios'
 
+import { SERVER_URL } from "../components/SERVER_URL"
+
 const MakeOffer = (props) => {
     const [offer_amount, setOfferAmount] = useState('');
     let token = localStorage.getItem("token");
@@ -8,8 +10,7 @@ const MakeOffer = (props) => {
     if (token) {
         headers.Authorization = `Bearer ${token}`;
     }
-    const URL = 'http://localhost:3000'
-    const OFFERS_URL = URL + '/offers.json'
+    const OFFERS_URL = SERVER_URL + '/offers.json'
     const _makeOffer = (event) => {
         event.preventDefault();
         axios.post(OFFERS_URL, {user_id: props.user.id, request_id: props.request.id, offer_amount: offer_amount, status: 'Open'}, {headers})
@@ -26,14 +27,14 @@ const MakeOffer = (props) => {
 
     const _editOffer = (event) => {
         event.preventDefault();
-        axios.put(`http://localhost:3000/offers/${userOpenOfferId}.json`, { status: 'Canceled'},{headers}).then(response => {
+        axios.put(SERVER_URL + `/offers/${userOpenOfferId}.json`, { status: 'Canceled'},{headers}).then(response => {
             console.log('Success:', response);
           })
           .catch(error => {
             console.error('Error:', error);
           })
           .then(()=>{
-        axios.put(`http://localhost:3000/offers/${userOpenOfferId}.json`, { offer_amount: offer_amount},{headers}).then(response => {
+        axios.put(SERVER_URL + `/offers/${userOpenOfferId}.json`, { offer_amount: offer_amount},{headers}).then(response => {
             console.log('Success:', response)
           })
           .catch(error => {
@@ -41,25 +42,19 @@ const MakeOffer = (props) => {
           });
         })
         .then(()=>{
-        axios.put(`http://localhost:3000/offers/${userOpenOfferId}.json`, { status: 'Open'},{headers}).then(response => {
+        axios.put(SERVER_URL + `/offers/${userOpenOfferId}.json`, { status: 'Open'},{headers}).then(response => {
             console.log('Success:', response);
           })
           .catch(error => {
             console.error('Error:', error);
           });
         })
-
-
-
-
-
     }
-
+    
     const requestBudget = Number(props.request.budget)
     function _handleOfferAmount(e) {
-        setOfferAmount(e.target.value)
+            setOfferAmount(e.target.value)
     };
-
     function _handleInputFocus(event) {
     event.target.select();
     }
@@ -86,7 +81,7 @@ const MakeOffer = (props) => {
                         <div>
                             <form onSubmit={_editOffer}>
                                 <label>Edit offer</label>
-                                <input type="number" id="offer" name="offer" value={offer_amount || (userOpenOfferAmount)} onInput={_handleOfferAmount}  onFocus={_handleInputFocus} required />
+                                <input type="number" id="offer" name="offer" value={offer_amount || (userOpenOfferAmount)} onBlur={_handleOfferAmount}  onFocus={_handleInputFocus} required />
                                 <button type="submit">Edit</button>
                             </form>
 
@@ -101,7 +96,7 @@ const MakeOffer = (props) => {
                         <div>
                             <form onSubmit={_makeOffer}>
                                 <label>Make an offer</label>
-                                <input type="number" id="offer" name="offer" value={offer_amount || requestBudget} onInput={_handleOfferAmount} required onFocus={_handleInputFocus} />
+                                <input type="number" id="offer" name="offer" value={offer_amount} placeholder={ requestBudget } onInput={_handleOfferAmount} required onFocus={_handleInputFocus} />
                                 <button type="submit">Go</button>
                             </form>
                         </div>

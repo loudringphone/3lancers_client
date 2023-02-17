@@ -12,9 +12,11 @@ import RequestId from "../pages/RequestId";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import EditRequest from "../pages/EditRequest";
 import MyMessages from "../pages/MyMessages";
+import { SERVER_URL } from "../components/SERVER_URL"
 
-const USERS_URL = "http://localhost:3000/users.json";
-
+const PROFILE_URL = SERVER_URL + "/profile"
+const USERS_URL = SERVER_URL + "/users"
+const LOGIN_URL = SERVER_URL + "/login"
 class App extends Component {
   state = {
     user: {},
@@ -24,7 +26,7 @@ class App extends Component {
   componentDidMount() {
     let token = localStorage.getItem("token");
     if (token) {
-      fetch("http://localhost:3000/profile", {
+      fetch(PROFILE_URL, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -42,7 +44,7 @@ class App extends Component {
   }
 
   signUp = (user) => {
-    fetch("http://localhost:3000/users", {
+    fetch(USERS_URL, {
       method: "POST",
       headers: {
         "Accept": "application/json",
@@ -68,7 +70,7 @@ class App extends Component {
           })
         } else {
           this.setState({ signupError: '', signinError: '' })
-          fetch("http://localhost:3000/login", {
+          fetch(LOGIN_URL, {
             method: "POST",
             headers: {
               "Accept": "application/json",
@@ -104,7 +106,7 @@ class App extends Component {
   }
 
   signIn = (user) => {
-    fetch("http://localhost:3000/login", {
+    fetch(LOGIN_URL, {
       method: "POST",
       headers: {
         Accept: "application/json",

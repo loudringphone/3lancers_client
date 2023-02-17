@@ -11,9 +11,10 @@ import MakeOffer from "../components/MakeOffer"
 // import MessageButton from "../components/MessageButton"
 import SendMessage from "../components/SendMessage"
 import "../components/RequestId.css"
+import { SERVER_URL } from "../components/SERVER_URL"
 
-const URL = 'http://localhost:3000'
-const REQUESTS_URL = URL + '/requests.json'
+
+const REQUESTS_URL = SERVER_URL + '/requests.json'
 
 export default class RequestId extends Component {
     constructor() {
@@ -52,16 +53,18 @@ export default class RequestId extends Component {
 const RequestInfo = (props) => {
     const { id } = useParams();
     const [showElementC, setShowElementC] = useState(false);
-    const handleClickC = () => {
+    const handleClickC = (event) => {
+        event.preventDefault();
         setShowElementC(true);
         setShowElementO(false);
     };
     const [showElementO, setShowElementO] = useState(true);
-    const handleClickO = () => {
+    const handleClickO = (event) => {
+        event.preventDefault();
         setShowElementO(true);
         setShowElementC(false);
     };
-    const OFFERS_URL = 'http://localhost:3000/offers.json'
+    const OFFERS_URL = SERVER_URL + "/offers.json"
     const [offers, setOffers] = useState([]);
     useEffect(() => {
     const fetchData = async () => {

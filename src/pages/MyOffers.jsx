@@ -4,7 +4,9 @@ import { NavLink } from 'react-router-dom';
 import { MdAttachMoney } from 'react-icons/md' 
 import { RiAuctionFill } from 'react-icons/ri' 
 
-const OFFERS_URL = 'http://localhost:3000/offers.json';
+import { SERVER_URL } from "../components/SERVER_URL"
+
+const OFFERS_URL = SERVER_URL + "/offers.json";
 
 class MyOffers extends Component {
     constructor() {

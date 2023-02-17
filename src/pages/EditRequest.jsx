@@ -2,12 +2,13 @@ import React, { useState, useEffect  } from "react";
 import axios from 'axios'
 import { useParams } from "react-router-dom";
 
+import { SERVER_URL } from "../components/SERVER_URL"
+
 export default function EditRequest() {
   const [request, setRequest] = useState({});
   const { id } = useParams();
   useEffect(() => {
-    const URL = 'http://localhost:3000'
-    const REQUEST_URL = URL + "/requests/" + id +".json"
+    const REQUEST_URL = SERVER_URL + "/requests/" + id + ".json"
     let token = localStorage.getItem("token");
     if (token) {
       fetch(REQUEST_URL, {
@@ -107,7 +108,7 @@ const RequestForm = (props) => {
           description: description || props.request.description,
           budget: budget || parseFloat(props.request.budget).toFixed(2),
         };
-        axios.put(`http://localhost:3000/requests/${id}.json`, requestData, {headers})
+        axios.put(SERVER_URL + `/requests/${id}.json`, requestData, {headers})
           .then((response) => {
             setRequest(response.data); // update the request state with the response data from the server
           })

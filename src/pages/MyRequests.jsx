@@ -2,9 +2,12 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { MdAttachMoney } from 'react-icons/md' 
 import { GiReceiveMoney } from 'react-icons/gi' 
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
-const Requests_URL = 'http://localhost:3000/requests.json';
+import { SERVER_URL } from "../components/SERVER_URL"
+
+const REQUESTS_URL = SERVER_URL + "/requests.json"
+
 
 class MyRequests extends Component {
     constructor() {
@@ -15,7 +18,7 @@ class MyRequests extends Component {
     }
     componentDidMount() {
         const fetchRequests = () => {
-            axios.get(Requests_URL).then((response) => {
+            axios.get(REQUESTS_URL).then((response) => {
                 this.setState({requests: response.data});
                 console.log(response)
             });

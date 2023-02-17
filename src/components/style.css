@@ -337,6 +337,14 @@ button {
     height: 150px;
     margin: 0 auto;
 }
+.messageBtn {
+    width: 100%;
+    background-color: blueviolet;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    margin: 10px auto;
+}
 @media (max-width: 736px){
     .requests {
         display: flex;

@@ -2,6 +2,7 @@ import React, { Component, useState } from "react";
 import axios from "axios";
 import { resolvePath } from "react-router-dom";
 
+import { SERVER_URL } from "../components/SERVER_URL"
 import '../components/css/Message.css';
 
 // token
@@ -12,7 +13,7 @@ if (token) {
 }
 
 // messages_url
-const MESSAGES_URL = 'http://localhost:3000/messages'
+const MESSAGES_URL = SERVER_URL + "/messages"
 
 export default class MyMessages extends Component {
     constructor() {
@@ -227,9 +228,9 @@ export function NewMessageForm(props) {
     };
 
     return (
-        <form classNameonSubmit={_handleSubmit}>
+        <form className="messageArea" onSubmit={_handleSubmit}>
             <textarea className='textareaMessages'type="text" placeholder="Type your message" name="message" onInput={_handleInput} value={content} required ></textarea>
-            <input type="submit" value="Send" />
+            <input className="messageBtn" type="submit" value="Send" />
         </form>
     )
 }

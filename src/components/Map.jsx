@@ -44,6 +44,11 @@ const Map = (props) => {
     const initialZoom = 2;
     setTimeout(() => {
       map.setZoom(initialZoom);
+      map.setOptions({
+        draggable: false,
+        scrollwheel: false,
+        clickableIcons: false
+      });
     }, 30);
   const targetZoom = 12;
   const increment = (targetZoom - initialZoom) / 10;
@@ -57,6 +62,11 @@ const Map = (props) => {
     
     if (parseInt(currentZoom) == targetZoom) {
       clearInterval(interval);
+      map.setOptions({
+        draggable: true,
+        scrollwheel: true,
+        clickableIcons: true
+      });
     }
   }, 100);
   }, 1000);

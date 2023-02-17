@@ -1,6 +1,8 @@
 import { useState } from "react";
 import axios from 'axios'
 
+import { SERVER_URL } from "../components/SERVER_URL"
+
 const MakeComment = (props) => {
 
     const [content, setContent] = useState('');
@@ -9,8 +11,7 @@ const MakeComment = (props) => {
     if (token) {
         headers.Authorization = `Bearer ${token}`;
     }
-    const URL = 'http://localhost:3000'
-    const COMMENT_URL = URL + '/comments.json'
+    const COMMENT_URL = SERVER_URL + '/comments.json'
     const _makeComment = (event) => {
         event.preventDefault();
         event.target.reset();
