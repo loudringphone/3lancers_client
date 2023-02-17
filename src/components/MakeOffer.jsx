@@ -55,15 +55,14 @@ const MakeOffer = (props) => {
 
     }
 
-
+    const requestBudget = Number(props.request.budget)
     function _handleOfferAmount(e) {
-        setOfferAmount(Number(e.target.value))
+        setOfferAmount(e.target.value)
     };
 
     function _handleInputFocus(event) {
     event.target.select();
     }
-
     const openOffers = props.offers.filter(offer => offer.status == "Open")
     let userOpenOffer = false
     let userOpenOfferId
@@ -102,7 +101,7 @@ const MakeOffer = (props) => {
                         <div>
                             <form onSubmit={_makeOffer}>
                                 <label>Make an offer</label>
-                                <input type="number" id="offer" name="offer" value={offer_amount || Number(props.request.budget)} onInput={_handleOfferAmount} required onFocus={_handleInputFocus} />
+                                <input type="number" id="offer" name="offer" value={offer_amount || requestBudget} onInput={_handleOfferAmount} required onFocus={_handleInputFocus} />
                                 <button type="submit">Go</button>
                             </form>
                         </div>
