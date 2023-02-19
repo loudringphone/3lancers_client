@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
+import { Helmet } from "react-helmet";
+
 import BrowseRequests from './BrowseRequests';
 class Home extends Component {
 
     render() {
         return (
             <div>
+                <Helmet>
+                    <title>3lancers</title>
+                </Helmet>
                 <PostRequest />
                 <div>
                     <BrowseRequests />

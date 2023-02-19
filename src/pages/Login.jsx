@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { Helmet } from "react-helmet";
 
 export default class Login extends Component {
 
@@ -25,7 +26,12 @@ export default class Login extends Component {
         else {
         
             return (
-                <div><h1 className='signupTitle'>Login</h1>
+                
+                <div>
+                    <Helmet>
+                        <title>3lancers | Login</title>
+                    </Helmet>
+                    <h1 className='signupTitle'>Login</h1>
                     <form onSubmit={this.handleSubmit}>
                         
                         <div className='signup'>

@@ -1,5 +1,6 @@
 import { Component } from "react";
 import axios from 'axios'
+import { Helmet } from "react-helmet";
 
 import { SERVER_URL } from "../components/SERVER_URL"
 
@@ -84,25 +85,30 @@ export default class SignUp extends Component {
         }
         else {
             return (
-                <form onSubmit={this.handleSubmit}>
-                    <h1 className='signupTitle'>Sign up</h1>
-                    <div className='signup'>
-                        <label>Username</label>
-                        <input name='username' value={this.state.username} onChange={this.handleChange} required />
-                        <label>Email address</label>
-                        <input name='email' value={this.state.email} onChange={this.handleChange} required />
-                        <label>Password</label>
-                        <input name='password' value={this.state.password} onChange={this.handleChange} type='password' required />
-                        <label>Confirm password</label>
-                        <input name='password_confirmation' value={this.state.password_confirmation} onChange={this.handleChange} type='password' required />
-                        {this.state.signupError1? <p className='error' style={{color: 'red'}}>{this.state.signupError1}</p>: null}
-                        {this.state.signupError2? <p className='error' style={{color: 'red'}}>{this.state.signupError2}</p>: null}
-                        {this.state.signupError3? <p className='error' style={{color: 'red'}}>{this.state.signupError3}</p>: null}
-                        {this.state.signupError4? <p className='error' style={{color: 'red'}}>{this.state.signupError4}</p>: null}
-                        {this.state.signupError5? <p className='error' style={{color: 'red'}}>{this.state.signupError5}</p>: null}
-                        <input className='signupBtn' type="submit" value='Sign up' />
-                    </div>
-                </form>
+                <div>
+                    <Helmet>
+                        <title>3lancers | Signup</title>
+                    </Helmet>
+                    <form onSubmit={this.handleSubmit}>
+                        <h1 className='signupTitle'>Sign up</h1>
+                        <div className='signup'>
+                            <label>Username</label>
+                            <input name='username' value={this.state.username} onChange={this.handleChange} required />
+                            <label>Email address</label>
+                            <input name='email' value={this.state.email} onChange={this.handleChange} required />
+                            <label>Password</label>
+                            <input name='password' value={this.state.password} onChange={this.handleChange} type='password' required />
+                            <label>Confirm password</label>
+                            <input name='password_confirmation' value={this.state.password_confirmation} onChange={this.handleChange} type='password' required />
+                            {this.state.signupError1? <p className='error' style={{color: 'red'}}>{this.state.signupError1}</p>: null}
+                            {this.state.signupError2? <p className='error' style={{color: 'red'}}>{this.state.signupError2}</p>: null}
+                            {this.state.signupError3? <p className='error' style={{color: 'red'}}>{this.state.signupError3}</p>: null}
+                            {this.state.signupError4? <p className='error' style={{color: 'red'}}>{this.state.signupError4}</p>: null}
+                            {this.state.signupError5? <p className='error' style={{color: 'red'}}>{this.state.signupError5}</p>: null}
+                            <input className='signupBtn' type="submit" value='Sign up' />
+                        </div>
+                    </form>
+                </div>
             )
         }
     }
