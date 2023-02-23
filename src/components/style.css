@@ -345,6 +345,13 @@ button {
     border-radius: 12px;
     margin: 10px auto;
 }
+.signupError {
+    text-align: left;
+    margin-left: 5%;
+    margin-right: 5%;
+    color:red;
+}
+
 @media (max-width: 736px){
     .requests {
         display: flex;
