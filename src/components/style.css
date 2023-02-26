@@ -310,7 +310,7 @@ svg {
 }
 .post-steps {
     margin: 5px auto;
-    width: 20%;
+    width: fit-content;
     padding: 10px;
     border: 2px solid var(--box-color);
 }
