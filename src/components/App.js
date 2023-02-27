@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Helmet } from "react-helmet";
+
 import SignUp from "../pages/SignUp";
 import Login from "../pages/Login";
 import MyRequests from "../pages/MyRequests";
@@ -140,6 +142,9 @@ class App extends Component {
     }, 500);
     return (
       <div className="App">
+        <Helmet>
+            <title>3Lancers</title>
+        </Helmet>
         <BrowserRouter>
           <Header username={this.state.user.username} />
           <Routes>

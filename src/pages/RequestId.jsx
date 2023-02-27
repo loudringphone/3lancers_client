@@ -1,17 +1,18 @@
 import React, { Component, useState, useEffect } from 'react';
-import axios from 'axios'
+import axios from 'axios';
 import { useParams } from "react-router-dom";
-import { FiEdit2 } from 'react-icons/fi'
+import { FiEdit2 } from 'react-icons/fi';
+import { Helmet } from "react-helmet";
 
-import Map from "../components/Map"
+import Map from "../components/Map";
 import Comments from "../components/Comments";
 import Offers from "../components/Offers";
-import CancelReopenComplete from "../components/CancelReopenComplete"
-import MakeOffer from "../components/MakeOffer"
+import CancelReopenComplete from "../components/CancelReopenComplete";
+import MakeOffer from "../components/MakeOffer";
 // import MessageButton from "../components/MessageButton"
-import SendMessage from "../components/SendMessage"
-import "../components/RequestId.css"
-import { SERVER_URL } from "../components/SERVER_URL"
+import SendMessage from "../components/SendMessage";
+import "../components/RequestId.css";
+import { SERVER_URL } from "../components/SERVER_URL";
 
 
 const REQUESTS_URL = SERVER_URL + 'requests.json'
@@ -104,6 +105,9 @@ const RequestInfo = (props) => {
     />
         return(
             <div className="request-info">
+                <Helmet>
+                    <title>3Lancers | {r.title}</title>
+                </Helmet>
                 <h2>{r.title} {(props.user.id == r.user_id || props.user.admin === true) && editIcon}</h2>
                 <h3>Request status: {r.status}</h3>
                 <p>Location: {r.location}</p>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import axios from 'axios'
+import axios from 'axios';
+import { Helmet } from "react-helmet";
 
 import { SERVER_URL } from "../components/SERVER_URL"
 
@@ -37,6 +38,9 @@ class BrowseRequests extends Component {
 const RequestList = (props) => {
     return(
         <div className='allUserRequests'>
+            <Helmet>
+                <title>3Lancers | Browse requests</title>
+            </Helmet>
             <h2>Current user requests</h2>
             <div className='requests'>
                 { props.requests.map((r) =>

@@ -29,7 +29,7 @@ export default class Login extends Component {
                 
                 <div>
                     <Helmet>
-                        <title>3lancers | Login</title>
+                        <title>3Lancers | Login</title>
                     </Helmet>
                     <h1 className='signupTitle'>Login</h1>
                     <form onSubmit={this.handleSubmit}>

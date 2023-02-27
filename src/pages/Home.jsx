@@ -8,7 +8,7 @@ class Home extends Component {
         return (
             <div>
                 <Helmet>
-                    <title>3lancers</title>
+                    <title>3Lancers</title>
                 </Helmet>
                 <PostRequest />
                 <div>

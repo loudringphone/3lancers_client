@@ -94,7 +94,7 @@ export default class SignUp extends Component {
             return (
                 <div>
                     <Helmet>
-                        <title>3lancers | Signup</title>
+                        <title>3Lancers | Signup</title>
                     </Helmet>
                     <form onSubmit={this.handleSubmit}>
                         <h1 className='signupTitle'>Sign up</h1>
