@@ -3,6 +3,7 @@ import axios from 'axios';
 import { MdAttachMoney } from 'react-icons/md' 
 import { GiReceiveMoney } from 'react-icons/gi' 
 import { NavLink } from 'react-router-dom';
+import { Helmet } from "react-helmet";
 
 import { SERVER_URL } from "../components/SERVER_URL"
 
@@ -42,6 +43,9 @@ class MyRequests extends Component {
         const dateOptions = { day: "2-digit", month: "short", year: "numeric" };
         return (
             <div>
+                <Helmet>
+                    <title>3Lancers | My Requests</title>
+                </Helmet>
                 <h2>My requests</h2>
                 <ul className='request-offerToggle'>
                     <li className='request-offerLinks'>

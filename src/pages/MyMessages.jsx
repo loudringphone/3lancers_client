@@ -1,6 +1,6 @@
 import React, { Component, useState } from "react";
 import axios from "axios";
-import { resolvePath } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 import { SERVER_URL } from "../components/SERVER_URL"
 import '../components/css/Message.css';
@@ -113,6 +113,9 @@ export default class MyMessages extends Component {
         if (token) {
             return (
                 <div className="my-messages">
+                    <Helmet>
+                        <title>3Lancers | My Messages</title>
+                    </Helmet>
                     <div key={"quick-views"} id="quick-views">
                         {quickViews}
                     </div>

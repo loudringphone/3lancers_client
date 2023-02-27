@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
-import { MdAttachMoney } from 'react-icons/md' 
-import { RiAuctionFill } from 'react-icons/ri' 
+import { MdAttachMoney } from 'react-icons/md';
+import { RiAuctionFill } from 'react-icons/ri';
+import { Helmet } from "react-helmet";
 
 import { SERVER_URL } from "../components/SERVER_URL"
 
@@ -37,6 +38,9 @@ class MyOffers extends Component {
         const dateOptions = { day: "2-digit", month: "short", year: "numeric" };
         return (
             <div>
+                <Helmet>
+                    <title>3Lancers | My Offers</title>
+                </Helmet>
                 <h2>My offers</h2>
                 <ul className='request-offerToggle'>
                     <li>

@@ -39,7 +39,7 @@ const RequestList = (props) => {
     return(
         <div className='allUserRequests'>
             <Helmet>
-                <title>3Lancers | Browse requests</title>
+                <title>3Lancers | Browse Requests</title>
             </Helmet>
             <h2>Current user requests</h2>
             <div className='requests'>

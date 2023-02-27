@@ -1,6 +1,7 @@
 import React, { useState, useEffect  } from "react";
 import axios from 'axios'
 import { useParams } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 import { SERVER_URL } from "../components/SERVER_URL"
 
@@ -35,6 +36,9 @@ export default function EditRequest() {
   if (token) {
     return (
       <div>
+        <Helmet>
+            <title>3Lancers | Edit Request</title>
+        </Helmet>
         <RequestForm request={request} onSubmit={saveRequest} />
       </div>
     )

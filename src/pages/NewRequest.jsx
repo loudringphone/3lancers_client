@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { Helmet } from "react-helmet";
 
 import { SERVER_URL } from "../components/SERVER_URL"
 
@@ -34,6 +35,9 @@ export default class NewRequest extends React.Component {
         if (token) {
             return (
                 <div>
+                    <Helmet>
+                        <title>3Lancers | New Request</title>
+                    </Helmet>
                     <RequestForm onSubmit={this.saveRequest} />
                 </div>
             )
