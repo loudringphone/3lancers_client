@@ -22,7 +22,7 @@ export default class NewRequest extends React.Component {
     // React life cycle method
     saveRequest(title, time, location, description, budget) {
         // save the request to the server via AJAX
-        axios.post(REQUESTS_URL, { user_id: this.props.user_id, title: title, time: time, location: location, description: description, budget: budget }, { headers }).then((response) => {
+        axios.post(REQUESTS_URL, { user_id: this.props.user_id, title: title, time: time, location: location, description: description, budget: budget, status: 'Open' }, { headers }).then((response) => {
             // save the new request to the server
             window.location.href = `/requests/${response.data.id}`
         });
