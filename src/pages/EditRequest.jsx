@@ -176,7 +176,7 @@ const RequestForm = (props) => {
                   </label>
                   <label className='newRequest'>
                       What is your budget for this request?
-                      <input  className='newRequestInput' type="number" value={request.budget|| parseInt(props.request.budget).toFixed(2)} onInput={_handleBudget} onFocus={_handleInputFocus} required />
+                      <input className='newRequestInput' type="test" pattern="^\d*(\.\d+)?$" title="Budget must be a number" value={request.budget|| parseInt(props.request.budget)} onInput={_handleBudget} onFocus={_handleInputFocus} required />
                   </label>
                   <input className='signupBtn' type="submit" value="Edit request" />
               </form>

@@ -96,9 +96,7 @@ const Map = (props) => {
       <></>
     </GoogleMap>
   ) : (
-    <div><br/>This site owner is missing an API key for <a href="https://developers.google.com/maps/documentation/javascript/get-api-key">Google Maps Platform</a> <br/>
-    If you would like to sponsor them a key, here is their bank details: <br/>
-    BSB 062-320 Account 1080 6600<br/><br/></div>
+    <div><br/>Oops! It seems the location provided by the Requester is not found on Google Maps<br/><br/></div>
   );
 };
 

@@ -103,6 +103,10 @@ const RequestInfo = (props) => {
     cursor='pointer'
     onClick={() => window.location.href = `/requests/${id}/edit`}
     />
+        let budgetWithCommas = r.budget.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
+        if (!/.[0-9][0-9]/.test(budgetWithCommas)) {
+            budgetWithCommas = budgetWithCommas + '0'
+        }
         return(
             <div className="request-info">
                 <Helmet>
@@ -114,7 +118,7 @@ const RequestInfo = (props) => {
                 <Map mapLocation={mapLocation}/>
                 <p>Description: {r.description}</p>
                 <p>Date: {new Date(r.time).toLocaleDateString("en-AU", dateOptions)}</p>
-                <p>Budget: <b>${parseInt(r.budget).toFixed(2)}</b></p>
+                <p>Budget: <b>${budgetWithCommas}</b></p>
                 <div>
                     {(props.user.id == r.user_id || props.user.admin === true) && (
                         <div>
