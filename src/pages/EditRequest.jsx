@@ -52,16 +52,29 @@ export default function EditRequest() {
 
 const RequestForm = (props) => {
     const [request, setRequest] = useState({
-        title: '',
-        time: '',
-        location: '',
-        description: '',
-        budget: ''
+        title: props.request.title || '',
+        time: props.request.time || '',
+        location: props.request.location || '',
+        description: props.request.description || '',
+        budget: props.request.budget || ''
     });
 
-
-
-
+    // if no useEffect, the input fields would not be pre-filled
+    useEffect(() => {
+      setRequest(request => ({ ...request, title: props.request.title }));
+    }, [props.request.title]);
+    // useEffect(() => {
+    //   setRequest(request => ({ ...request, time: props.request.time }));
+    // }, [props.request.title]);
+    useEffect(() => {
+      setRequest(request => ({ ...request, location: props.request.location }));
+    }, [props.request.location]);
+    useEffect(() => {
+      setRequest(request => ({ ...request, description: props.request.description }));
+    }, [props.request.description]);
+    useEffect(() => {
+      setRequest(request => ({ ...request, budget: props.request.budget }));
+    }, [props.request.budget]);
 
 
     const { id } = useParams();
@@ -69,15 +82,7 @@ const RequestForm = (props) => {
 
 
     function _handleTitle(e) {
-      if (e.target.value === "") {
-        setRequest({...request, title: ' '});
-      }
-      else if (e.target.value.length > 0 && e.target.value[0] === ' ') {
-        setRequest({...request, title: e.target.value.slice(1)});
-      }
-      else {
-        setRequest({...request, title: e.target.value});
-      }
+      setRequest({...request, title: e.target.value});
     };
 
     function _handleTime(e) {
@@ -85,27 +90,11 @@ const RequestForm = (props) => {
     };
 
     function _handleLocation(e) {
-      if (e.target.value === "") {
-        setRequest({...request, location: " "});
-      }
-      else if (e.target.value.length > 0 && e.target.value[0] === ' ') {
-        setRequest({...request, location: e.target.value.slice(1)});
-      }
-      else {
-        setRequest({...request, location: e.target.value});
-      }
-    };
+      setRequest({...request, location: e.target.value});
+    }
 
     function _handleDescription(e) {
-      if (e.target.value === "") {
-        setRequest({...request, description: " "});
-      }
-      else if (e.target.value.length > 0 && e.target.value[0] === ' ') {
-        setRequest({...request, description: e.target.value.slice(1)});
-      }
-      else {
-        setRequest({...request, description: e.target.value});
-      }
+      setRequest({...request, description: e.target.value});
     };
 
     function _handleBudget(e) {
@@ -160,7 +149,7 @@ const RequestForm = (props) => {
               <form style={{ display: 'flex', flexDirection: 'column' }} onSubmit={_handleSubmit}>
                   <label className='newRequest'>
                       In a few words, what do you need done?
-                      <input className='newRequestInput'  type="text" name='title' id='title' value={request.title || props.request.title} onChange={_handleTitle} onFocus={_handleInputFocus} required />
+                      <input className='newRequestInput'  type="text" name='title' id='title' value={request.title} onChange={_handleTitle} onFocus={_handleInputFocus} required />
                   </label>
                   <label className='newRequest'>
                       When do you need this done? 
@@ -168,15 +157,15 @@ const RequestForm = (props) => {
                   </label>
                   <label className='newRequest'>
                       Where do you need this done?
-                      <input className='newRequestInput'  type="text" name='location' id="location" value={request.location || props.request.location} onInput={_handleLocation} onFocus={_handleInputFocus} required />
+                      <input className='newRequestInput'  type="text" name='location' id="location" value={request.location} onInput={_handleLocation} onFocus={_handleInputFocus} required />
                   </label>
                   <label className='newRequest'>
                       Provide more details of the request
-                      <textarea className='newRequestInput'  name="description" id="description" cols="30" rows="10" value={request.description || props.request.description} onInput={_handleDescription} onFocus={_handleInputFocus}></textarea>
+                      <textarea className='newRequestInput'  name="description" id="description" cols="30" rows="10" value={request.description} onInput={_handleDescription} onFocus={_handleInputFocus}></textarea>
                   </label>
                   <label className='newRequest'>
                       What is your budget for this request?
-                      <input className='newRequestInput' type="test" pattern="^\d*(\.\d+)?$" title="Budget must be a number" value={request.budget|| parseInt(props.request.budget)} onInput={_handleBudget} onFocus={_handleInputFocus} required />
+                      <input className='newRequestInput' type="test" pattern="^\d*(\.\d+)?$" title="Budget must be a number" value={request.budget} onInput={_handleBudget} onFocus={_handleInputFocus} required />
                   </label>
                   <input className='signupBtn' type="submit" value="Edit request" />
               </form>
