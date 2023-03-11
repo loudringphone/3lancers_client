@@ -104,7 +104,7 @@ const RequestInfo = (props) => {
     onClick={() => window.location.href = `/requests/${id}/edit`}
     />
         let budgetWithCommas = r.budget.replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",")
-        if (!/.[0-9][0-9]/.test(budgetWithCommas)) {
+        if (budgetWithCommas.slice(-2)[0] === '.') {
             budgetWithCommas = budgetWithCommas + '0'
         }
         return(
@@ -116,9 +116,11 @@ const RequestInfo = (props) => {
                 <h3>Request status: {r.status}</h3>
                 <p>Location: {r.location}</p>
                 <Map mapLocation={mapLocation}/>
-                <p>Description: {r.description}</p>
-                <p>Date: {new Date(r.time).toLocaleDateString("en-AU", dateOptions)}</p>
-                <p>Budget: <b>${budgetWithCommas}</b></p>
+                <p className='description'>Description: {r.description}</p>
+                <div clss="request">
+                    <p>Date: {new Date(r.time).toLocaleDateString("en-AU", dateOptions)}</p>
+                    <p>Budget: <b>${budgetWithCommas}</b></p>
+                </div>
                 <div>
                     {(props.user.id == r.user_id || props.user.admin === true) && (
                         <div>
@@ -140,8 +142,8 @@ const RequestInfo = (props) => {
                 </div>
                 <div className='comments-offers'>
                     <div style={{display:'inline-flex'}}>
-                        <a href="#" onClick={handleClickC}>Comments</a>
-                        <a href="#" onClick={handleClickO}>Offers</a>
+                        <a href="#comments" className={showElementC ? 'selected' : ''} style={{textDecoration: showElementC ? 'underline' : 'none', color: showElementC ? 'blueviolet' : ''}} onClick={handleClickC}>Comments</a>
+                        <a href="#offers" className={showElementO ? 'selected' : ''} style={{textDecoration: showElementO ? 'underline' : 'none', color: showElementO ? 'blueviolet' : ''}} onClick={handleClickO}>Offers</a>
                     </div>
                     {showElementC && <Comments user={props.user} request={r} />}
                     {showElementO && <Offers user={props.user} request={r} offers={offers}/>}

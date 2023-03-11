@@ -33,7 +33,9 @@
     margin-left: 10px;
     cursor: pointer;
   }
-  
+  input#offer {
+    margin-bottom: 15px;
+  }
   .request-info .comments-offers {
     /* display: flex; */
     justify-content: center;
@@ -43,9 +45,15 @@
   .request-info .comments-offers a {
     padding-bottom: 10px;
     font-size: 20px;
-    margin-right: 20px;
+    margin-right: 5px;
     text-decoration: none;
     color: #333;
+  }
+  div.eachOffer {
+    display: flex;
+  }
+  div.eachOffer > p {
+    margin-right: 20px;
   }
   
   .request-info .comments-offers a.active {

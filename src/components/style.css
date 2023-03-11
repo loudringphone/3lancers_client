@@ -352,7 +352,16 @@ button {
     color:red;
 }
 
+a.selected {
+    font-weight: bold;
+    text-decoration:underline;
+}
+
 @media (max-width: 736px){
+    p.description {
+        width: 95%;
+        justify-content: center;
+    }
     .requests {
         display: flex;
         flex-direction: column;

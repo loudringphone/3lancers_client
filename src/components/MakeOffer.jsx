@@ -4,7 +4,7 @@ import axios from 'axios'
 import { SERVER_URL } from "../components/SERVER_URL"
 
 const MakeOffer = (props) => {
-    const [offer_amount, setOfferAmount] = useState('');
+    const [offerAmount, setOfferAmount] = useState('');
     let token = localStorage.getItem("token");
     let headers = {};
     if (token) {
@@ -13,7 +13,7 @@ const MakeOffer = (props) => {
     const OFFERS_URL = SERVER_URL + 'offers.json'
     const _makeOffer = (event) => {
         event.preventDefault();
-        axios.post(OFFERS_URL, {user_id: props.user.id, request_id: props.request.id, offer_amount: offer_amount, status: 'Open'}, {headers})
+        axios.post(OFFERS_URL, {user_id: props.user.id, request_id: props.request.id, offer_amount: Number(offerAmount), status: 'Open'}, {headers})
           .then(response => {
             console.log('Success:', response);
           })
@@ -34,7 +34,7 @@ const MakeOffer = (props) => {
             console.error('Error:', error);
           })
           .then(()=>{
-        axios.put(SERVER_URL + `offers/${userOpenOfferId}.json`, { offer_amount: offer_amount},{headers}).then(response => {
+        axios.put(SERVER_URL + `offers/${userOpenOfferId}.json`, { offer_amount: Number(offerAmount) },{headers}).then(response => {
             console.log('Success:', response)
           })
           .catch(error => {
@@ -81,7 +81,7 @@ const MakeOffer = (props) => {
                         <div>
                             <form onSubmit={_editOffer}>
                                 <label>Edit offer</label>
-                                <input type="number" id="offer" name="offer" value={offer_amount || (userOpenOfferAmount)} onBlur={_handleOfferAmount}  onFocus={_handleInputFocus} required />
+                                <input type="number" id="offer" name="offer" value={offerAmount || (userOpenOfferAmount)} onBlur={_handleOfferAmount}  onFocus={_handleInputFocus} required />
                                 <button type="submit">Edit</button>
                             </form>
 
@@ -96,7 +96,7 @@ const MakeOffer = (props) => {
                         <div>
                             <form onSubmit={_makeOffer}>
                                 <label>Make an offer</label>
-                                <input type="number" id="offer" name="offer" value={offer_amount} placeholder={ requestBudget } onInput={_handleOfferAmount} required onFocus={_handleInputFocus} />
+                                <input type="number" id="offer" name="offer" value={offerAmount} placeholder={ requestBudget } onInput={_handleOfferAmount} required onFocus={_handleInputFocus} />
                                 <button type="submit">Go</button>
                             </form>
                         </div>
