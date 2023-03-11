@@ -87,10 +87,7 @@ export default class SignUp extends Component {
 
 
     render() {
-        if (localStorage.getItem('token')) {
-            return (window.location.href = '/home')
-        }
-        else {
+        if (!localStorage.getItem('token')) {
             return (
                 <div>
                     <Helmet>

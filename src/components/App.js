@@ -88,10 +88,16 @@ class App extends Component {
             .then(response => response.json())
             .then(result => {
               if (result.token) {
-                localStorage.setItem('token', result.token)
+                localStorage.setItem("token", result.token);
                 this.setState({
-                  user: result.user
-                })
+                  user: result.user,
+                });
+                window.location.href = '/home'
+              } else {
+                this.setState({
+                  signinError: result.error,
+                  signupError: "",
+                });
               }
             })
         }
