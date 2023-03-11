@@ -63,3 +63,23 @@
   .request-info .comments-offers a:hover {
     color: #8A2BE2;
   }
+
+  a.accept {
+    color: green !important;
+    font-size: 15px !important;
+    font-weight: bold;
+  }
+  a.accept:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 15%;
+  }
+  a.decline {
+    color: red !important;
+    font-size: 15px !important;
+    font-weight: bold;
+  }
+  a.decline:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 15%;
+
+  }

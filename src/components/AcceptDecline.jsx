@@ -58,7 +58,7 @@ export default class AcceptDecline extends Component {
         if (this.props.offer.status == "Open"){
             return(
             <div>
-                <a href="#" onClick={() => this.acceptOffer()}>Accept</a> <a href="#" onClick={() => this.declineOffer()}>Decline</a>
+                <a className="accept" href="#" onClick={() => this.acceptOffer()}>Accept</a> <a className="decline" href="#" onClick={() => this.declineOffer()}>Decline</a>
             </div>
             )
 
